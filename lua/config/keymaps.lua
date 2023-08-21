@@ -2,6 +2,10 @@ vim.keymap.set("n", "<leader>u", "<Cmd>UrlView<CR>", { desc = "View buffer URLs"
 vim.keymap.set("n", "<leader>U", "<Cmd>UrlView packer<CR>", { desc = "View Packer plugin URLs" })
 -- map telescope live_grep to leader + l + g
 vim.keymap.set("n", "<leader>lg", ":Telescope live_grep<CR>", { desc = "Open Telescope Live Grep" })
+-- bind leader + g + p to open telescope projects in normal mode
+vim.api.nvim_set_keymap("n", "<leader>gp", require'telescope'.extensions.project.project{}, { desc = "Open Telesope projects " })
+-- bind Control + o to open recent files in normal mode
+vim.api.nvim_set_keymap("n", "<C-o>", ":Telescope oldfiles<CR>", { noremap = true, silent = true })
 
 -- tabs
 vim.api.nvim_set_keymap("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
@@ -72,8 +76,6 @@ vim.cmd(":command Vs vs")
 vim.cmd(":command W w")
 vim.cmd(":command Q q")
 
--- bind Control + o to open recent files in normal mode
-vim.api.nvim_set_keymap("n", "<C-o>", ":Telescope oldfiles<CR>", { noremap = true, silent = true })
 -- Open file in Obsidian vault
 --macos
 vim.cmd(
@@ -141,8 +143,6 @@ vim.api.nvim_set_keymap("v", "<leader>ch", ":call CocAction('doHover')<CR>", { d
 vim.api.nvim_set_keymap("n", "<leader>cf", "<plug>(coc-codeaction-cursor)", { desc = "Code Action Cursor" })
 -- bind leader + c + a to coc command to do a code fix at the cursor in normal mode
 vim.api.nvim_set_keymap("n", "<leader>ca", "<plug>(coc-fix-current)", { desc = "Fix current" })
--- bind leader + g + p to open telescope projects in normal mode
-vim.api.nvim_set_keymap("n", "<leader>gp", ":Telescope projects<CR>", { desc = "Open Telesope projects " })
 -- bind leader + e to open the init.lua file in normal mode
 vim.api.nvim_set_keymap("n", "<leader>e", ":e $MYVIMRC<CR>", { noremap = true, silent = true })
 -- bind leader + m to open oil file explorer in normal mode
