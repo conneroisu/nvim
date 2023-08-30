@@ -6,7 +6,7 @@
 --]================]
 return {
 	"iamcco/markdown-preview.nvim",
-	Event = "VeryLazy",
+	Event = "UIEnter",
 	ft = "markdown",
 	build = function()
 		vim.fn["mkdp#util#install"]()

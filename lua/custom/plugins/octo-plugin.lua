@@ -1,5 +1,6 @@
 return {
   'pwntester/octo.nvim',
+  Event = 'UIEnter',
   requires = {
     'nvim-lua/plenary.nvim',
     'nvim-telescope/telescope.nvim',

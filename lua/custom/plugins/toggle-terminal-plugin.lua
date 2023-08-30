@@ -7,7 +7,7 @@
 
 return {
     "akinsho/toggleterm.nvim",
-    Event = "VeryLazy",
+    Event = "UIEnter",
     config = function()
     end,
 }

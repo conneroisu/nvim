@@ -7,6 +7,6 @@
 
 return {
 	"folke/todo-comments.nvim",
-	event = "VeryLazy",
+	event = "UIEnter",
 	dependencies = "nvim-lua/plenary.nvim",
 }
