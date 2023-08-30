@@ -8,10 +8,16 @@ vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", {
 })
 
 -- Bind J and K in visual mode to move the seslection up and down respectively
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move visual selection down" })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual selection up" })
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", {
+    desc = "Move visual selection down"
+})
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {
+    desc = "Move visual selection up"
+})
 -- Map J in normal mode to join lines by staying at the current postiion
-vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines" })
+vim.keymap.set("n", "J", "mzJ`z", {
+    desc = "Join lines"
+})
 -- set leader + p to "\"_dP allows for pasting without losing yanked text
 vim.api.nvim_set_keymap("x", "<leader>p", "\"_dP", {
     noremap = true,
@@ -222,7 +228,9 @@ vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, {
 })
 
 -- map telescope live_grep to leader + l + g
-vim.keymap.set("n", "<leader>lg", ":Telescope live_grep<CR>", { desc = "Open Telescope Live Grep" })
+vim.keymap.set("n", "<leader>lg", ":Telescope live_grep<CR>", {
+    desc = "Open Telescope Live Grep"
+})
 
 vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, {
     desc = '[F]ind [F]iles'
@@ -538,10 +546,10 @@ vim.api.nvim_set_keymap("n", "<leader>cf", "<plug>(coc-codeaction-cursor)", {
 vim.api.nvim_set_keymap("n", "<leader>ca", "<plug>(coc-fix-current)", {
     desc = "Fix current"
 })
--- -- bind leader + g + p to open telescope projects in normal mode
--- vim.api.nvim_set_keymap("n", "<leader>gp", ":Telescope projects<CR>", {
---     desc = "Open Telesope projects "
--- })
+-- bind leader + g + p to open telescope projects in normal mode
+vim.api.nvim_set_keymap("n", "<leader>gp", ":Telescope projects<CR>", {
+    desc = "Open Telesope projects "
+})
 -- bind leader + e to open the init.lua file in normal mode
 vim.api.nvim_set_keymap("n", "<leader>e", ":e $MYVIMRC<CR>", {
     noremap = true,
