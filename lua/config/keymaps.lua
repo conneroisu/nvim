@@ -331,3 +331,5 @@ vim.cmd("imap <silent><script><expr> <C-S-L> copilot#AcceptWord('<CR>') ")
     keyset("n", "<space>p", ":<C-u>CocListResume<cr>", opts)
     vim.cmd("CocCommand document.toggleCodeLens")
 
+-- bind leader + g + h to open the Octo github issue list in normal mode
+vim.api.nvim_set_keymap("n", "<leader>gh", "<cmd>:Octo issue list<CR>", { desc = "Open the Octo issue list" })
