@@ -3,11 +3,14 @@
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = '\\'
 vim.g.maplocalleader = ' '
+-- bind leader + m to open oil file explorer in normal mode
+vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", { noremap = true, silent = true })
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
     'git',
@@ -20,14 +23,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
 require('lazy').setup({
-  -- NOTE: First, some plugins that don't require any configuration
-
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
@@ -85,7 +81,7 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk, { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
+        --vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk, { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
         vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
         vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
       end,
@@ -237,22 +233,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- [[ Configure Telescope ]]
--- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-  },
-}
-
--- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
-
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
@@ -275,7 +255,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'csharp','golang'  },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -496,8 +476,7 @@ vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", { noremap = true, silent =
 vim.api.nvim_set_keymap("n", "<C-h>", "^", { noremap = true, silent = true })
 -- bind shift + l to move to the end of the line in normal mode
 vim.api.nvim_set_keymap("n", "<C-l>", "$", { noremap = true, silent = true })
-vim.cmd("map <C-l> $")
-vim.cmd("map <C-h> ^")
+
 
 -- Move Lines
 vim.api.nvim_set_keymap("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
@@ -605,10 +584,12 @@ end
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
-  -- gopls = {},
+   gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
+   svelte = {},
    tsserver = {},
+  
    html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
@@ -694,3 +675,12 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+vim.command("au BufNewFile,BufRead *.xaml setlocal filetype=xml")
+
+vim.cmd("let g:loaded_netrw = 0")
+vim.cmd("let g:loaded_netrwPlugin = 0")
+vim.cmd("syntax on")
+vim.cmd("set termguicolors")
+
+-- set hybrid line numbers wehre the actual line nunmber is at the current line and the relative line numbers everywhere else
+vim.cmd("set number relativenumber")

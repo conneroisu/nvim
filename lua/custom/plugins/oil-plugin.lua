@@ -130,8 +130,4 @@ return {
 			},
 		})
 	end,
-	on_attach = function()
-        vim.keymap.set('n', '<leader>m', require('Oil').open_cwd, { buffer = bufnr, desc = 'Open Current Working Directory' })
-        vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
-	end,
 }
