@@ -19,7 +19,7 @@ return {
             vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
             vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 
-            -- vim.opt.scrolloff = 8
+            -- set the scroll off of the buffer when lsp is attached to said buffer to 8 
             vim.o.scrolloff = 8
         end)
         lsp.setup()

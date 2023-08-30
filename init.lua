@@ -7,6 +7,16 @@ vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", {
     silent = true
 })
 
+-- Bind J and K in visual mode to move the seslection up and down respectively
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move visual selection down" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual selection up" })
+-- Map J in normal mode to join lines by staying at the current postiion
+vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines" })
+-- set leader + p to "\"_dP allows for pasting without losing yanked text
+vim.api.nvim_set_keymap("x", "<leader>p", "\"_dP", {
+    noremap = true,
+    silent = true
+})
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info

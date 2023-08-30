@@ -25,16 +25,12 @@ vim.api.nvim_set_keymap("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 vim.api.nvim_set_keymap("n", "<C-y>", "<cmd>redo<cr>", { desc = "Redo" })
 -- Bind the previous file to alt+left like in a browser.
 vim.api.nvim_set_keymap("n", "<A-Left>", ":edit #<cr>", { silent = true })
-
 -- bind leader + x + L to open location list from trouble in normal mode
 vim.api.nvim_set_keymap("n", "<leader>xL", "<cmd>TroubleToggle loclist<cr>", { desc = "Location List (Trouble)" })
-
 -- bind leader + x + Q to open quickfix list from trouble in normal mode
 vim.api.nvim_set_keymap("n", "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", { desc = "Quickfix List (Trouble)" })
-
 -- bind leader + u + u to open undotree in normal mode
 vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle)
-
 -- bind <leader> + x + x to open document diagnostics in normal mode
 vim.api.nvim_set_keymap(
 	"n",
@@ -53,9 +49,9 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap("n", "<leader>gh", "<cmd>:Octo issue list<CR>", { desc = "Open the Octo issue list" })
 -- bind leader + w to open the URL view
 vim.keymap.set("n", "<leader>w", "<Cmd>UrlView<CR>", { desc = "View buffer URLs" })
-
 -- lazy
 vim.api.nvim_set_keymap("n", "<leader>L", "<cmd>:Lazy<cr>", { desc = "Lazy" })
+
 
 
 --[=======[
