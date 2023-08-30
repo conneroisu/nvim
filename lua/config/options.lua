@@ -13,6 +13,9 @@ vim.o.clipboard = "unnamedplus"
 -- Add spaces after comment delimiters by default
 vim.g.NERDSpaceDelims = 1
 
+
+vim.opt.undofile = true
+
 -- Use compact syntax for prettified multi-line comments
 vim.g.NERDCompactSexyComs = 1
 

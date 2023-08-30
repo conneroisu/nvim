@@ -1,11 +1,13 @@
-vim.keymap.set("n", "<leader>u", "<Cmd>UrlView<CR>", { desc = "View buffer URLs" })
-vim.keymap.set("n", "<leader>U", "<Cmd>UrlView packer<CR>", { desc = "View Packer plugin URLs" })
--- map telescope live_grep to leader + l + g
-vim.keymap.set("n", "<leader>lg", ":Telescope live_grep<CR>", { desc = "Open Telescope Live Grep" })
+
+-- TELESCOPE ==========================================================================================================
 -- bind leader + g + p to open telescope projects in normal mode
-vim.api.nvim_set_keymap("n", "<leader>gp", "Oil ~/Documents/001Repos", { desc = "Open  projects " })
+vim.api.nvim_set_keymap("n", "<leader>gp", "Oil S:<cr>", { desc = "Open  projects " })
 -- bind Control + o to open recent files in normal mode
 vim.api.nvim_set_keymap("n", "<C-o>", ":Telescope oldfiles<CR>", { noremap = true, silent = true })
+
+
+vim.keymap.set("n", "<leader>u", "<Cmd>UrlView<CR>", { desc = "View buffer URLs" })
+vim.keymap.set("n", "<leader>U", "<Cmd>UrlView packer<CR>", { desc = "View Packer plugin URLs" })
 
 -- tabs
 vim.api.nvim_set_keymap("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
@@ -56,12 +58,6 @@ vim.keymap.set("n", "<leader>w", "<Cmd>UrlView<CR>", { desc = "View buffer URLs"
 vim.api.nvim_set_keymap("n", "<leader>L", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 
 
---[=====[
--- Netrw
---]=====]
--- Bind netrw to <leader>M at 25 width
-vim.api.nvim_set_keymap("n", "<leader>M", ":Lexplore<CR> :vertical resize 25<CR>", { noremap = true, silent = true })
-
 --[=======[
    Neotest
 --]=======]
@@ -89,6 +85,7 @@ vim.api.nvim_set_keymap(
 	":IO<CR>",
 	{ noremap = true, silent = true, desc = "Open in Obsidian (MacOS)" }
 )
+
 vim.api.nvim_set_keymap("n", "<leader>hu", "<cmd>Git<cr>", { desc = "Git" })
 
 -- bind the leader + u + n to dismiss all notifications in normal mode
@@ -148,7 +145,7 @@ vim.api.nvim_set_keymap("n", "<leader>ca", "<plug>(coc-fix-current)", { desc = "
 -- bind leader + e to open the init.lua file in normal mode
 vim.api.nvim_set_keymap("n", "<leader>e", ":e $MYVIMRC<CR>", { noremap = true, silent = true })
 -- bind leader + m to open oil file explorer in normal mode
-vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", { noremap = true, silent = true })
+--vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", { noremap = true, silent = true })
 
 -- bind shift + h to move to the start of the line in normal mode
 vim.api.nvim_set_keymap("n", "<C-h>", "^", { noremap = true, silent = true })
@@ -243,7 +240,7 @@ vim.cmd("imap <silent><script><expr> <C-S-L> copilot#AcceptWord('<CR>') ")
     keyset("n", "]g", "<Plug>(coc-diagnostic-next)", { silent = true })
 
     -- Symbol renaming to F2
-    keyset("n", "<F2>", "<Plug>(coc-rename)", { silent = true })
+    keyset("n", "<F2>", ":IncRename ")
 
     -- GoTo code navigation
     keyset("n", "gd", "<Plug>(coc-definition)", { silent = true })
