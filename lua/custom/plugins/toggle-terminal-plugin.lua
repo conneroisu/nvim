@@ -6,7 +6,8 @@
 --]===============]
 
 return {
-  "akinsho/toggleterm.nvim",
-  config = function()
-  end,
+    "akinsho/toggleterm.nvim",
+    Event = "VeryLazy",
+    config = function()
+    end,
 }

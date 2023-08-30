@@ -270,7 +270,6 @@ vim.cmd("imap <silent><script><expr> <C-S-L> copilot#AcceptWord('<CR>') ")
 
     -- Apply rodeAction to the selected region
     -- Example: `<leader>aap` for current paragraph
-    local opts = { silent = true, nowait = true }
     keyset("x", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
     keyset("n", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
 
@@ -302,7 +301,6 @@ vim.cmd("imap <silent><script><expr> <C-S-L> copilot#AcceptWord('<CR>') ")
 
     -- Remap <C-f> and <C-b> to scroll float windows/popups
     ---@diagnostic disable-next-line: redefined-local
-    local opts = { silent = true, nowait = true, expr = true }
     keyset("n", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
     keyset("n", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
     keyset("i", "<C-f>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', opts)
