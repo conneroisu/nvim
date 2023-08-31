@@ -19,8 +19,10 @@ return {
             vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
             vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 
-            -- set the scroll off of the buffer when lsp is attached to said buffer to 8 
+            -- set the scroll off of the buffer when lsp is attached to said buffer to 8
             vim.o.scrolloff = 8
+            -- set hybrid line numbers where the actual line number is at the current line and the relative line numbers everywhere else
+            vim.cmd("set number relativenumber")
         end)
         lsp.setup()
     end

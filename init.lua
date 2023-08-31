@@ -844,8 +844,4 @@ vim.cmd("let g:loaded_netrwPlugin = 0")
 vim.cmd("syntax on")
 vim.cmd("set termguicolors")
 
--- set hybrid line numbers where the actual line number is at the current line and the relative line numbers everywhere else
-vim.cmd("set number relativenumber")
 
--- vim.opt.scrolloff = 8
-vim.o.scrolloff = 8
