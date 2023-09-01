@@ -1,10 +1,10 @@
 
 -- TELESCOPE ==========================================================================================================
--- bind leader + g + p to open telescope projects in normal mode
-vim.api.nvim_set_keymap("n", "<leader>gp", "Oil S:<cr>", { desc = "Open  projects " })
 -- bind Control + o to open recent files in normal mode
 vim.api.nvim_set_keymap("n", "<C-o>", ":Telescope oldfiles<CR>", { noremap = true, silent = true })
 
+-- set dbui from dadbod to leader plus d plus b in normal mode
+vim.api.nvim_set_keymap("n", "<leader>db", ":DBUIToggle<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>u", "<Cmd>UrlView<CR>", { desc = "View buffer URLs" })
 vim.keymap.set("n", "<leader>U", "<Cmd>UrlView packer<CR>", { desc = "View Packer plugin URLs" })

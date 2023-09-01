@@ -1,6 +1,6 @@
 return {
     "VonHeikemen/lsp-zero.nvim",
-    Event = "UIEnter",
+    Event = "VeryLazy",
     config = function()
         local lsp = require("lsp-zero")
         lsp.preset("recommended")
