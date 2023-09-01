@@ -1,6 +1,15 @@
 -- Map J in normal mode to join lines by staying at the current postiion
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines" })
 
+-- bind Control + o to open recent files in normal mode
+vim.api.nvim_set_keymap("n", "<C-o>", ":Telescope oldfiles<CR>", {
+    noremap = true,
+    silent = true
+})
+
+vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<CR>", {
+    desc = '[F]ind [F]iles'
+})
 -- bind space + space to open telescope in normal mode for files 
 vim.api.nvim_set_keymap("n", "<space><space>", ":Telescope find_files<CR>", {
     noremap = true,
@@ -55,13 +64,45 @@ vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", {
     silent = true
 })
 
+-- lazy
+vim.api.nvim_set_keymap("n", "<leader>L", "<cmd>:Lazy<cr>", {
+    desc = "Lazy"
+})
+-- bind leader + u + u to open undotree in normal mode
+vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle)
+
+-- bind <leader> + x + w to open workspace diagnostics
+vim.api.nvim_set_keymap("n", "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", {
+    desc = "Workspace Diagnostics (Trouble)"
+})
+-- bind leader + g + h to open the Octo github issue list in normal mode
+vim.api.nvim_set_keymap("n", "<leader>gh", "<cmd>:Octo issues<CR>", {
+    desc = "Open the Octo issue list"
+})
 
 -- map telescope live_grep to leader + l + g
 vim.keymap.set("n", "<leader>lg", ":Telescope live_grep<CR>", {
     desc = "Open Telescope Live Grep"
 })
 
+-- bind <leader> + x + x to open document diagnostics in normal mode
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", {
+    desc = "Document Diagnostics (Trouble)"
+})
+-- bind leader + x + Q to open quickfix list from trouble in normal mode
+vim.api.nvim_set_keymap("n", "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", {
+    desc = "Quickfix List (Trouble)"
+})
 
+-- Bind the previous file to alt+left like in a browser.
+vim.api.nvim_set_keymap("n", "<A-Left>", ":edit #<cr>", {
+    silent = true
+})
+
+-- open the diagnostics list with leader + q
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, {
+    desc = 'Open diagnostics list'
+})
 -- Bind redo to Ctrl + Y
 vim.api.nvim_set_keymap("n", "<C-y>", "<cmd>redo<cr>", {
     desc = "Redo"

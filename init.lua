@@ -212,14 +212,6 @@ vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, {
     desc = '[?] Find recently opened files'
 })
 
--- map telescope live_grep to leader + l + g
-vim.keymap.set("n", "<leader>lg", ":Telescope live_grep<CR>", {
-    desc = "Open Telescope Live Grep"
-})
-
-vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, {
-    desc = '[F]ind [F]iles'
-})
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, {
     desc = '[ ] Find existing buffers'
 })
@@ -333,10 +325,6 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, {
     desc = 'Open floating diagnostic message'
 })
 
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, {
-    desc = 'Open diagnostics list'
-})
-
 -- buffers
 vim.api.nvim_set_keymap("n", "<C-Left>", "<cmd>bprevious<cr>", {
     desc = "Prev buffer"
@@ -358,44 +346,6 @@ vim.api.nvim_set_keymap("n", "<leader>xL", "<cmd>TroubleToggle loclist<cr>", {
     desc = "Location List (Trouble)"
 })
 
--- bind leader + x + Q to open quickfix list from trouble in normal mode
-vim.api.nvim_set_keymap("n", "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", {
-    desc = "Quickfix List (Trouble)"
-})
-
--- bind leader + u + u to open undotree in normal mode
-vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle)
-
--- bind <leader> + x + x to open document diagnostics in normal mode
-vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", {
-    desc = "Document Diagnostics (Trouble)"
-})
--- bind <leader> + x + w to open workspace diagnostics
-vim.api.nvim_set_keymap("n", "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", {
-    desc = "Workspace Diagnostics (Trouble)"
-})
--- bind leader + g + h to open the Octo github issue list in normal mode
-vim.api.nvim_set_keymap("n", "<leader>gh", "<cmd>:Octo issue list<CR>", {
-    desc = "Open the Octo issue list"
-})
--- bind leader + w to open the URL view
-vim.keymap.set("n", "<leader>w", "<Cmd>UrlView<CR>", {
-    desc = "View buffer URLs"
-})
-
--- lazy
-vim.api.nvim_set_keymap("n", "<leader>L", "<cmd>:Lazy<cr>", {
-    desc = "Lazy"
-})
---[=====[
--- Netrw
---]=====]
--- Bind netrw to <leader>M at 25 width
-vim.api.nvim_set_keymap("n", "<leader>M", ":Lexplore<CR> :vertical resize 25<CR>", {
-    noremap = true,
-    silent = true
-})
-
 --[=======[
    Neotest
 --]=======]
@@ -410,11 +360,6 @@ vim.cmd(":command Vs vs")
 vim.cmd(":command W w")
 vim.cmd(":command Q q")
 
--- bind Control + o to open recent files in normal mode
-vim.api.nvim_set_keymap("n", "<C-o>", ":Telescope oldfiles<CR>", {
-    noremap = true,
-    silent = true
-})
 -- Open file in Obsidian vault
 -- macos
 vim.cmd([[command! -nargs=0 IO execute "silent !open 'obsidian://open?vault=SecondBrain&file=" . expand('%:t:r') . "'"]])
