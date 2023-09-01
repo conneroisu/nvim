@@ -793,13 +793,15 @@ cmp.setup {
     } }
 }
 
+-- -- The line beneath this is called `modeline`. See `:help modeline`
+-- -- vim: ts=2 sts=2 sw=2 et
+-- vim.command("au BufNewFile,BufRead *.xaml setlocal filetype=xml")
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 
-vim.cmd("let g:loaded_netrw = 0")
-vim.cmd("let g:loaded_netrwPlugin = 0")
+-- vim.cmd("let g:loaded_netrw = 0")
+vim.o.loaded_netrw = 0
+vim.o.loaded_netrwPlugin = 0
 vim.cmd("syntax on")
-vim.cmd("set termguicolors")
-
-
-vim.cmd(
-    "autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} }) ")
+vim.o.termguicolors = true
+vim.cmd( "autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} }) ")
