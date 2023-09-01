@@ -1,31 +1,31 @@
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = '\\'
 vim.g.maplocalleader = ' '
--- bind leader + m to open oil file explorer in normal mode
-vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", {
+
+-- bind Ctrl + Space to view options from cmp in insert mode
+vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", {
     noremap = true,
-    silent = true
+    silent = true,
+    expr = true
 })
 
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {
+    desc = "Move visual selection up"
+})
 -- Bind J and K in visual mode to move the seslection up and down respectively
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", {
     desc = "Move visual selection down"
 })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {
-    desc = "Move visual selection up"
-})
--- Map J in normal mode to join lines by staying at the current postiion
-vim.keymap.set("n", "J", "mzJ`z", {
-    desc = "Join lines"
-})
+
+
+
 -- set leader + p to "\"_dP allows for pasting without losing yanked text
 vim.api.nvim_set_keymap("x", "<leader>p", "\"_dP", {
     noremap = true,
     silent = true
 })
--- Install package manager
---    https://github.com/folke/lazy.nvim
---    `:help lazy.nvim.txt` for more info
+
+-- Install package manager https://github.com/folke/lazy.nvim `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
 if not vim.loop.fs_stat(lazypath) then
@@ -33,14 +33,14 @@ if not vim.loop.fs_stat(lazypath) then
         .system { 'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git', '--branch=stable', -- latest stable release
             lazypath }
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
     { 'folke/neodev.nvim', init = function() require('neodev').setup() end },
     'tpope/vim-fugitive',
-    'tpope/vim-rhubarb', -- Detect tabstop and shiftwidth automatically
-    'tpope/vim-sleuth',  -- NOTE: This is where your plugins related to LSP can be installed.
-    --  The configuration is done below. Search for lspconfig to find it below.
+    'tpope/vim-rhubarb',
+    'tpope/vim-sleuth',
     {
         -- LSP Configuration & Plugins
         'neovim/nvim-lspconfig',
@@ -60,18 +60,6 @@ require('lazy').setup({
                 opts = {}
             }, -- Additional lua configuration, makes nvim stuff amazing!
         }
-    },
-    {
-        -- Autocompletion
-        'hrsh7th/nvim-cmp',
-        dependencies = {                                    -- Snippet Engine & its associated nvim-cmp source
-            'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', -- Adds LSP completion capabilities
-            'hrsh7th/cmp-nvim-lsp',                         -- Adds a number of user-friendly snippets
-            'rafamadriz/friendly-snippets' }
-    },                                                      -- Useful plugin to show you pending keybinds.
-    {
-        'folke/which-key.nvim',
-        opts = {}
     },
     {
         -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -109,7 +97,6 @@ require('lazy').setup({
         }
     },
     {
-        -- Theme inspired by Atom
         'navarasu/onedark.nvim',
         priority = 1000,
         config = function()
@@ -132,25 +119,19 @@ require('lazy').setup({
     {
         -- Add indentation guides even on blank lines
         'lukas-reineke/indent-blankline.nvim',
-        -- Enable `lukas-reineke/indent-blankline.nvim`
         -- See `:help indent_blankline.txt`
         opts = {
             char = '┊',
-            show_trailing_blankline_indent = false
+            show_trailing_blankline_indent = false,
         }
-    }, -- "gc" to comment visual regions/lines
-    {
-        'numToStr/Comment.nvim',
-        opts = {}
     },
     {
         import = 'custom.plugins'
     }
-}, {})
+})
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
--- NOTE: You can change these options as you wish!
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -162,8 +143,6 @@ vim.wo.number = true
 vim.o.mouse = 'a'
 
 -- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
 vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
@@ -186,8 +165,16 @@ vim.o.timeoutlen = 300
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
--- NOTE: You should make sure your terminal supports this
+-- set hybrid line numbers
+vim.o.number = true
+vim.o.relativenumber = true
+
 vim.o.termguicolors = true
+
+-- disable netrw in favor of Oil
+vim.o.loaded_netrw = 0
+vim.o.loaded_netrwPlugin = 0
+
 
 -- [[ Basic Keymaps ]]
 
@@ -345,39 +332,11 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, {
     desc = 'Open floating diagnostic message'
 })
+
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, {
     desc = 'Open diagnostics list'
 })
-vim.keymap.set("n", "<leader>u", "<Cmd>UrlView<CR>", {
-    desc = "View buffer URLs"
-})
-vim.keymap.set("n", "<leader>U", "<Cmd>UrlView packer<CR>", {
-    desc = "View Packer plugin URLs"
-})
--- map telescope live_grep to leader + l + g
-vim.keymap.set("n", "<leader>lg", ":Telescope live_grep<CR>", {
-    desc = "Open Telescope Live Grep"
-})
 
--- tabs
-vim.api.nvim_set_keymap("n", "<leader><tab>l", "<cmd>tablast<cr>", {
-    desc = "Last Tab"
-})
-vim.api.nvim_set_keymap("n", "<leader><tab>f", "<cmd>tabfirst<cr>", {
-    desc = "First Tab"
-})
-vim.api.nvim_set_keymap("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", {
-    desc = "New Tab"
-})
-vim.api.nvim_set_keymap("n", "<leader><tab>]", "<cmd>tabnext<cr>", {
-    desc = "Next Tab"
-})
-vim.api.nvim_set_keymap("n", "<leader><tab>d", "<cmd>tabclose<cr>", {
-    desc = "Close Tab"
-})
-vim.api.nvim_set_keymap("n", "<leader><tab>[", "<cmd>tabprevious<cr>", {
-    desc = "Previous Tab"
-})
 -- buffers
 vim.api.nvim_set_keymap("n", "<C-Left>", "<cmd>bprevious<cr>", {
     desc = "Prev buffer"
@@ -385,19 +344,13 @@ vim.api.nvim_set_keymap("n", "<C-Left>", "<cmd>bprevious<cr>", {
 vim.api.nvim_set_keymap("n", "<C-Right>", "<cmd>bnext<cr>", {
     desc = "Next buffer"
 })
+
 vim.api.nvim_set_keymap("n", "[b", "<cmd>bprevious<cr>", {
     desc = "Prev buffer"
 })
+
 vim.api.nvim_set_keymap("n", "]b", "<cmd>bnext<cr>", {
     desc = "Next buffer"
-})
--- Bind redo to Ctrl + Y
-vim.api.nvim_set_keymap("n", "<C-y>", "<cmd>redo<cr>", {
-    desc = "Redo"
-})
--- Bind the previous file to alt+left like in a browser.
-vim.api.nvim_set_keymap("n", "<A-Left>", ":edit #<cr>", {
-    silent = true
 })
 
 -- bind leader + x + L to open location list from trouble in normal mode
@@ -526,16 +479,6 @@ vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", {
     silent = true
 })
 
--- bind shift + h to move to the start of the line in normal mode
-vim.api.nvim_set_keymap("n", "<C-h>", "^", {
-    noremap = true,
-    silent = true
-})
--- bind shift + l to move to the end of the line in normal mode
-vim.api.nvim_set_keymap("n", "<C-l>", "$", {
-    noremap = true,
-    silent = true
-})
 
 -- Move Lines
 vim.api.nvim_set_keymap("n", "<A-j>", "<cmd>m .+1<cr>==", {
@@ -691,16 +634,9 @@ local on_attach = function(_, bufnr)
     })
 end
 
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
---
---  If you want to override the default filetypes that your language server will attach to you can
---  define the property 'filetypes' to the map in question.
+--  define the property 'filetypes' to the map in question, to override the default filetypes of a server.
 local servers = {
-    -- clangd = {},
+     clangd = {},
     -- gopls = {},
     -- pyright = {},
     -- rust_analyzer = {},
@@ -763,7 +699,7 @@ cmp.setup {
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete {},
-        ['<CR>'] = cmp.mapping.confirm {
+        ['<c-y>'] = cmp.mapping.confirm {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true
         },
@@ -800,8 +736,7 @@ cmp.setup {
 -- The line beneath this is called `modeline`. See `:help modeline`
 
 -- vim.cmd("let g:loaded_netrw = 0")
-vim.o.loaded_netrw = 0
-vim.o.loaded_netrwPlugin = 0
 vim.cmd("syntax on")
-vim.o.termguicolors = true
 vim.cmd( "autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} }) ")
+
+require("custom.keymaps.normal-keymaps")

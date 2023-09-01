@@ -8,4 +8,5 @@ return {
 	"https://codeberg.org/esensar/nvim-dev-container",
 	Event = "VeryLazy",
 	dependencies = { "nvim-treesitter/nvim-treesitter" },
+   lazy = true,
 }

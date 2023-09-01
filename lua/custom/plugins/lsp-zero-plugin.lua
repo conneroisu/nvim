@@ -25,5 +25,6 @@ return {
             vim.cmd("set number relativenumber")
         end)
         lsp.setup()
-    end
+    end,
+    lazy = true,
 }

@@ -17,4 +17,5 @@ return {
 			return math.floor(vim.o.columns * 0.75)
 		end,
 	},
+	lazy = true,
 }
