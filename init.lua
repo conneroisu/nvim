@@ -2,22 +2,6 @@
 vim.g.mapleader = '\\'
 vim.g.maplocalleader = ' '
 
--- bind Ctrl + Space to view options from cmp in insert mode
-vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", {
-    noremap = true,
-    silent = true,
-    expr = true
-})
-
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {
-    desc = "Move visual selection up"
-})
--- Bind J and K in visual mode to move the seslection up and down respectively
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", {
-    desc = "Move visual selection down"
-})
-
-
 
 -- set leader + p to "\"_dP allows for pasting without losing yanked text
 vim.api.nvim_set_keymap("x", "<leader>p", "\"_dP", {
@@ -178,19 +162,7 @@ vim.o.loaded_netrwPlugin = 0
 
 -- [[ Basic Keymaps ]]
 
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', {
-    silent = true
-})
-
--- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", {
-    expr = true,
-    silent = true
-})
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", {
-    expr = true,
     silent = true
 })
 
@@ -321,9 +293,6 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {
     desc = 'Go to next diagnostic message'
 })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, {
-    desc = 'Open floating diagnostic message'
-})
 
 -- buffers
 vim.api.nvim_set_keymap("n", "<C-Left>", "<cmd>bprevious<cr>", {
@@ -369,75 +338,11 @@ vim.api.nvim_set_keymap("n", "<leader>io", ":IO<CR>", {
     desc = "Open in Obsidian (MacOS)"
 })
 
-vim.api.nvim_set_keymap("n", "<leader>hu", "<cmd>Git<cr>", {
-    desc = "Git"
-})
-
--- bind the leader + u + n to dismiss all notifications in normal mode
-vim.api.nvim_set_keymap("n", "<leader>un", "<cmd>lua require('notify').dismiss({silent = true, pending = true})<cr>", {
-    desc = "Dismiss all Notifications"
-})
--- set leader key + c + o to toggle comments in normal and visual mode
-vim.api.nvim_set_keymap("n", "<leader>co", "<cmd>CommentToggle<cr>", {
-    desc = "Comment Toggle"
-})
 -- bind leader + c + o to toggle comments in visual mode
 vim.api.nvim_set_keymap("v", "<leader>co", ":'<,'>CommentToggle<cr>", {
     desc = "Visual Comment Toggle"
 })
--- map leader + x + x to toggle the document diagnostics from trouble in normal mode
-vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", {
-    desc = "Document Diagnostics (Trouble)"
-})
--- map leader + x + X to toggle the workspace diagnostics from trouble in normal mode
-vim.api.nvim_set_keymap("n", "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", {
-    desc = "Workspace Diagnostics (Trouble)"
-})
--- bind leader + x + L to toggle the loclist from trouble in normal mode
-vim.api.nvim_set_keymap("n", "<leader>xL", "<cmd>TroubleToggle loclist<cr>", {
-    desc = "Location List (Trouble)"
-})
--- bind leader + x + Q to toggle the quickfix list from trouble in normal mode
-vim.api.nvim_set_keymap("n", "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", {
-    desc = "Quickfix List (Trouble)"
-})
--- bind leader + a + g to generate a github commit message from the git diff in normal mode
-vim.api.nvim_set_keymap("n", "<leader>ag", ":NeoAIShortcut gitcommit<CR>", {
-    desc = "Generate a git diff commit message."
-})
--- bind leader + u + u to toggle the undo tree view in normal mode
-vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle, {
-    desc = "Open Undo Tree"
-})
--- bind leader + g + p to open telescope projects in normal mode
-vim.api.nvim_set_keymap("n", "<leader>gp", ":Telescope projects<CR>", {
-    desc = "Open Telesope projects "
-})
--- bind leader + e to open the init.lua file in normal mode
-vim.api.nvim_set_keymap("n", "<leader>e", ":e $MYVIMRC<CR>", {
-    noremap = true,
-    silent = true
-})
--- bind leader + m to open oil file explorer in normal mode
-vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", {
-    noremap = true,
-    silent = true
-})
 
-
--- Move Lines
-vim.api.nvim_set_keymap("n", "<A-j>", "<cmd>m .+1<cr>==", {
-    desc = "Move down"
-})
-vim.api.nvim_set_keymap("n", "<A-k>", "<cmd>m .-2<cr>==", {
-    desc = "Move up"
-})
-vim.api.nvim_set_keymap("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", {
-    desc = "Move down"
-})
-vim.api.nvim_set_keymap("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", {
-    desc = "Move up"
-})
 vim.api.nvim_set_keymap("v", "<A-j>", ":m '>+1<cr>gv=gv", {
     desc = "Move down"
 })
@@ -526,13 +431,6 @@ vim.api.nvim_set_keymap("t", "<c-_>", "<cmd>close<cr>", {
     desc = "which_key_ignore"
 })
 
---[==============[
-   GITHUB COPILOT
---]==============]
--- Bind accept github copilot to <Tab>
-vim.cmd("imap <silent><script><expr> <C-j> copilot#Accept('<CR>') ")
--- Bind accept word to ctrl + shift + l
-vim.cmd("imap <silent><script><expr> <C-S-L> copilot#AcceptWord('<CR>') ")
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
@@ -678,10 +576,8 @@ cmp.setup {
 -- -- vim: ts=2 sts=2 sw=2 et
 -- vim.command("au BufNewFile,BufRead *.xaml setlocal filetype=xml")
 
--- The line beneath this is called `modeline`. See `:help modeline`
-
--- vim.cmd("let g:loaded_netrw = 0")
 vim.cmd("syntax on")
 vim.cmd( "autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} }) ")
-
+require("custom.keymaps.visual-keymaps")
+require("custom.keymaps.insert-keymaps")
 require("custom.keymaps.normal-keymaps")

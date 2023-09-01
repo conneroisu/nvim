@@ -1,15 +1,98 @@
 -- Map J in normal mode to join lines by staying at the current postiion
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines" })
 
+vim.keymap.set("n", "K", "<CMD>lua _G.show_docs()<CR>", { silent = true , desc = "Show Documentation for item under cursor"})
 -- bind Control + o to open recent files in normal mode
 vim.api.nvim_set_keymap("n", "<C-o>", ":Telescope oldfiles<CR>", {
+    noremap = true,
+    silent = true,
+    desc = "Open Recent Files"
+})
+
+--macos
+vim.cmd(
+	[[command! -nargs=0 IO execute "silent !open 'obsidian://open?vault=SecondBrain&file=" . expand('%:t:r') . "'"]]
+)
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>io",
+	":IO<CR>",
+	{ noremap = true, silent = true, desc = "Open in Obsidian (MacOS)" }
+)
+-- Move Lines up and down with alt j and alt k in normal mode
+vim.api.nvim_set_keymap("n", "<A-j>", "<cmd>m .+1<cr>==", {
+    desc = "Move down"
+})
+vim.api.nvim_set_keymap("n", "<A-k>", "<cmd>m .-2<cr>==", {
+    desc = "Move up"
+})
+
+-- bind the leader + u + n to dismiss all notifications in normal mode
+vim.api.nvim_set_keymap("n", "<leader>un", "<cmd>lua require('notify').dismiss({silent = true, pending = true})<cr>", {
+    desc = "Dismiss all Notifications"
+})
+
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", {
+    expr = true,
+    silent = true
+})
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", {
+    expr = true,
+    silent = true
+})
+-- set leader key + c + o to toggle comments in normal and visual mode
+vim.api.nvim_set_keymap("n", "<leader>co", "<cmd>CommentToggle<cr>", {
+    desc = "Comment Toggle"
+})
+-- map leader + x + x to toggle the document diagnostics from trouble in normal mode
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", {
+    desc = "Document Diagnostics (Trouble)"
+})
+-- map leader + x + X to toggle the workspace diagnostics from trouble in normal mode
+vim.api.nvim_set_keymap("n", "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", {
+    desc = "Workspace Diagnostics (Trouble)"
+})
+-- bind leader + x + L to toggle the loclist from trouble in normal mode
+vim.api.nvim_set_keymap("n", "<leader>xL", "<cmd>TroubleToggle loclist<cr>", {
+    desc = "Location List (Trouble)"
+})
+-- bind leader + x + Q to toggle the quickfix list from trouble in normal mode
+vim.api.nvim_set_keymap("n", "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", {
+    desc = "Quickfix List (Trouble)"
+})
+-- bind leader + a + g to generate a github commit message from the git diff in normal mode
+vim.api.nvim_set_keymap("n", "<leader>ag", ":NeoAIShortcut gitcommit<CR>", {
+    desc = "Generate a git diff commit message."
+})
+-- bind leader + u + u to toggle the undo tree view in normal mode
+vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle, {
+    desc = "Open Undo Tree"
+})
+-- bind leader + g + p to open telescope projects in normal mode
+vim.api.nvim_set_keymap("n", "<leader>gp", ":Telescope projects<CR>", {
+    desc = "Open Telesope projects "
+})
+-- bind leader + m to open oil file explorer in normal mode
+vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", {
+    noremap = true,
+    silent = true
+})
+-- bind leader + h + u to open Git from fugitive in normal mode
+vim.api.nvim_set_keymap("n", "<leader>hu", "<cmd>Git<cr>", {
+    desc = "Git"
+})
+-- bind leader + e to open the init.lua file in normal mode
+vim.api.nvim_set_keymap("n", "<leader>e", ":e $MYVIMRC<CR>", {
     noremap = true,
     silent = true
 })
 
+-- bind leader + f + f to open telescope in normal mode for files
 vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<CR>", {
     desc = '[F]ind [F]iles'
 })
+
 -- bind space + space to open telescope in normal mode for files 
 vim.api.nvim_set_keymap("n", "<space><space>", ":Telescope find_files<CR>", {
     noremap = true,

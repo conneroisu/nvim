@@ -8,7 +8,6 @@
 -- Lazy.nvim
 return {
 	"liljaylj/codestats.nvim",
-	event = "VeryLazy",
 	dependencies = { "nvim-lua/plenary.nvim" },
 	event = { "TextChanged", "InsertEnter" },
 	cmd = { "CodeStatsXpSend", "CodeStatsProfileUpdate" },
@@ -23,4 +22,5 @@ return {
 			curl_timeout = 5, -- curl request timeout in seconds
 		})
 	end,
+	lazy = true,
 }
