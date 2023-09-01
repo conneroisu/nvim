@@ -35,12 +35,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({ 
-            'folke/neodev.nvim' ,
-        { import = "lazyvim.plugins.extras.lang.docker" },
+require('lazy').setup({
+    { 'folke/neodev.nvim', init = function() require('neodev').setup() end },
     'tpope/vim-fugitive',
-    'tpope/vim-rhubarb',                   -- Detect tabstop and shiftwidth automatically
-    'tpope/vim-sleuth',                    -- NOTE: This is where your plugins related to LSP can be installed.
+    'tpope/vim-rhubarb', -- Detect tabstop and shiftwidth automatically
+    'tpope/vim-sleuth',  -- NOTE: This is where your plugins related to LSP can be installed.
     --  The configuration is done below. Search for lspconfig to find it below.
     {
         -- LSP Configuration & Plugins
@@ -65,11 +64,11 @@ require('lazy').setup({
     {
         -- Autocompletion
         'hrsh7th/nvim-cmp',
-        dependencies = {                            -- Snippet Engine & its associated nvim-cmp source
+        dependencies = {                                    -- Snippet Engine & its associated nvim-cmp source
             'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', -- Adds LSP completion capabilities
-            'hrsh7th/cmp-nvim-lsp',                 -- Adds a number of user-friendly snippets
+            'hrsh7th/cmp-nvim-lsp',                         -- Adds a number of user-friendly snippets
             'rafamadriz/friendly-snippets' }
-    },                                              -- Useful plugin to show you pending keybinds.
+    },                                                      -- Useful plugin to show you pending keybinds.
     {
         'folke/which-key.nvim',
         opts = {}
@@ -512,38 +511,6 @@ vim.api.nvim_set_keymap("n", "<leader>ag", ":NeoAIShortcut gitcommit<CR>", {
 vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle, {
     desc = "Open Undo Tree"
 })
--- bind leader + g + i to the coc command to go to implementation in normal mode
-vim.api.nvim_set_keymap("n", "<leader>gi", "<cmd><plug>(coc-implementation)<CR>", {
-    desc = "Go to implementation"
-})
--- bind leader + g + t to the coc command to go to type definition in normal mode
-vim.api.nvim_set_keymap("n", "<leader>gt", "<cmd><plug>(coc-type-definition)<CR>", {
-    desc = "Go to type definition"
-})
--- bind leader + g + d to the coc command to go to definition in normal mode
-vim.api.nvim_set_keymap("n", "<leader>gd", "<cmd><plug>(coc-definition)<CR>", {
-    desc = "Go to definition"
-})
--- bind leader + g + r to the coc command to go to references in normal mode
-vim.api.nvim_set_keymap("n", "<leader>gr", "<cmd><plug>(coc-references)<CR>", {
-    desc = "Go to references"
-})
--- Bind leader  + c + l to open coc diagnostics
-vim.api.nvim_set_keymap("n", "<leader>cl", ":CocDiagnostics<CR>", {
-    desc = "Open diagnostics"
-})
--- bind leader + c + h to coc command to open hover doc in visual mode
-vim.api.nvim_set_keymap("v", "<leader>ch", ":call CocAction('doHover')<CR>", {
-    desc = "Open hover doc"
-})
--- bind leader + c + h to coc command to do a code action at the cursor in normal mode
-vim.api.nvim_set_keymap("n", "<leader>cf", "<plug>(coc-codeaction-cursor)", {
-    desc = "Code Action Cursor"
-})
--- bind leader + c + a to coc command to do a code fix at the cursor in normal mode
-vim.api.nvim_set_keymap("n", "<leader>ca", "<plug>(coc-fix-current)", {
-    desc = "Fix current"
-})
 -- bind leader + g + p to open telescope projects in normal mode
 vim.api.nvim_set_keymap("n", "<leader>gp", ":Telescope projects<CR>", {
     desc = "Open Telesope projects "
@@ -632,7 +599,7 @@ vim.api.nvim_set_keymap("v", ">", ">gv", {
 
 -- new file
 vim.api.nvim_set_keymap("n", "<leader>fn", "<cmd>enew<cr>", {
-    desc = "New File"
+    desc = "[N]ew [F]ile"
 })
 vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>lopen<cr>", {
     desc = "Location List"
@@ -682,12 +649,7 @@ vim.cmd("imap <silent><script><expr> <C-S-L> copilot#AcceptWord('<CR>') ")
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
-    -- NOTE: Remember that lua is a real programming language, and as such it is possible
-    -- to define small helper and utility functions so you don't have to repeat yourself
-    -- many times.
-    --
-    -- In this case, we create a function that lets us more easily define mappings specific
-    -- for LSP related items. It sets the mode, buffer and description for us each time.
+    -- function that lets us more easily define mappings specific for LSP related items. It sets the mode, buffer and description for us each time.
     local nmap = function(keys, func, desc)
         if desc then
             desc = 'LSP: ' .. desc
@@ -761,8 +723,6 @@ local servers = {
     }
 }
 
--- Setup neovim lua configuration
-require('neodev').setup()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -842,4 +802,4 @@ vim.cmd("set termguicolors")
 
 
 vim.cmd(
-"autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} }) ")
+    "autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} }) ")
