@@ -6,7 +6,6 @@
 --]=========]
 return {
 	"folke/which-key.nvim",
-	Event = "VeryLazy",
 	init = function()
 		vim.o.timeout = true
 		vim.o.timeoutlen = 300
@@ -99,4 +98,5 @@ return {
 			filetypes = {},
 		},
 	},
+	lazy = true
 }

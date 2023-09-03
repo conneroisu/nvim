@@ -6,5 +6,5 @@
 --]===]
 return {
 	"MunifTanjim/nui.nvim",
-	Event = "VeryLazy",
+   lazy = true
 }

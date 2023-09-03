@@ -7,5 +7,5 @@
 
 return {
 	"tpope/vim-repeat",
-	Event = "VeryLazy",
+	 lazy = true
 }

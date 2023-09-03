@@ -14,7 +14,6 @@
 
 return {
     "nvim-treesitter/nvim-treesitter",
-    Event = "VeryLazy",
     version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
@@ -79,5 +78,6 @@ return {
 
 
     end,
+    lazy = true,
 
 }

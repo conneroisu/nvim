@@ -76,7 +76,8 @@ vim.api.nvim_set_keymap("n", "<leader>gp", ":Telescope projects<CR>", {
 -- bind leader + m to open oil file explorer in normal mode
 vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", {
     noremap = true,
-    silent = true
+    silent = true, 
+    desc = "Open Oil File Explorer"
 })
 -- bind leader + h + u to open Git from fugitive in normal mode
 vim.api.nvim_set_keymap("n", "<leader>hu", "<cmd>Git<cr>", {
@@ -85,12 +86,51 @@ vim.api.nvim_set_keymap("n", "<leader>hu", "<cmd>Git<cr>", {
 -- bind leader + e to open the init.lua file in normal mode
 vim.api.nvim_set_keymap("n", "<leader>e", ":e $MYVIMRC<CR>", {
     noremap = true,
-    silent = true
+    silent = true,
+    desc = "Open init.lua"
 })
 
 -- bind leader + f + f to open telescope in normal mode for files
 vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<CR>", {
     desc = '[F]ind [F]iles'
+})
+
+
+-- See `:help telescope.builtin`
+vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, {
+    desc = '[?] Find recently opened files'
+})
+
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, {
+    desc = '[ ] Find existing buffers'
+})
+vim.keymap.set('n', '<leader>/', function()
+    -- You can pass additional configuration to telescope to change theme, layout, etc.
+    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+        winblend = 10,
+        previewer = false
+    })
+end, {
+    desc = '[/] Fuzzily search in current buffer'
+})
+
+vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, {
+    desc = 'Search [G]it [F]iles'
+})
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, {
+    desc = '[S]earch [F]iles'
+})
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, {
+    desc = '[S]earch [H]elp'
+})
+vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, {
+    desc = '[S]earch current [W]ord'
+})
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, {
+    desc = '[S]earch by [G]rep'
+})
+vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, {
+    desc = '[S]earch [D]iagnostics'
 })
 
 -- bind space + space to open telescope in normal mode for files 
@@ -144,15 +184,16 @@ vim.api.nvim_set_keymap("n", "<S-l>", "$", {
 -- bind leader + m to open oil file explorer in normal mode
 vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", {
     noremap = true,
-    silent = true
+    silent = true,
+    desc = "Open Oil File Explorer"
 })
 
 -- lazy
 vim.api.nvim_set_keymap("n", "<leader>L", "<cmd>:Lazy<cr>", {
-    desc = "Lazy"
+    desc = "Open Lazy"
 })
--- bind leader + u + u to open undotree in normal mode
-vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle)
+
+vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle, {desc="Open Undo Tree"})
 
 -- bind <leader> + x + w to open workspace diagnostics
 vim.api.nvim_set_keymap("n", "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", {
@@ -179,13 +220,15 @@ vim.api.nvim_set_keymap("n", "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", {
 
 -- Bind the previous file to alt+left like in a browser.
 vim.api.nvim_set_keymap("n", "<A-Left>", ":edit #<cr>", {
-    silent = true
+    silent = true, 
+    desc = "Previous File"
 })
 
 -- open the diagnostics list with leader + q
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, {
     desc = 'Open diagnostics list'
 })
+
 -- Bind redo to Ctrl + Y
 vim.api.nvim_set_keymap("n", "<C-y>", "<cmd>redo<cr>", {
     desc = "Redo"

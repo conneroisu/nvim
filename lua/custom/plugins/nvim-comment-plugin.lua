@@ -6,7 +6,6 @@
 --]============]
 return {
 	"terrortylor/nvim-comment",
-	event = "VeryLazy",
 	config = function()
 		require("nvim_comment").setup({
 			marker_padding = true,
@@ -17,4 +16,6 @@ return {
 			hooks = {},
 		})
 	end,
+	lazy = true,
+
 }

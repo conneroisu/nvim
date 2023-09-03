@@ -1,6 +1,5 @@
 return {
     "linux-cultist/venv-selector.nvim",
-    Event = "VeryLazy",
     cmd = "VenvSelect",
     opts = {
         name = {
@@ -11,4 +10,5 @@ return {
         },
     },
     keys = { { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv" } },
+    lazy = true,
 }
