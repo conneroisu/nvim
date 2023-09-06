@@ -13,18 +13,20 @@ local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
 if not vim.loop.fs_stat(lazypath) then
     vim.fn
-        .system {'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git', '--branch=stable', -- latest stable release
-                 lazypath}
+        .system { 'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git', '--branch=stable', -- latest stable release
+            lazypath }
 end
 
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({{
+require('lazy').setup({ {
     'folke/neodev.nvim',
     init = function()
         require('neodev').setup()
     end
-}, 'tpope/vim-rhubarb', 'tpope/vim-sleuth', {
+},
+    'tpope/vim-rhubarb',
+    'tpope/vim-sleuth', {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -66,13 +68,13 @@ require('lazy').setup({{
     end
 }, {
     import = 'custom.plugins'
-}})
+} })
 
 require("config.options")
 
 -- [[ Basic Keymaps ]]
 
-vim.keymap.set({'n', 'v'}, '<Space>', '<Nop>', {
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', {
     silent = true
 })
 
@@ -93,7 +95,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = {'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim'},
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -211,25 +213,6 @@ vim.api.nvim_set_keymap("n", "<leader>io", ":IO<CR>", {
     desc = "Open in Obsidian (MacOS)"
 })
 
--- bind leader + c + o to toggle comments in visual mode
-vim.api.nvim_set_keymap("v", "<leader>co", ":'<,'>CommentToggle<cr>", {
-    desc = "Visual Comment Toggle"
-})
-
-vim.api.nvim_set_keymap("v", "<A-j>", ":m '>+1<cr>gv=gv", {
-    desc = "Move down"
-})
-vim.api.nvim_set_keymap("v", "<A-k>", ":m '<-2<cr>gv=gv", {
-    desc = "Move up"
-})
-
-vim.api.nvim_set_keymap("n", "<leader>bb", "<cmd>e #<cr>", {
-    desc = "Switch to Other Buffer"
-})
-vim.api.nvim_set_keymap("n", "<leader>`", "<cmd>e #<cr>", {
-    desc = "Switch to Other Buffer"
-})
-
 vim.api.nvim_set_keymap("n", "n", "'Nn'[v:searchforward]", {
     expr = true,
     desc = "Next search result"
@@ -253,25 +236,6 @@ vim.api.nvim_set_keymap("x", "N", "'nN'[v:searchforward]", {
 vim.api.nvim_set_keymap("o", "N", "'nN'[v:searchforward]", {
     expr = true,
     desc = "Prev search result"
-})
-
--- better indenting
-vim.api.nvim_set_keymap("v", "<", "<gv", {
-    desc = "Remove Indent"
-})
-vim.api.nvim_set_keymap("v", ">", ">gv", {
-    desc = "Add Indent"
-})
-
--- new file
-vim.api.nvim_set_keymap("n", "<leader>fn", "<cmd>enew<cr>", {
-    desc = "[N]ew [F]ile"
-})
-vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>lopen<cr>", {
-    desc = "Location List"
-})
-vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>copen<cr>", {
-    desc = "Quickfix List"
 })
 
 -- floating terminal
@@ -360,7 +324,7 @@ local servers = {
     tsserver = {},
 
     html = {
-        filetypes = {'html', 'twig', 'hbs'}
+        filetypes = { 'html', 'twig', 'hbs' }
     },
 
     lua_ls = {
@@ -386,14 +350,14 @@ mason_lspconfig.setup {
     ensure_installed = vim.tbl_keys(servers)
 }
 
-mason_lspconfig.setup_handlers {function(server_name)
+mason_lspconfig.setup_handlers { function(server_name)
     require('lspconfig')[server_name].setup {
         capabilities = capabilities,
         on_attach = on_attach,
         settings = servers[server_name],
         filetypes = (servers[server_name] or {}).filetypes
     }
-end}
+end }
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
@@ -426,7 +390,7 @@ cmp.setup {
             else
                 fallback()
             end
-        end, {'i', 's'}),
+        end, { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
@@ -435,13 +399,13 @@ cmp.setup {
             else
                 fallback()
             end
-        end, {'i', 's'})
+        end, { 'i', 's' })
     },
-    sources = {{
+    sources = { {
         name = 'nvim_lsp'
     }, {
         name = 'luasnip'
-    }}
+    } }
 }
 
 -- -- The line beneath this is called `modeline`. See `:help modeline`
