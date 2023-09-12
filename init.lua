@@ -8,7 +8,6 @@ vim.api.nvim_set_keymap("x", "<leader>p", "\"_dP", {
     silent = true
 })
 
--- Install package manager https://github.com/folke/lazy.nvim `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
 if not vim.loop.fs_stat(lazypath) then
@@ -19,12 +18,14 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({ {
-    'folke/neodev.nvim',
-    init = function()
-        require('neodev').setup()
-    end
-},
+require('lazy').setup({
+    {
+        -- must  be installed first especiallly before lsp
+        'folke/neodev.nvim',
+        init = function()
+            require('neodev').setup()
+        end
+    },
     'tpope/vim-rhubarb',
     'tpope/vim-sleuth', {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -72,7 +73,7 @@ require('lazy').setup({ {
 
 require("config.options")
 
--- [[ Basic Keymaps ]]
+-- [[ Basic Keymap ]]
 
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', {
     silent = true
@@ -412,6 +413,7 @@ cmp.setup {
 -- -- vim: ts=2 sts=2 sw=2 et
 -- vim.command("au BufNewFile,BufRead *.xaml setlocal filetype=xml")
 
+
 vim.cmd("syntax on")
 vim.cmd(
     "autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} }) ")
@@ -419,3 +421,4 @@ vim.cmd(
 require("custom.keymaps.visual-keymaps")
 require("custom.keymaps.insert-keymaps")
 require("custom.keymaps.normal-keymaps")
+vim.cmd("set wrap!")
