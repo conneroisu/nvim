@@ -1,8 +1,12 @@
 -- Shifting  ===========================================================
 -- Map J in normal mode to join lines by staying at the current postiion
-vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines" })
+vim.keymap.set("n", "J", "mzJ`z", {
+    desc = "Join lines"
+})
 
-vim.keymap.set("n", "<C-e>", ":!explorer .", { desc = "Open the current working directory in the file explorer for windows" }))
+vim.keymap.set("n", "<C-e>", ":!explorer .", {
+    desc = "Open the current working directory in the file explorer for windows"
+})
 -- Move Lines up and down with alt j and alt k in normal mode
 vim.api.nvim_set_keymap("n", "<A-j>", "<cmd>m .+1<cr>==", {
     desc = "Move down"
@@ -11,8 +15,10 @@ vim.api.nvim_set_keymap("n", "<A-k>", "<cmd>m .-2<cr>==", {
     desc = "Move up"
 })
 
-vim.keymap.set("n", "K", "<CMD>lua _G.show_docs()<CR>", { silent = true,
-    desc = "Show Documentation for item under cursor"})
+vim.keymap.set("n", "K", "<CMD>lua _G.show_docs()<CR>", {
+    silent = true,
+    desc = "Show Documentation for item under cursor"
+})
 -- bind Control + o to open recent files in normal mode
 vim.api.nvim_set_keymap("n", "<C-o>", ":Telescope oldfiles<CR>", {
     noremap = true,
@@ -20,16 +26,13 @@ vim.api.nvim_set_keymap("n", "<C-o>", ":Telescope oldfiles<CR>", {
     desc = "Open Recent Files"
 })
 
---macos
-vim.cmd(
-	[[command! -nargs=0 IO execute "silent !open 'obsidian://open?vault=SecondBrain&file=" . expand('%:t:r') . "'"]]
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>io",
-	":IO<CR>",
-	{ noremap = true, silent = true, desc = "Open in Obsidian (MacOS)" }
-)
+-- macos
+vim.cmd([[command! -nargs=0 IO execute "silent !open 'obsidian://open?vault=SecondBrain&file=" . expand('%:t:r') . "'"]])
+vim.api.nvim_set_keymap("n", "<leader>io", ":IO<CR>", {
+    noremap = true,
+    silent = true,
+    desc = "Open in Obsidian (MacOS)"
+})
 
 -- bind the leader + u + n to dismiss all notifications in normal mode
 vim.api.nvim_set_keymap("n", "<leader>un", "<cmd>lua require('notify').dismiss({silent = true, pending = true})<cr>", {
@@ -80,7 +83,7 @@ vim.api.nvim_set_keymap("n", "<leader>gp", ":Telescope projects<CR>", {
 -- bind leader + m to open oil file explorer in normal mode
 vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", {
     noremap = true,
-    silent = true, 
+    silent = true,
     desc = "Open Oil File Explorer"
 })
 -- bind leader + h + u to open Git from fugitive in normal mode
@@ -98,7 +101,6 @@ vim.api.nvim_set_keymap("n", "<leader>e", ":e $MYVIMRC<CR>", {
 vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<CR>", {
     desc = '[F]ind [F]iles'
 })
-
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, {
@@ -197,7 +199,9 @@ vim.api.nvim_set_keymap("n", "<leader>L", "<cmd>:Lazy<cr>", {
     desc = "Open Lazy"
 })
 
-vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle, {desc="Open Undo Tree"})
+vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle, {
+    desc = "Open Undo Tree"
+})
 
 -- bind <leader> + x + w to open workspace diagnostics
 vim.api.nvim_set_keymap("n", "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", {
@@ -224,7 +228,7 @@ vim.api.nvim_set_keymap("n", "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", {
 
 -- Bind the previous file to alt+left like in a browser.
 vim.api.nvim_set_keymap("n", "<A-Left>", ":edit #<cr>", {
-    silent = true, 
+    silent = true,
     desc = "Previous File"
 })
 
