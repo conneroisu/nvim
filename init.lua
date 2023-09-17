@@ -174,6 +174,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {
 vim.api.nvim_set_keymap("n", "<C-Left>", "<cmd>bprevious<cr>", {
     desc = "Prev buffer"
 })
+
 vim.api.nvim_set_keymap("n", "<C-Right>", "<cmd>bnext<cr>", {
     desc = "Next buffer"
 })
@@ -214,10 +215,6 @@ vim.api.nvim_set_keymap("n", "<leader>io", ":IO<CR>", {
     desc = "Open in Obsidian (MacOS)"
 })
 
-vim.api.nvim_set_keymap("n", "n", "'Nn'[v:searchforward]", {
-    expr = true,
-    desc = "Next search result"
-})
 vim.api.nvim_set_keymap("x", "n", "'Nn'[v:searchforward]", {
     expr = true,
     desc = "Next search result"
@@ -225,10 +222,6 @@ vim.api.nvim_set_keymap("x", "n", "'Nn'[v:searchforward]", {
 vim.api.nvim_set_keymap("o", "n", "'Nn'[v:searchforward]", {
     expr = true,
     desc = "Next search result"
-})
-vim.api.nvim_set_keymap("n", "N", "'nN'[v:searchforward]", {
-    expr = true,
-    desc = "Prev search result"
 })
 vim.api.nvim_set_keymap("x", "N", "'nN'[v:searchforward]", {
     expr = true,
@@ -239,13 +232,14 @@ vim.api.nvim_set_keymap("o", "N", "'nN'[v:searchforward]", {
     desc = "Prev search result"
 })
 
--- floating terminal
-local lazyterm = function()
-    Util.float_term(nil, {
-        cwd = Util.get_root()
-    })
-end
-
+vim.api.nvim_set_keymap("n", "n", "'Nn'[v:searchforward]", {
+    expr = true,
+    desc = "Next search result"
+})
+vim.api.nvim_set_keymap("n", "N", "'nN'[v:searchforward]", {
+    expr = true,
+    desc = "Prev search result"
+})
 -- Terminal vim.api.nvim_set_keymappings
 vim.api.nvim_set_keymap("t", "<esc><esc>", "<c-\\><c-n>", {
     desc = "Enter Normal Mode"

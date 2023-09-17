@@ -1,12 +1,12 @@
 --[==========[
    tree sitter
-   desc: Incremental parsing system for programming tools 
+   desc: Incremental parsing system for programming tools
    author: nvim-tree-sitter
    url: https://github.com/nvim-treesitter/nvim-treesitter
 --]==========]
 
 --[===================[
-   tree sitter context 
+   tree sitter context
    desc: Contextual inside designators for code
    author: nvim-tree-sitter
    License: MIT
@@ -18,6 +18,7 @@ return {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
+
         {
             "nvim-treesitter/nvim-treesitter-textobjects",
             init = function()
@@ -28,12 +29,12 @@ return {
                 load_textobjects = true
             end,
         },
-        { "nvim-treesitter/nvim-treesitter-context"},
+        { "nvim-treesitter/nvim-treesitter-context" },
     },
     cmd = { "TSUpdateSync" },
     keys = {
         { "<c-space>", desc = "Increment selection" },
-        { "<bs>", desc = "Decrement selection", mode = "x" },
+        { "<bs>",      desc = "Decrement selection", mode = "x" },
     },
     opts = {
         highlight = { enable = true },
@@ -75,7 +76,10 @@ return {
         },
     },
     config = function(_, opts)
-
-
+        require 'nvim-treesitter.configs'.setup {
+            autotag = {
+                enable = true,
+            }
+        }
     end,
 }

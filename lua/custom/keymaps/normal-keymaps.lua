@@ -1,7 +1,18 @@
+-- Shifting  ===========================================================
 -- Map J in normal mode to join lines by staying at the current postiion
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines" })
 
-vim.keymap.set("n", "K", "<CMD>lua _G.show_docs()<CR>", { silent = true , desc = "Show Documentation for item under cursor"})
+vim.keymap.set("n", "<C-e>", ":!explorer .", { desc = "Open the current working directory in the file explorer for windows" }))
+-- Move Lines up and down with alt j and alt k in normal mode
+vim.api.nvim_set_keymap("n", "<A-j>", "<cmd>m .+1<cr>==", {
+    desc = "Move down"
+})
+vim.api.nvim_set_keymap("n", "<A-k>", "<cmd>m .-2<cr>==", {
+    desc = "Move up"
+})
+
+vim.keymap.set("n", "K", "<CMD>lua _G.show_docs()<CR>", { silent = true,
+    desc = "Show Documentation for item under cursor"})
 -- bind Control + o to open recent files in normal mode
 vim.api.nvim_set_keymap("n", "<C-o>", ":Telescope oldfiles<CR>", {
     noremap = true,
@@ -19,13 +30,6 @@ vim.api.nvim_set_keymap(
 	":IO<CR>",
 	{ noremap = true, silent = true, desc = "Open in Obsidian (MacOS)" }
 )
--- Move Lines up and down with alt j and alt k in normal mode
-vim.api.nvim_set_keymap("n", "<A-j>", "<cmd>m .+1<cr>==", {
-    desc = "Move down"
-})
-vim.api.nvim_set_keymap("n", "<A-k>", "<cmd>m .-2<cr>==", {
-    desc = "Move up"
-})
 
 -- bind the leader + u + n to dismiss all notifications in normal mode
 vim.api.nvim_set_keymap("n", "<leader>un", "<cmd>lua require('notify').dismiss({silent = true, pending = true})<cr>", {
@@ -233,22 +237,3 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, {
 vim.api.nvim_set_keymap("n", "<C-y>", "<cmd>redo<cr>", {
     desc = "Redo"
 })
--- -- tabs
--- vim.api.nvim_set_keymap("n", "<leader><tab>l", "<cmd>tablast<cr>", {
---     desc = "Last Tab"
--- })
--- vim.api.nvim_set_keymap("n", "<leader><tab>f", "<cmd>tabfirst<cr>", {
---     desc = "First Tab"
--- })
--- vim.api.nvim_set_keymap("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", {
---     desc = "New Tab"
--- })
--- vim.api.nvim_set_keymap("n", "<leader><tab>]", "<cmd>tabnext<cr>", {
---     desc = "Next Tab"
--- })
--- vim.api.nvim_set_keymap("n", "<leader><tab>d", "<cmd>tabclose<cr>", {
---     desc = "Close Tab"
--- })
--- vim.api.nvim_set_keymap("n", "<leader><tab>[", "<cmd>tabprevious<cr>", {
---     desc = "Previous Tab"
--- })
