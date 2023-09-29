@@ -18,7 +18,6 @@ return {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-
         {
             "nvim-treesitter/nvim-treesitter-textobjects",
             init = function()
@@ -44,6 +43,7 @@ return {
             "c",
             "html",
             "javascript",
+            "typescript",
             "jsdoc",
             "json",
             "lua",
@@ -60,7 +60,6 @@ return {
             "regex",
             "svelte",
             "tsx",
-            "typescript",
             "vim",
             "vimdoc",
             "yaml",

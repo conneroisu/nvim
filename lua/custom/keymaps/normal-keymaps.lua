@@ -4,6 +4,8 @@ vim.keymap.set("n", "J", "mzJ`z", {
     desc = "Join lines"
 })
 
+  vim.keymap.set("n", "<F2>", function() vim.lsp.buf.rename() end, opts)
+  vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 vim.keymap.set("n", "<C-e>", ":!explorer .", {
     desc = "Open the current working directory in the file explorer for windows"
 })
@@ -47,6 +49,12 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", {
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", {
     expr = true,
     silent = true
+})
+
+
+-- set leader + c + f to quickfix with lsp in normal mode 
+vim.api.nvim_set_keymap("n", "<leader>cf", ":lua vim.lsp.buf.code_action()<CR>", {
+    desc = "Quickfix with LSP"
 })
 -- set leader key + c + o to toggle comments in normal and visual mode
 vim.api.nvim_set_keymap("n", "<leader>co", "<cmd>CommentToggle<cr>", {
@@ -174,6 +182,34 @@ vim.api.nvim_set_keymap("n", "<space>m", ":lua require('harpoon.mark').add_file(
     desc = "Add file to harpoon list of files"
 })
 
+-- Bind harpoon go to first mark to Alt + 1 
+vim.api.nvim_set_keymap("n", "<M-1>", ":lua require('harpoon.ui').nav_file(1)<CR>", {
+    noremap = true,
+    silent = true,
+    desc = "Navigate to first harpoon mark"
+})
+
+-- Bind harpoon go to second mark to Ctrl + 2
+vim.api.nvim_set_keymap("n", "<M-2>", ":lua require('harpoon.ui').nav_file(2)<CR>", {
+    noremap = true,
+    silent = true,
+    desc = "Navigate to second harpoon mark"
+})
+
+-- Bind harpoon go to third mark to Ctrl + 3
+vim.api.nvim_set_keymap("n", "<M-3>", ":lua require('harpoon.ui').nav_file(3)<CR>", {
+    noremap = true,
+    silent = true,
+    desc = "Navigate to third harpoon mark"
+})
+
+-- Bind harpoon go to fourth mark to Ctrl + 4
+vim.api.nvim_set_keymap("n", "<C-4>", ":lua require('harpoon.ui').nav_file(4)<CR>", {
+    noremap = true,
+    silent = true,
+    desc = "Navigate to fourth harpoon mark"
+})
+
 -- bind shift + h to move to the start of the line in normal mode
 vim.api.nvim_set_keymap("n", "<S-h>", "^", {
     noremap = true,
@@ -241,3 +277,48 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, {
 vim.api.nvim_set_keymap("n", "<C-y>", "<cmd>redo<cr>", {
     desc = "Redo"
 })
+
+
+-- Function to get the cwd of the current buffer 
+function _G.get_cwd()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local bufname = vim.api.nvim_buf_get_name(bufnr)
+    local cwd = vim.fn.fnamemodify(bufname, ":h")
+    return cwd
+end
+
+-- Bind leader + b + p to copy the current buffer path to the clipboard
+vim.api.nvim_set_keymap("n", "<leader>bp", ":let @*=expand('%:p')<CR>", {
+    desc = "Copy buffer path to clipboard"
+})
+
+
+-- bind alt + shift + f to :Format in normal mode
+vim.api.nvim_set_keymap("n", "<A-S-f>", ":Format<CR>", {
+    desc = "Format"
+})
+
+vim.keymap.set("x", "<leader>re", ":Refactor extract ")
+vim.keymap.set("x", "<leader>rf", ":Refactor extract_to_file ")
+
+vim.keymap.set("x", "<leader>rv", ":Refactor extract_var ")
+
+vim.keymap.set({ "n", "x" }, "<leader>ri", ":Refactor inline_var")
+
+vim.keymap.set( "n", "<leader>rI", ":Refactor inline_func")
+
+vim.keymap.set("n", "<leader>rb", ":Refactor extract_block")
+vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
+vim.keymap.set("x", "<leader>re", function() require('refactoring').refactor('Extract Function') end)
+vim.keymap.set("x", "<leader>rf", function() require('refactoring').refactor('Extract Function To File') end)
+-- Extract function supports only visual mode
+vim.keymap.set("x", "<leader>rv", function() require('refactoring').refactor('Extract Variable') end)
+-- Extract variable supports only visual mode
+vim.keymap.set("n", "<leader>rI", function() require('refactoring').refactor('Inline Function') end)
+-- Inline func supports only normal
+vim.keymap.set({ "n", "x" }, "<leader>ri", function() require('refactoring').refactor('Inline Variable') end)
+-- Inline var supports both normal and visual mode
+
+vim.keymap.set("n", "<leader>rb", function() require('refactoring').refactor('Extract Block') end)
+vim.keymap.set("n", "<leader>rbf", function() require('refactoring').refactor('Extract Block To File') end)
+-- Extract block supports only normal mode

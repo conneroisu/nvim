@@ -1,4 +1,9 @@
 
-return{
-'alvan/vim-closetag'
+
+--[========[
+-- Closetag
+--]========]
+
+return {
+    'alvan/vim-closetag'
 }

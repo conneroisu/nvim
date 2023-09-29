@@ -16,5 +16,5 @@ return {
             tag = 'legacy',
             opts = {}
         },     -- Additional lua configuration, makes nvim stuff amazing!
-    }
+    },
 }

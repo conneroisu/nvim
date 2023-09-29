@@ -1,17 +1,9 @@
 # kickstart.nvim
 
-https://github.com/kdheepak/kickstart.nvim/assets/1813121/f3ff9a2b-c31f-44df-a4fa-8a0d7b17cf7b
-
 ### Introduction
 
 A starting point for Neovim that is:
 
-* Small
-* Single-file (with examples of moving to multi-file)
-* Documented
-* Modular
-
-This repo is meant to be used by **YOU** to begin your Neovim journey; remove the things you don't use and add what you miss.
 
 Kickstart.nvim targets *only* the latest ['stable'](https://github.com/neovim/neovim/releases/tag/stable) and latest ['nightly'](https://github.com/neovim/neovim/releases/tag/nightly) of Neovim. If you are experiencing issues, please make sure you have the latest versions.
 
@@ -20,30 +12,7 @@ Distribution Alternatives:
 
 ### Installation
 
-* Backup your previous configuration (if any exists)
 
-### Archive Installation
-* On the home/landing page for the project find the blue "<> CODE" button click it and select Local > Download ZIP.
-* Extract the archive to:
-  `~/.config/nvim` (Linux)
-  `~/.config/nvim` (MacOS)
-  `%userprofile%\AppData\Local\nvim\` (Windows)
-* Ensure your extraction method did not extract with a parent folder. For example in ~/.config/nvim you should have init.lua not another folder called kickstart.nvim.
-
-### Git Clone Installation
-* From a terminal cd/dir to:
-    `~/.config/nvim` (Linux)
-    `~/.config/nvim` (MacOS)
-    `%userprofile%\AppData\Local\nvim\` (Windows)
-
-* Run: `git clone https://github.com/nvim-lua/kickstart.nvim.git ~/.config/nvim` OR: `gh repo clone nvim-lua/kickstart.nvim`
-* Run Neovim (from terminal or shortcut) and allow lazy.nvim to download files and set up the basics.
-* Once the setup is complete, restart Neovim.
-* **You're ready to go!**
-
-* (Recommended/Optional) Fork this repo (so that you have your own copy that you can modify).
-* Clone the kickstart repo into `$HOME/.config/nvim/` (Linux/Mac) or `%userprofile%\AppData\Local\nvim\` (Windows)
-  * If you don't want to include it as a git repo, you can just clone it and then move the files to this location
 
 Additional system requirements:
 - Make sure to review the readmes of the plugins if you are experiencing errors. In particular:

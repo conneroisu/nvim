@@ -3,7 +3,8 @@
    desc: personal plugin for AI assisted text generation
    author: conneroisu 
    url: https://github.com/conneroisu/neoai
---]=====] return {
+--]=====]
+return {
     "conneroisu/neoai.nvim",
     dependencies = {"MunifTanjim/nui.nvim"},
     cmd = {"NeoAI", "NeoAIOpen", "NeoAIClose", "NeoAIToggle", "NeoAIContext", "NeoAIContextOpen", "NeoAIContextClose",

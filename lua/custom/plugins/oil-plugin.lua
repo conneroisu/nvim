@@ -3,17 +3,17 @@
    desc: File Explorer in Buffer
    author: Stevearc (https://github.com/stevearc)
    url: https://github.com/stevearc/oil.nvim
---]===] return {
+--]===]
+return {
     "stevearc/oil.nvim",
-    opts = {},
     -- Optional dependencies
-    dependencies = {"nvim-tree/nvim-web-devicons"},
-    config = function()
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = function()
         require("oil").setup({
             -- Id is automatically added at the beginning, and name at the end
             -- See :help oil-columns
-            columns = {"icon" -- "permissions"
-                ,"size", --"mtime",
+            columns = { "icon" -- "permissions"
+            , "size",         --"mtime",
             },
             -- Buffer-local options to use for oil buffers
             buf_options = {
@@ -31,6 +31,9 @@
                 conceallevel = 3,
                 concealcursor = "n"
             },
+            is_always_hidden = function(name, bufnr)
+                return true
+            end,
             -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`
             default_file_explorer = true,
             -- Restore window options to previous values when leaving an oil buffer
@@ -62,9 +65,9 @@
                 ["~"] = "actions.tcd",
                 ["g."] = "actions.toggle_hidden"
             },
-            show_hidden = true;
+            show_hidden = true,
             -- Set to false to disable all of the above keymaps
             use_default_keymaps = true,
-    })
+        })
     end,
-    }
+}
