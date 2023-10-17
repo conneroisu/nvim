@@ -26,5 +26,4 @@ return {
         end)
         lsp.setup()
     end,
-    lazy = true,
 }

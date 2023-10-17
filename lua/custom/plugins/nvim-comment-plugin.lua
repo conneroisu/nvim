@@ -16,6 +16,4 @@ return {
 			hooks = {},
 		})
 	end,
-	lazy = true,
-
 }

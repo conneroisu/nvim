@@ -4,7 +4,6 @@ return {
     event = "InsertEnter",
     dependencies = {
         'L3MON4D3/LuaSnip',
-        'tzachar/fuzzy.nvim',
         'saadparwaiz1/cmp_luasnip', -- Adds LSP completion capabilities
         {
             'tzachar/cmp-fuzzy-path',

@@ -1,9 +1,9 @@
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+--  note: must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = '\\'
 vim.g.maplocalleader = ' '
 
--- set leader + p to "\"_dP allows for pasting without losing yanked text
-vim.api.nvim_set_keymap("x", "<leader>p", "\"_dP", {
+-- set leader + p to "\"_dp allows for pasting without losing yanked text
+vim.api.nvim_set_keymap("x", "<leader>p", "\"_dp", {
     noremap = true,
     silent = true
 })
@@ -357,7 +357,6 @@ end }
 -- -- vim: ts=2 sts=2 sw=2 et
 -- vim.command("au BufNewFile,BufRead *.xaml setlocal filetype=xml")
 
-
 vim.cmd("syntax on")
 
 vim.cmd("set wrap!")
@@ -365,3 +364,5 @@ vim.cmd("set wrap!")
 require("custom.keymaps.visual-keymaps")
 require("custom.keymaps.insert-keymaps")
 require("custom.keymaps.normal-keymaps")
+
+vim.o.statusline = vim.o.statusline .. '%F'

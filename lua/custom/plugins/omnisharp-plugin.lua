@@ -10,6 +10,4 @@ return{
 		vim.cmd("let g:asyncomplete_auto_popup = 1")
 		vim.cmd("let g:asyncomplete_auto_completeopt = 0")
 	end,
-	lazy = true
-
 }
