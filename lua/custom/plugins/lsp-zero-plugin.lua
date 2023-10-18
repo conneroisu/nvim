@@ -1,10 +1,13 @@
 return {
     "VonHeikemen/lsp-zero.nvim",
+    dependencies = { "neovim/nvim-lspconfig" },
     Event = "VeryLazy",
     config = function()
         local lsp = require("lsp-zero")
         lsp.preset("recommended")
-        lsp.nvim_workspace()
+        -- lsp.nvim_workspace()
+        local lua_opts = lsp.nvim_lua_ls()
+        require("lspconfig").lua_ls.setup(lua_opts)
         lsp.on_attach(function(client, bufnr)
             local opts = { buffer = bufnr, remap = true }
 
