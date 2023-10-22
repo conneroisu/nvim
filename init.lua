@@ -1,4 +1,4 @@
---  note: must happen before plugins are required (otherwise wrong leader will be used)
+--  (otherwise wrong leader will be used)
 vim.g.mapleader = '\\'
 vim.g.maplocalleader = ' '
 
@@ -74,10 +74,6 @@ require('lazy').setup({
 
 require("config.options")
 
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', {
-    silent = true
-})
-
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', {
     clear = true
 })
@@ -93,7 +89,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+    ensure_installed = { 'c', 'cpp','cs', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -159,43 +155,6 @@ require('nvim-treesitter.configs').setup {
     }
 }
 
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {
-    desc = 'Go to previous diagnostic message'
-})
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {
-    desc = 'Go to next diagnostic message'
-})
-
--- buffers
-vim.api.nvim_set_keymap("n", "<C-Left>", "<cmd>bprevious<cr>", {
-    desc = "Prev buffer"
-})
-
-vim.api.nvim_set_keymap("n", "<C-Right>", "<cmd>bnext<cr>", {
-    desc = "Next buffer"
-})
-
-vim.api.nvim_set_keymap("n", "[b", "<cmd>bprevious<cr>", {
-    desc = "Prev buffer"
-})
-
-vim.api.nvim_set_keymap("n", "]b", "<cmd>bnext<cr>", {
-    desc = "Next buffer"
-})
-
--- bind leader + x + L to open location list from trouble in normal mode
-vim.api.nvim_set_keymap("n", "<leader>xL", "<cmd>TroubleToggle loclist<cr>", {
-    desc = "Location List (Trouble)"
-})
-
---[=======[
-   Neotest
---]=======]
-vim.api.nvim_set_keymap("n", "<leader>td", ":lua require('neotest').run.run({strategy = 'dap'})<CR>", {
-    noremap = true,
-    silent = true
-})
 
 vim.cmd(":command Wq wq")
 vim.cmd(":command VS vs")
@@ -203,20 +162,8 @@ vim.cmd(":command Vs vs")
 vim.cmd(":command W w")
 vim.cmd(":command Q q")
 
--- Open file in Obsidian vault
--- macos
-vim.cmd([[command! -nargs=0 IO execute "silent !open 'obsidian://open?vault=SecondBrain&file=" . expand('%:t:r') . "'"]])
-vim.api.nvim_set_keymap("n", "<leader>io", ":IO<CR>", {
-    noremap = true,
-    silent = true,
-    desc = "Open in Obsidian (MacOS)"
-})
 
 vim.api.nvim_set_keymap("x", "n", "'Nn'[v:searchforward]", {
-    expr = true,
-    desc = "Next search result"
-})
-vim.api.nvim_set_keymap("o", "n", "'Nn'[v:searchforward]", {
     expr = true,
     desc = "Next search result"
 })
@@ -224,16 +171,11 @@ vim.api.nvim_set_keymap("x", "N", "'nN'[v:searchforward]", {
     expr = true,
     desc = "Prev search result"
 })
-vim.api.nvim_set_keymap("o", "N", "'nN'[v:searchforward]", {
-    expr = true,
-    desc = "Prev search result"
-})
-
-vim.api.nvim_set_keymap("n", "n", "'Nn'[v:searchforward]", {
+vim.api.nvim_set_keymap("o", "n", "'Nn'[v:searchforward]", {
     expr = true,
     desc = "Next search result"
 })
-vim.api.nvim_set_keymap("n", "N", "'nN'[v:searchforward]", {
+vim.api.nvim_set_keymap("o", "N", "'nN'[v:searchforward]", {
     expr = true,
     desc = "Prev search result"
 })
@@ -349,14 +291,8 @@ mason_lspconfig.setup_handlers { function(server_name)
     }
 end }
 
--- -- The line beneath this is called `modeline`. See `:help modeline`
--- -- vim: ts=2 sts=2 sw=2 et
--- vim.command("au BufNewFile,BufRead *.xaml setlocal filetype=xml")
-
 vim.cmd("syntax on")
-
 vim.cmd("set wrap!")
-
 require("custom.keymaps.visual-keymaps")
 require("custom.keymaps.insert-keymaps")
 require("custom.keymaps.normal-keymaps")

@@ -320,6 +320,32 @@ vim.keymap.set("n", "<leader>rbf", function() require('refactoring').refactor('E
 vim.cmd("let g:VM_maps['Select Cursor Down'] = '<M-S-Down>'")
 vim.cmd("let g:VM_maps['Select Cursor Up'] = '<M-S-Up>'")
 
+
+-- Open file in Obsidian vault
+-- macos
+vim.cmd([[command! -nargs=0 IO execute "silent !open 'obsidian://open?vault=SecondBrain&file=" . expand('%:t:r') . "'"]])
+vim.api.nvim_set_keymap("n", "<leader>io", ":IO<CR>", {
+    noremap = true,
+    silent = true,
+    desc = "Open in Obsidian (MacOS)"
+})
+
+vim.api.nvim_set_keymap("n", "n", "'Nn'[v:searchforward]", {
+    expr = true,
+    desc = "Next search result"
+})
+vim.api.nvim_set_keymap("n", "N", "'nN'[v:searchforward]", {
+    expr = true,
+    desc = "Prev search result"
+})
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {
+    desc = 'Go to previous diagnostic message'
+})
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {
+    desc = 'Go to next diagnostic message'
+})
+
 -- buffers
 vim.api.nvim_set_keymap("n", "<C-Left>", "<cmd>bprevious<cr>", {
     desc = "Prev buffer"

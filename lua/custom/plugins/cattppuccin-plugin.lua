@@ -47,7 +47,6 @@
                 gitsigns = true,
                 nvimtree = true,
                 telescope = true,
-                coc_nvim = true,
                 markdown = true,
                 treesitter = true,
                 treesitter_context = true,

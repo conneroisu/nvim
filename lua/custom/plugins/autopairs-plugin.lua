@@ -1,3 +1,8 @@
+--[===========================[
+name: autopairs-plugin.lua 
+url: https://github.com/windwp/nvim-autopairs
+description: autopairs-plugin.lua
+--]===========================]
 return {
     "windwp/nvim-autopairs",
     -- Optional dependency
