@@ -5,10 +5,6 @@ return {
     dependencies = {
         'L3MON4D3/LuaSnip',
         'saadparwaiz1/cmp_luasnip', -- Adds LSP completion capabilities
-        {
-            'tzachar/cmp-fuzzy-path',
-            dependencies = { 'tzachar/fuzzy.nvim' }
-        },
         'hrsh7th/cmp-nvim-lsp',
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
@@ -47,7 +43,6 @@ return {
                 { name = 'luasnip' },
                 { name = 'buffer' },
                 { name = 'path' },
-                { name = 'fuzzy_path' },
                 { name = 'cmdline' }
             }),
             experimental = {

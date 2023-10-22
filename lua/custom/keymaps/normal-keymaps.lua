@@ -1,4 +1,8 @@
 -- Shifting  ===========================================================
+vim.keymap.set("n", "<Space>", "<Nop>", {
+    desc = "No Operation on Space"
+})
+-- '})
 -- Map J in normal mode to join lines by staying at the current postiion
 vim.keymap.set("n", "J", "mzJ`z", {
     desc = "Join lines"
@@ -117,15 +121,6 @@ vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, {
 
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, {
     desc = '[ ] Find existing buffers'
-})
-vim.keymap.set('n', '<leader>/', function()
-    -- You can pass additional configuration to telescope to change theme, layout, etc.
-    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-        winblend = 10,
-        previewer = false
-    })
-end, {
-    desc = '[/] Fuzzily search in current buffer'
 })
 
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, {
@@ -324,3 +319,33 @@ vim.keymap.set("n", "<leader>rbf", function() require('refactoring').refactor('E
 -- Extract block supports only normal mode
 vim.cmd("let g:VM_maps['Select Cursor Down'] = '<M-S-Down>'")
 vim.cmd("let g:VM_maps['Select Cursor Up'] = '<M-S-Up>'")
+
+-- buffers
+vim.api.nvim_set_keymap("n", "<C-Left>", "<cmd>bprevious<cr>", {
+    desc = "Prev buffer"
+})
+
+vim.api.nvim_set_keymap("n", "<C-Right>", "<cmd>bnext<cr>", {
+    desc = "Next buffer"
+})
+
+vim.api.nvim_set_keymap("n", "[b", "<cmd>bprevious<cr>", {
+    desc = "Prev buffer"
+})
+
+vim.api.nvim_set_keymap("n", "]b", "<cmd>bnext<cr>", {
+    desc = "Next buffer"
+})
+
+-- bind leader + x + L to open location list from trouble in normal mode
+vim.api.nvim_set_keymap("n", "<leader>xL", "<cmd>TroubleToggle loclist<cr>", {
+    desc = "Location List (Trouble)"
+})
+
+--[=======[
+   Neotest
+--]=======]
+vim.api.nvim_set_keymap("n", "<leader>td", ":lua require('neotest').run.run({strategy = 'dap'})<CR>", {
+    noremap = true,
+    silent = true
+})

@@ -74,14 +74,10 @@ require('lazy').setup({
 
 require("config.options")
 
--- [[ Basic Keymap ]]
-
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', {
     silent = true
 })
 
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', {
     clear = true
 })

@@ -1,4 +1,0 @@
-
-return {
-    'joerdav/templ.vim'
-}

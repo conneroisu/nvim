@@ -1,4 +1,7 @@
 
+vim.keymap.set( 'v' , '<Space>', '<Nop>', {
+    silent = true
+})
 
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {
     desc = "Move visual selection up"
