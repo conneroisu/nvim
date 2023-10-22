@@ -3,7 +3,8 @@
 	 desc: Github Signs and Symbols
 	 author: lewis6991 (https://github.com/lewis6991)
 	 url: https://github.com/lewis6991/gitsigns.nvim
---]========] return {
+--]========] 
+return {
     "lewis6991/gitsigns.nvim",
     config = function()
         require("gitsigns").setup({

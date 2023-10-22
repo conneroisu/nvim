@@ -1,7 +1,8 @@
 --[===========================[
 name: autopairs-plugin.lua 
 url: https://github.com/windwp/nvim-autopairs
-description: autopairs-plugin.lua
+description: automaticallty pairs symbols like () "" '' {} [] 
+tags: ['autopairs', 'windwp', 'nvim-autopairs']
 --]===========================]
 return {
     "windwp/nvim-autopairs",

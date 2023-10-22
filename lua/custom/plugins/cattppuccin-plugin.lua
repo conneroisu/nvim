@@ -1,9 +1,10 @@
---[==========[
-   catppuccin
-   desc: theme for neovim
+--[===============[
+   name: catppuccin
    author: catppuccin (@catppuccin)
    url: https://github.com/catppuccin/nvim
---]==========] return {
+   desc: theme for neovim
+--]===============]
+return {
     "catppuccin/nvim",
     name = "catppuccin",
     opts = {
@@ -20,10 +21,10 @@
             native_lsp = {
                 enabled = true,
                 underlines = {
-                    errors = {"undercurl"},
-                    hints = {"undercurl"},
-                    warnings = {"undercurl"},
-                    information = {"undercurl"}
+                    errors = { "undercurl" },
+                    hints = { "undercurl" },
+                    warnings = { "undercurl" },
+                    information = { "undercurl" }
                 }
             },
             navic = {

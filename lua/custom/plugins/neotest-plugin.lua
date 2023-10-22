@@ -1,7 +1,7 @@
 --[=======[
    neotest
-   desc: A test runner plugin for Neovim inspired by vim-test 
-   author: nvim-neotest 
+   desc: A test runner plugin for Neovim inspired by vim-test
+   author: nvim-neotest
    url: https://github.com/nvim-neotest/neotest
 --]=======]
 return {
@@ -30,7 +30,8 @@ return {
 				-- Can also be a function to return dynamic value.
 				-- If not provided, the path will be inferred by checking for
 				-- virtual envs in the local directory and for Pipenev/Poetry configs
-				python = "C:\\Users\\Conne\\Documents\\significant-gpt\\Auto-GPT-0.3.1\\agpt-venv\\Scripts\\python.exe",
+				python =
+				"C:\\Users\\Conne\\Documents\\significant-gpt\\Auto-GPT-0.3.1\\agpt-venv\\Scripts\\python.exe",
 				-- Returns if a given file path is a test file.
 			},
 		},
@@ -59,7 +60,8 @@ return {
 			virtual_text = {
 				format = function(diagnostic)
 					-- Replace newline and tab characters with space for more compact diagnostics
-					local message = diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+					local message = diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+",
+						" "):gsub("^%s+", "")
 					return message
 				end,
 			},
@@ -93,14 +95,22 @@ return {
 
 		require("neotest").setup(opts)
 	end,
-  -- stylua: ignore
-  keys = {
-    { "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run File" },
-    { "<leader>tT", function() require("neotest").run.run(vim.loop.cwd()) end, desc = "Run All Test Files" },
-    { "<leader>tr", function() require("neotest").run.run() end, desc = "Run Nearest" },
-    { "<leader>ts", function() require("neotest").summary.toggle() end, desc = "Toggle Summary" },
-    { "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Show Output" },
-    { "<leader>tO", function() require("neotest").output_panel.toggle() end, desc = "Toggle Output Panel" },
-    { "<leader>tS", function() require("neotest").run.stop() end, desc = "Stop" },
-  },
+	-- stylua: ignore
+	keys = {
+		{ "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end,                      desc =
+		"Run File" },
+		{ "<leader>tT", function() require("neotest").run.run(vim.loop.cwd()) end,                          desc =
+		"Run All Test Files" },
+		{ "<leader>tr", function() require("neotest").run.run() end,                                        desc =
+		"Run Nearest" },
+		{ "<leader>ts", function() require("neotest").summary.toggle() end,                                 desc =
+		"Toggle Summary" },
+		{ "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end,
+			                                                                                                    desc =
+			"Show Output" },
+		{ "<leader>tO", function() require("neotest").output_panel.toggle() end,                            desc =
+		"Toggle Output Panel" },
+		{ "<leader>tS", function() require("neotest").run.stop() end,                                       desc =
+		"Stop" },
+	},
 }
