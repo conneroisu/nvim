@@ -1,13 +1,6 @@
 --  (otherwise wrong leader will be used)
 vim.g.mapleader = '\\'
 vim.g.maplocalleader = ' '
-
--- set leader + p to "\"_dp allows for pasting without losing yanked text
-vim.api.nvim_set_keymap("x", "<leader>p", "\"_dp", {
-    noremap = true,
-    silent = true
-})
-
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
 if not vim.loop.fs_stat(lazypath) then
@@ -19,7 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-
     {
         -- must  be installed first especiallly before lsp
         'folke/neodev.nvim',
@@ -29,7 +21,6 @@ require('lazy').setup({
     },
     'tpope/vim-rhubarb',
     'tpope/vim-sleuth', {
-    -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
         -- See `:help gitsigns.txt`
@@ -89,7 +80,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp','cs', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'c_sharp' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -154,15 +145,6 @@ require('nvim-treesitter.configs').setup {
         }
     }
 }
-
-
-vim.cmd(":command Wq wq")
-vim.cmd(":command VS vs")
-vim.cmd(":command Vs vs")
-vim.cmd(":command W w")
-vim.cmd(":command Q q")
-
-
 vim.api.nvim_set_keymap("x", "n", "'Nn'[v:searchforward]", {
     expr = true,
     desc = "Next search result"
@@ -179,7 +161,6 @@ vim.api.nvim_set_keymap("o", "N", "'nN'[v:searchforward]", {
     expr = true,
     desc = "Prev search result"
 })
--- Terminal vim.api.nvim_set_keymappings
 vim.api.nvim_set_keymap("t", "<esc><esc>", "<c-\\><c-n>", {
     desc = "Enter Normal Mode"
 })
@@ -202,7 +183,6 @@ vim.api.nvim_set_keymap("t", "<c-_>", "<cmd>close<cr>", {
     desc = "which_key_ignore"
 })
 
--- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
     -- function that lets us more easily define mappings specific for LSP related items. It sets the mode, buffer and description for us each time.
@@ -216,10 +196,8 @@ local on_attach = function(_, bufnr)
             desc = desc
         })
     end
-
     nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-
     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
     nmap('gr', "<cmd>lua require('telescope.builtin').lsp_references()<cr>", '[G]oto [R]eferences')
     nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
@@ -227,11 +205,9 @@ local on_attach = function(_, bufnr)
     nmap('<leader>ds', "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", '[D]ocument [S]ymbols')
     nmap('<leader>ws', "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>",
         '[W]orkspace [S]ymbols')
-
     -- See `:help K` for why this keymap
     nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
     nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
-
     -- Lesser used LSP functionality
     nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
     nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
@@ -239,7 +215,6 @@ local on_attach = function(_, bufnr)
     nmap('<leader>wl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, '[W]orkspace [L]ist Folders')
-
     -- Create a command `:Format` local to the LSP buffer
     vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
         vim.lsp.buf.format()
@@ -275,7 +250,6 @@ local servers = {
 }
 
 
--- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
 
 mason_lspconfig.setup {

@@ -5,7 +5,6 @@ url: https://github.com/OmniSharp/omnisharp-vim
 description: Vim plugin for OmniSharp, a cross platform .NET development
 tags: ['dotnet', 'csharp', 'omnisharp', 'aspnet', 'aspnetcore', 'unity']
 --]=======]
-
 return {
 	'OmniSharp/omnisharp-vim',
 	dependencies = {

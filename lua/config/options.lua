@@ -132,3 +132,19 @@ vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#35ea83", bold = true })
 vim.api.nvim_set_hl(0, "LineNr", { fg = "#35ea83", bold = true })
 
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#35ea83", bold = true })
+
+
+-- Set quick keybinds that I use often
+
+vim.cmd(":command Wq wq")
+vim.cmd(":command VS vs")
+vim.cmd(":command Vs vs")
+vim.cmd(":command W w")
+vim.cmd(":command Q q")
+
+
+-- set leader + p to "\"_dp allows for pasting without losing yanked text
+vim.api.nvim_set_keymap("x", "<leader>p", "\"_dp", {
+    noremap = true,
+    silent = true
+})
