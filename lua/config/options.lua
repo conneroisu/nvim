@@ -128,9 +128,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#35ea83", bold = true })
-
 vim.api.nvim_set_hl(0, "LineNr", { fg = "#35ea83", bold = true })
-
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#35ea83", bold = true })
 
 
@@ -148,3 +146,11 @@ vim.api.nvim_set_keymap("x", "<leader>p", "\"_dp", {
     noremap = true,
     silent = true
 })
+
+-- let g:python3_host_prog = '"D:\001Repos\docuvet.ai\dev-venv\Scripts\python.exe"'
+--
+-- g:python3_host_prog
+--
+vim.g.python3_host_prog = "C:\\Users\\Conne\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe"
+vim.g.python_host_prog = "C:\\Users\\Conne\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe"
+

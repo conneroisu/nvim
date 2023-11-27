@@ -1,7 +1,6 @@
 return {
     "VonHeikemen/lsp-zero.nvim",
     dependencies = { "neovim/nvim-lspconfig" },
-    Event = "VeryLazy",
     config = function()
         local lsp = require("lsp-zero")
         lsp.preset("recommended")
@@ -25,7 +24,15 @@ return {
             -- set the scroll off of the buffer when lsp is attached to said buffer to 8
             vim.o.scrolloff = 8
             -- set hybrid line numbers where the actual line number is at the current line and the relative line numbers everywhere else
-            vim.cmd("set number relativenumber")
+            -- vim.cmd("set number relativenumber")
+            vim.o.relativenumber = true
+            vim.o.number = true
+
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+            require('mason').setup()
+            local mason_lspconfig = require 'mason-lspconfig'
         end)
         lsp.setup()
     end,

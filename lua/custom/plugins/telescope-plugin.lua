@@ -9,7 +9,6 @@ tags: [ 'telescope', 'nvim', 'lua', 'picker', 'fuzzy', 'finder', 'filter', 'prev
 
 return {
     'nvim-telescope/telescope.nvim',
-    Event = 'BufWinEnter',
     branch = '0.1.x',
     dependencies = {
         {

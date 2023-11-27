@@ -1,26 +1,19 @@
---  (otherwise wrong leader will be used)
-vim.g.mapleader = '\\'
-vim.g.maplocalleader = ' '
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+--p  (otherwise wrong leader will be used)
+vim.g.mapleader = '\\'; vim.g.maplocalleader = ' '; local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn
-        .system { 'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git', '--branch=stable', -- latest stable release
-            lazypath }
+    vim.fn .system {'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git', '--branch=stable', lazypath}
 end
 
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
-    {
-        -- must  be installed first especiallly before lsp
-        'folke/neodev.nvim',
-        init = function()
-            require('neodev').setup()
-        end
-    },
-    'tpope/vim-rhubarb',
-    'tpope/vim-sleuth', {
+require('lazy').setup({{
+    -- must  be installed first especiallly before lsp
+    'folke/neodev.nvim',
+    init = function()
+        require('neodev').setup()
+    end
+}, 'tpope/vim-rhubarb', 'tpope/vim-sleuth', {
     'lewis6991/gitsigns.nvim',
     opts = {
         -- See `:help gitsigns.txt`
@@ -61,7 +54,7 @@ require('lazy').setup({
     end
 }, {
     import = 'custom.plugins'
-} })
+}})
 
 require("config.options")
 
@@ -76,11 +69,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     group = highlight_group,
     pattern = '*'
 })
+require'nvim-treesitter.install'.compilers = { "clang", "clang++", "g++"}
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'c_sharp' },
+    ensure_installed = {'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'c_sharp',
+                        'astro'},
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -223,10 +218,8 @@ local on_attach = function(_, bufnr)
     })
 end
 
-
 --  define the property 'filetypes' to the map in question, to override the default filetypes of a server.
 local servers = {
-    clangd = {},
     -- gopls = {},
     -- pyright = {},
     -- rust_analyzer = {},
@@ -234,7 +227,7 @@ local servers = {
     tsserver = {},
 
     html = {
-        filetypes = { 'html', 'twig', 'hbs' }
+        filetypes = {'html', 'twig', 'hbs'}
     },
 
     lua_ls = {
@@ -249,21 +242,20 @@ local servers = {
     }
 }
 
-
 local mason_lspconfig = require 'mason-lspconfig'
 
 mason_lspconfig.setup {
     ensure_installed = vim.tbl_keys(servers)
 }
 
-mason_lspconfig.setup_handlers { function(server_name)
+mason_lspconfig.setup_handlers {function(server_name)
     require('lspconfig')[server_name].setup {
         capabilities = capabilities,
         on_attach = on_attach,
         settings = servers[server_name],
         filetypes = (servers[server_name] or {}).filetypes
     }
-end }
+end}
 
 vim.cmd("syntax on")
 vim.cmd("set wrap!")

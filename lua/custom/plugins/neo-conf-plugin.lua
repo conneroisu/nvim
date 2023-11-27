@@ -5,7 +5,6 @@
    url: https://github.com/folke/neoconf.nvim
 --]=======] return {
     "folke/neoconf.nvim",
-    Event = "VimEnter",
     cmd = "Neoconf",
     config = true
 }

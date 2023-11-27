@@ -31,17 +31,10 @@ return {
 				-- If not provided, the path will be inferred by checking for
 				-- virtual envs in the local directory and for Pipenev/Poetry configs
 				python =
-				"C:\\Users\\Conne\\Documents\\significant-gpt\\Auto-GPT-0.3.1\\agpt-venv\\Scripts\\python.exe",
+				"D:\\001Repos\\docuvet.ai\\dev-venv\\Scripts\\python.exe",
 				-- Returns if a given file path is a test file.
 			},
 		},
-		-- Example for loading neotest-go with a custom config
-		-- adapters = {
-		--   ["neotest-go"] = {
-		--     args = { "-tags=integration" },
-		--   },
-		-- },
-
 		status = { virtual_text = true },
 		output = { open_on_run = true },
 		quickfix = {

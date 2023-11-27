@@ -1,10 +1,10 @@
---[================[
-   markdown preview
-   desc: Allows for the prerviewing of rerndered markdown files in the browser. 
-   author: iamcco (https://github.com/iamcco)
-   url: https://github.com/iamcco/markdown-preview.nvim
---]================]
+-- install with yarn or npm
 return {
-    "iamcco/markdown-preview.nvim",
-    ft = "markdown",
+  "iamcco/markdown-preview.nvim",
+  cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+  build = "cd app && yarn install",
+  init = function()
+    vim.g.mkdp_filetypes = { "markdown" }
+  end,
+  ft = { "markdown" },
 }
