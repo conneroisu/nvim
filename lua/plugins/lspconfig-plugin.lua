@@ -18,4 +18,7 @@ return {
             opts = {}
         } -- Additional lua configuration, makes nvim stuff amazing!
     },
+init = function ()
+		require("neoconf").setup()
+end
 }
