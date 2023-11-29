@@ -69,7 +69,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     group = highlight_group,
     pattern = '*'
 })
-require'nvim-treesitter.install'.compilers = { "clang", "clang++", "g++"}
+require'nvim-treesitter.install'.compilers = { "gcc", "clang", "clang++", "g++"}
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
