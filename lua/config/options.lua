@@ -151,6 +151,7 @@ vim.api.nvim_set_keymap("x", "<leader>p", "\"_dp", {
 --
 -- g:python3_host_prog
 --
-vim.g.python3_host_prog = "C:\\Users\\Conne\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe"
-vim.g.python_host_prog = "C:\\Users\\Conne\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe"
+--
+vim.g.python3_host_prog = "/usr/bin/python"
+vim.g.python_host_prog = "/usr/bin/python"
 

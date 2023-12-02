@@ -8,6 +8,9 @@ return {
 	"nvim-neotest/neotest",
 	dependencies = {
 		"nvim-neotest/neotest-go",
+		{
+			"nvim-neotest/neotest-python",
+		}
 	},
 	opts = {
 		-- Can be a list of adapters like what neotest expects,
@@ -30,8 +33,6 @@ return {
 				-- Can also be a function to return dynamic value.
 				-- If not provided, the path will be inferred by checking for
 				-- virtual envs in the local directory and for Pipenev/Poetry configs
-				python =
-				"D:\\001Repos\\docuvet.ai\\dev-venv\\Scripts\\python.exe",
 				-- Returns if a given file path is a test file.
 			},
 		},
@@ -90,20 +91,47 @@ return {
 	end,
 	-- stylua: ignore
 	keys = {
-		{ "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end,                      desc =
-		"Run File" },
-		{ "<leader>tT", function() require("neotest").run.run(vim.loop.cwd()) end,                          desc =
-		"Run All Test Files" },
-		{ "<leader>tr", function() require("neotest").run.run() end,                                        desc =
-		"Run Nearest" },
-		{ "<leader>ts", function() require("neotest").summary.toggle() end,                                 desc =
-		"Toggle Summary" },
-		{ "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end,
-			                                                                                                    desc =
-			"Show Output" },
-		{ "<leader>tO", function() require("neotest").output_panel.toggle() end,                            desc =
-		"Toggle Output Panel" },
-		{ "<leader>tS", function() require("neotest").run.stop() end,                                       desc =
-		"Stop" },
+		{
+			"<leader>tt",
+			function() require("neotest").run.run(vim.fn.expand("%")) end,
+			desc =
+			"Run File"
+		},
+		{
+			"<leader>tT",
+			function() require("neotest").run.run(vim.loop.cwd()) end,
+			desc =
+			"Run All Test Files"
+		},
+		{
+			"<leader>tr",
+			function() require("neotest").run.run() end,
+			desc =
+			"Run Nearest"
+		},
+		{
+			"<leader>ts",
+			function() require("neotest").summary.toggle() end,
+			desc =
+			"Toggle Summary"
+		},
+		{
+			"<leader>to",
+			function() require("neotest").output.open({ enter = true, auto_close = true }) end,
+			desc =
+			"Show Output"
+		},
+		{
+			"<leader>tO",
+			function() require("neotest").output_panel.toggle() end,
+			desc =
+			"Toggle Output Panel"
+		},
+		{
+			"<leader>tS",
+			function() require("neotest").run.stop() end,
+			desc =
+			"Stop"
+		},
 	},
 }

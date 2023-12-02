@@ -1,3 +1,9 @@
+
+-- RUnning 
+
+vim.keymap.set("n", "<leader>rh", ":lua require('rest-nvim').run()<CR>", {
+    desc = "No Operation on Space"
+})
 -- Shifting  ===========================================================
 vim.keymap.set("n", "<Space>", "<Nop>", {
     desc = "No Operation on Space"
