@@ -28,5 +28,4 @@ jobs:
         tag: nightly
     - run: |
         nvim --version
-        cp . .config/nvim
-        nvim
+        nvim -u init.lua
