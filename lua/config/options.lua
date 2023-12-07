@@ -110,7 +110,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		"man",
 		"notify",
 		"qf",
-		"fugitive",
 		"ObsidianBacklinks",
 		"spectre_panel",
 		"startuptime",

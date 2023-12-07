@@ -1,4 +1,3 @@
-
 -- RUnning 
 
 vim.keymap.set("n", "<leader>rh", ":lua require('rest-nvim').run()<CR>", {
