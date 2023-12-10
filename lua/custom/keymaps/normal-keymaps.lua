@@ -1,5 +1,9 @@
 -- RUnning 
 
+vim.keymap.set("n", "<leader>hi", ":Octo issue list<CR>", {
+    desc = "Open Github Issues"
+})
+
 vim.keymap.set("n", "<leader>rh", ":lua require('rest-nvim').run()<CR>", {
     desc = "No Operation on Space"
 })
