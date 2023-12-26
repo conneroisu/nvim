@@ -2,12 +2,12 @@
 vim.g.mapleader = '\\'; vim.g.maplocalleader = ' '; local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn .system {'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git', '--branch=stable', lazypath}
+    vim.fn.system { 'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git', '--branch=stable', lazypath }
 end
 
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({{
+require('lazy').setup({ {
     -- must  be installed first especiallly before lsp
     'folke/neodev.nvim',
     init = function()
@@ -54,7 +54,7 @@ require('lazy').setup({{
     end
 }, {
     import = 'custom.plugins'
-}})
+} })
 
 require("config.options")
 
@@ -69,19 +69,19 @@ local highlight_group = vim.api.nvim_create_augroup('YankHighlight', {
 --     group = highlight_group,
 --     pattern = '*'
 -- })
-require'nvim-treesitter.install'.compilers = { "gcc", "clang", "clang++", "g++"}
+require 'nvim-treesitter.install'.compilers = { "gcc", "clang", "clang++", "g++" }
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = {'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'c_sharp',
-                        'astro', 'ninja', 'bash', "css", "rst", "toml"},
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'c_sharp', 'astro', 'ninja', 'bash', "css", "rst", "toml", "markdown", "markdown_inline" },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
 
     highlight = {
-        enable = true
+        enable = true,
+        additional_vim_regex_highlighting = { "markdown" }
     },
     indent = {
         enable = true
@@ -227,7 +227,7 @@ local servers = {
     tsserver = {},
 
     html = {
-        filetypes = {'html', 'twig', 'hbs'}
+        filetypes = { 'html', 'twig', 'hbs' }
     },
 
     lua_ls = {
@@ -248,14 +248,14 @@ mason_lspconfig.setup {
     ensure_installed = vim.tbl_keys(servers)
 }
 
-mason_lspconfig.setup_handlers {function(server_name)
+mason_lspconfig.setup_handlers { function(server_name)
     require('lspconfig')[server_name].setup {
         capabilities = capabilities,
         on_attach = on_attach,
         settings = servers[server_name],
         filetypes = (servers[server_name] or {}).filetypes
     }
-end}
+end }
 
 vim.cmd("syntax on")
 vim.cmd("set wrap!")
@@ -265,4 +265,4 @@ require("custom.keymaps.normal-keymaps")
 
 vim.o.statusline = vim.o.statusline .. '%F'
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>fi', builtin.find_files, { desc = "Find Files"})
+vim.keymap.set('n', '<leader>fi', builtin.find_files, { desc = "Find Files" })

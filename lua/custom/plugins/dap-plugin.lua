@@ -12,7 +12,6 @@
     "mfussenegger/nvim-dap",
     {
         "rcarriga/nvim-dap-ui",
-        Event = "VryLazy",
         dependencies = {"mfussenegger/nvim-dap"},
         config = function()
             require("neodev").setup({
