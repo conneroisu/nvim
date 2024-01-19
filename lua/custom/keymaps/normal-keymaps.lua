@@ -166,14 +166,14 @@ vim.api.nvim_set_keymap("n", "<space>h", "<cmd>lua require('harpoon.ui').toggle_
 })
 
 -- bind harpoon navigate next to alt + h
-vim.api.nvim_set_keymap("n", "<M-h>", ":lua require('harpoon.ui').nav_next()<CR>", {
+vim.api.nvim_set_keymap("n", "<A-h>", ":lua require('harpoon.ui').nav_next()<CR>", {
     noremap = true,
     silent = true,
     desc = "Navigate to next harpoon mark"
 })
 
 -- bind harpoon navigate previous to alt + l
-vim.api.nvim_set_keymap("n", "<M-l>", ":lua require('harpoon.ui').nav_prev()<CR>", {
+vim.api.nvim_set_keymap("n", "<A-l>", ":lua require('harpoon.ui').nav_prev()<CR>", {
     noremap = true,
     silent = true,
     desc = "Navigate to previous harpoon mark"

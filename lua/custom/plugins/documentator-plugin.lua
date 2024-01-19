@@ -1,4 +1,0 @@
-
-return {
-    "conneroisu/documentator.nvim",
-}

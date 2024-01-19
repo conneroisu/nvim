@@ -22,6 +22,9 @@ return {
       }
     },
 
-      yaml_parser = "yq"
+    yaml_parser = "yq",
+    ui = {
+      enable = false,
+    }
   },
 }

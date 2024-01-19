@@ -1,4 +1,4 @@
---p  (otherwise wrong leader will be used)
+--  (otherwise wrong leader will be used)
 vim.g.mapleader = '\\'; vim.g.maplocalleader = ' '; local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
 if not vim.loop.fs_stat(lazypath) then
@@ -80,7 +80,6 @@ require('nvim-treesitter.configs').setup {
     auto_install = false,
 
     highlight = {
-        enable = true,
         additional_vim_regex_highlighting = { "markdown" }
     },
     indent = {
@@ -265,4 +264,20 @@ require("custom.keymaps.normal-keymaps")
 
 vim.o.statusline = vim.o.statusline .. '%F'
 local builtin = require('telescope.builtin')
+local lspconfig = require('lspconfig')
+if not lspconfig.hdl_checker then
+  require'lspconfig/configs'.hdl_checker = {
+    default_config = {
+    cmd = {"hdl_checker", "--lsp", };
+    filetypes = {"vhdl", "verilog", "systemverilog"};
+      root_dir = function(fname)
+        -- will look for a parent directory with a .git directory. If none, just
+        -- use the current directory
+        return lspconfig.util.find_git_ancestor(fname) or lspconfig.util.path.dirname(fname)
+      end;
+      settings = {};
+    };
+  }
+end
 vim.keymap.set('n', '<leader>fi', builtin.find_files, { desc = "Find Files" })
+vim.cmd('set rtp^="/home/conner/.opam/default/share/ocp-indent/vim"')

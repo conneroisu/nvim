@@ -6,5 +6,5 @@
    tags: ai, github, autocomplete, language-model
 --]==============]
 return {
-	"github/copilot.vim",
+	"github/copilot.vim"
 }

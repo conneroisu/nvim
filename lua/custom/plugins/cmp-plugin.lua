@@ -1,9 +1,21 @@
+--[===[
+   CMP
+   description: Autocompletion plugin
+   author: hrsh7th
+   url: https://github.com/hrsh7th/nvim-cmp
+--]===]
 return {
     "hrsh7th/nvim-cmp",
     version = false, -- last release is way too old
     event = "InsertEnter",
     dependencies = {
-        'L3MON4D3/LuaSnip',
+        {
+            "L3MON4D3/LuaSnip",
+            -- follow latest release.
+            version = "v2.2.0", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+            -- install jsregexp (optional!).
+            build = "make install_jsregexp"
+        },
         'saadparwaiz1/cmp_luasnip', -- Adds LSP completion capabilities
         'hrsh7th/cmp-nvim-lsp',
         "hrsh7th/cmp-buffer",
