@@ -1,5 +1,7 @@
 --  (otherwise wrong leader will be used)
-vim.g.mapleader = '\\'; vim.g.maplocalleader = ' '; local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+vim.g.mapleader = '\\'; 
+vim.g.maplocalleader = ' '; 
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system { 'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git', '--branch=stable', lazypath }
@@ -7,54 +9,20 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({ {
-    -- must  be installed first especiallly before lsp
-    'folke/neodev.nvim',
-    init = function()
-        require('neodev').setup()
-    end
-}, 'tpope/vim-rhubarb', 'tpope/vim-sleuth', {
-    'lewis6991/gitsigns.nvim',
-    opts = {
-        -- See `:help gitsigns.txt`
-        signs = {
-            add = {
-                text = '+'
-            },
-            change = {
-                text = '~'
-            },
-            delete = {
-                text = '_'
-            },
-            topdelete = {
-                text = '‾'
-            },
-            changedelete = {
-                text = '~'
-            }
-        },
-        on_attach = function(bufnr)
-            -- vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk, { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
-            vim.keymap.set('n', '<leader>gsn', require('gitsigns').next_hunk, {
-                buffer = bufnr,
-                desc = '[G]o to [N]ext Hunk'
-            })
-            vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, {
-                buffer = bufnr,
-                desc = '[P]review [H]unk'
-            })
+require('lazy').setup({
+    {
+        -- must  be installed first especiallly before lsp
+        'folke/neodev.nvim',
+        init = function()
+            require('neodev').setup()
         end
+    },
+    'tpope/vim-rhubarb',
+    'tpope/vim-sleuth',
+    {
+        import = 'custom.plugins'
     }
-}, {
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-        vim.cmd.colorscheme 'onedark'
-    end
-}, {
-    import = 'custom.plugins'
-} })
+})
 
 require("config.options")
 
@@ -62,14 +30,16 @@ local highlight_group = vim.api.nvim_create_augroup('YankHighlight', {
     clear = true
 })
 
--- vim.api.nvim_create_autocmd('TextYankPost', {
---     callback = function()
---         vim.highlight.on_yank()
---     end,
---     group = highlight_group,
---     pattern = '*'
--- })
+vim.api.nvim_create_autocmd('TextYankPost', {
+     callback = function()
+         vim.highlight.on_yank()
+     end,
+     group = highlight_group,
+     pattern = '*'
+ })
+
 require 'nvim-treesitter.install'.compilers = { "gcc", "clang", "clang++", "g++" }
+
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
@@ -158,21 +128,6 @@ vim.api.nvim_set_keymap("o", "N", "'nN'[v:searchforward]", {
 vim.api.nvim_set_keymap("t", "<esc><esc>", "<c-\\><c-n>", {
     desc = "Enter Normal Mode"
 })
-vim.api.nvim_set_keymap("t", "<S-C-h>", "<cmd>wincmd h<cr>", {
-    desc = "Go to left window"
-})
-vim.api.nvim_set_keymap("t", "<S-C-j>", "<cmd>wincmd j<cr>", {
-    desc = "Go to lower window"
-})
-vim.api.nvim_set_keymap("t", "<S-C-k>", "<cmd>wincmd k<cr>", {
-    desc = "Go to upper window"
-})
-vim.api.nvim_set_keymap("t", "<S-C-l>", "<cmd>wincmd l<cr>", {
-    desc = "Go to right window"
-})
-vim.api.nvim_set_keymap("t", "<C-/>", "<cmd>close<cr>", {
-    desc = "Hide Terminal"
-})
 vim.api.nvim_set_keymap("t", "<c-_>", "<cmd>close<cr>", {
     desc = "which_key_ignore"
 })
@@ -238,6 +193,10 @@ local servers = {
                 enable = false
             }
         }
+    }, 
+    hdl_checker = {
+        filetypes = { "vhdl", "verilog", "systemverilog", "vhd" },
+        cmd = { "hdl_checker", "--lsp", },
     }
 }
 
@@ -258,6 +217,7 @@ end }
 
 vim.cmd("syntax on")
 vim.cmd("set wrap!")
+
 require("custom.keymaps.visual-keymaps")
 require("custom.keymaps.insert-keymaps")
 require("custom.keymaps.normal-keymaps")
@@ -266,18 +226,20 @@ vim.o.statusline = vim.o.statusline .. '%F'
 local builtin = require('telescope.builtin')
 local lspconfig = require('lspconfig')
 if not lspconfig.hdl_checker then
-  require'lspconfig/configs'.hdl_checker = {
-    default_config = {
-    cmd = {"hdl_checker", "--lsp", };
-    filetypes = {"vhdl", "verilog", "systemverilog"};
-      root_dir = function(fname)
-        -- will look for a parent directory with a .git directory. If none, just
-        -- use the current directory
-        return lspconfig.util.find_git_ancestor(fname) or lspconfig.util.path.dirname(fname)
-      end;
-      settings = {};
-    };
-  }
+    require 'lspconfig/configs'.hdl_checker = {
+        default_config = {
+            cmd = { "hdl_checker", "--lsp", },
+            filetypes = { "vhdl", "verilog", "systemverilog", "vhd" },
+            root_dir = function(fname)
+                -- will look for a parent directory with a .git directory. If none, just
+                -- use the current directory
+                return lspconfig.util.find_git_ancestor(fname) or lspconfig.util.path.dirname(fname)
+            end,
+            settings = {},
+        },
+    }
 end
 vim.keymap.set('n', '<leader>fi', builtin.find_files, { desc = "Find Files" })
 vim.cmd('set rtp^="/home/conner/.opam/default/share/ocp-indent/vim"')
+-- set the colorscheme to ron
+vim.cmd('colorscheme ron')

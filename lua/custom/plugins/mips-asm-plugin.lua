@@ -1,0 +1,4 @@
+
+return {
+   "benknoble/vim-mips"
+}

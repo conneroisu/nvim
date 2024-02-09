@@ -146,11 +146,13 @@ vim.api.nvim_set_keymap("x", "<leader>p", "\"_dp", {
     silent = true
 })
 
--- let g:python3_host_prog = '"D:\001Repos\docuvet.ai\dev-venv\Scripts\python.exe"'
+vim.g.python3_host_prog = "/usr/bin/python"
+vim.g.python_host_prog = "/usr/bin/python"
+
 --
 -- g:python3_host_prog
 --
 --
-vim.g.python3_host_prog = "/usr/bin/python"
-vim.g.python_host_prog = "/usr/bin/python"
+-- vim.g.python3_host_prog = "/usr/bin/python"
+-- vim.g.python_host_prog = "/usr/bin/python"
 
