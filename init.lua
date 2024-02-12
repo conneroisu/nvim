@@ -205,6 +205,7 @@ local mason_lspconfig = require 'mason-lspconfig'
 mason_lspconfig.setup {
     ensure_installed = vim.tbl_keys(servers)
 }
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 mason_lspconfig.setup_handlers { function(server_name)
     require('lspconfig')[server_name].setup {
@@ -231,14 +232,29 @@ if not lspconfig.hdl_checker then
             cmd = { "hdl_checker", "--lsp", },
             filetypes = { "vhdl", "verilog", "systemverilog", "vhd" },
             root_dir = function(fname)
-                -- will look for a parent directory with a .git directory. If none, just
-                -- use the current directory
                 return lspconfig.util.find_git_ancestor(fname) or lspconfig.util.path.dirname(fname)
             end,
             settings = {},
         },
     }
 end
+if not lspconfig.hdl_ls then
+    require 'lspconfig/configs'.hdl_ls = {
+        default_config = {
+            cmd = { "hdl_ls" },
+            filetypes = { "vhdl", "verilog", "systemverilog", "vhd" },
+            root_dir = function(fname)
+                return lspconfig.util.find_git_ancestor(fname) or lspconfig.util.path.dirname(fname)
+            end,
+            settings = {},
+        },
+    }
+end
+require'lspconfig'.ghdl_ls.setup{}
+require'lspconfig'.jedi_language_server.setup{}
+require'lspconfig'.pyright.setup{
+    capabilities = capabilities,
+}
 vim.keymap.set('n', '<leader>fi', builtin.find_files, { desc = "Find Files" })
 vim.cmd('set rtp^="/home/conner/.opam/default/share/ocp-indent/vim"')
 -- set the colorscheme to ron
