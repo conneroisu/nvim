@@ -88,6 +88,17 @@ return {
 		end
 
 		require("neotest").setup(opts)
+
+		require("neotest").setup({
+			adapters = {
+				["neotest-python"] = {
+					runner = "pytest",
+					args = { "--log-level", "DEBUG" },
+					dap = { justMyCode = false },
+				},
+				require("neotest-go")
+			},
+		})
 	end,
 	-- stylua: ignore
 	keys = {

@@ -89,7 +89,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", {
 })
 
 -- set leader + c + f to quickfix with lsp in normal mode
-vim.api.nvim_set_keymap("n", "<leader>cf", ":lua vim.lsp.buf.code_action()<CR>", {
+vim.api.nvim_set_keymap("n", "<leader>cf", "<cmd>Lspsaga code_action<CR>", {
     desc = "Quickfix with LSP"
 })
 
@@ -440,17 +440,17 @@ end
    VHDL
 --]=======]
 Compile_And_Link = function()
-    vim.cmd(":!nvc -a " .. vim.fn.expand('%:p') .. " -e " .. vim.fn.expand('%:t:r') .. " -r " .. vim.fn.expand('%:t:r'))
+    vim.cmd(":!nvc -a " .. vim.fn.expand('%:p') .. " -e " .. vim.fn.expand('%:t:r') .. " -r " .. vim.fn.expand('%:t:r') )
 end
 
 Open_nvc = function()
     vim.cmd(
         ":!nvc -a " .. vim.fn.expand('%:p') .. " -e " .. vim.fn.expand('%:t:r') .. " -r " .. vim.fn.expand('%:t:r') ..
-        " --format=fst -w &")
+        " --format=fst -w && gtkwave " .. vim.fn.expand('%:t:r') .. ".fst")
 
-    -- wait for the command to finish 10ms
-    sleep(1)
-    vim.cmd(":!gtkwave " .. vim.fn.expand('%:t:r') .. ".fst")
+    -- -- wait for the command to finish 10ms
+    -- sleep(1)
+    -- vim.cmd(":!gtkwave " .. vim.fn.expand('%:t:r') .. ".fst")
 end
 
 -- map leader + v + n to run the current file with nvc
@@ -465,4 +465,12 @@ vim.api.nvim_set_keymap("n", "<leader>vb", ":lua Compile_And_Link()<CR>", {
     noremap = true,
     silent = true,
     desc = "Run the current file with nvc"
+})
+
+
+-- go mod tidy on leager + g + m + t
+vim.api.nvim_set_keymap("n", "<leader>gmt", ":!go mod tidy<CR>", {
+    noremap = true,
+    silent = true,
+    desc = "Go Mod Tidy"
 })

@@ -11,7 +11,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
-        -- must  be installed first especiallly before lsp
+        -- must  be installed before lsp
         "folke/neodev.nvim",
         init = function()
             require("neodev").setup()
@@ -26,9 +26,7 @@ require("lazy").setup({
 
 require("config.options")
 
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", {
-    clear = true
-})
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
@@ -46,7 +44,6 @@ require("nvim-treesitter.configs").setup {
         require("config.treesitter-langs")
     },
 
-    -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
 
     highlight = {
@@ -132,9 +129,9 @@ vim.api.nvim_set_keymap("t", "<c-_>", "<cmd>close<cr>", {
     desc = "which_key_ignore"
 })
 
---  This function gets run when an LSP connects to a particular buffer.
+--  Function that gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
-    -- function that lets us more easily define mappings specific for LSP related items. It sets the mode, buffer and description for us each time.
+    -- Function that lets us more easily define mappings specific for LSP related items. It sets the mode, buffer and description for us each time.
     local nmap = function(keys, func, desc)
         if desc then
             desc = "LSP: " .. desc
@@ -146,7 +143,7 @@ local on_attach = function(_, bufnr)
         })
     end
     nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-    nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+    nmap("<leader>ca", ":Lspsaga code_action<CR>", "[C]ode [A]ction")
     nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
     nmap("gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", "[G]oto [R]eferences")
     nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
@@ -155,7 +152,6 @@ local on_attach = function(_, bufnr)
     nmap("<leader>ws", "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>",
         "[W]orkspace [S]ymbols")
     -- See `:help K` for why this keymap
-    nmap("K", vim.lsp.buf.hover, "Hover Documentation")
     nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
     -- Lesser used LSP functionality
     nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -179,7 +175,10 @@ local servers = {
     -- rust_analyzer = {},
     svelte = {},
     tsserver = {},
+    ltex = {},
+    texlab = {},
 
+    dockerls = {},
     html = {
         filetypes = { "html", "twig", "hbs" }
     },
@@ -256,5 +255,48 @@ require "lspconfig".pyright.setup {
 }
 vim.keymap.set("n", "<leader>fi", builtin.find_files, { desc = "Find Files" })
 vim.cmd("set rtp^='/home/conner/.opam/default/share/ocp-indent/vim'")
--- set the colorscheme to ron
+-- Set the `colorscheme` to ron
 vim.cmd("colorscheme ron")
+
+require('custom.misc.markdown')
+-- Register the language
+vim.filetype.add {
+    extension = {
+        templ = "templ"
+    }
+}
+
+-- Make sure we have a Tree-Sitter Grammar for the Language
+local treesitter_parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+treesitter_parser_config.templ = treesitter_parser_config.templ or {
+    install_info = {
+        url = "https://github.com/vrischmann/tree-sitter-templ.git",
+        files = { "src/parser.c", "src/scanner.c" },
+        branch = "master",
+    },
+}
+
+vim.treesitter.language.register('templ', 'templ')
+
+-- Register the LSP as a Config
+local configs = require 'lspconfig.configs'
+if not configs.templ then
+    configs.templ = {
+        default_config = {
+            cmd = { "templ", "lsp" },
+            filetypes = { 'templ' },
+            root_dir = require "lspconfig.util".root_pattern("go.mod", ".git"),
+            settings = {},
+        },
+    }
+end
+
+-- Activate the Tailwind-Lsp for `.templ` files
+require 'lspconfig'.tailwindcss.setup {
+    cmd = { "tailwindcss-language-server", "--stdio" },
+    filetypes = { "templ", "html", "css", "scss", "javascript", "typescript", "astro", "svelte", "vue" },
+    root_dir = require "lspconfig.util".root_pattern("go.mod", ".git", "tailwind.config.js", "postcss.config.js", "tailwind.config.cjs"),
+    settings = {},
+    on_attach = on_attach,
+    capabilities = capabilities,
+}

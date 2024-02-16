@@ -101,7 +101,7 @@ vim.opt.mouse = "a"
 -- turn off swap files
 vim.opt.swapfile = false
 
--- quiting
+-- Qutting for specific file types
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = {
 		"PlenaryTestPopup",
@@ -130,13 +130,15 @@ vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#35ea83", bold = true })
 vim.api.nvim_set_hl(0, "LineNr", { fg = "#35ea83", bold = true })
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#35ea83", bold = true })
 
-
--- Set quick keybinds that I use often
-
+-- Renmap Command 'Wq' to 'wq'
 vim.cmd(":command Wq wq")
+-- Renmap Command 'VS' to 'vs'
 vim.cmd(":command VS vs")
+-- Remap Command 'Vs' to 'vs'
 vim.cmd(":command Vs vs")
+-- Remap Command 'W' to 'w'
 vim.cmd(":command W w")
+-- Remap Command 'Q' to 'q'
 vim.cmd(":command Q q")
 
 
@@ -146,13 +148,6 @@ vim.api.nvim_set_keymap("x", "<leader>p", "\"_dp", {
     silent = true
 })
 
+-- Python Host Program
 vim.g.python3_host_prog = "/usr/bin/python"
 vim.g.python_host_prog = "/usr/bin/python"
-
---
--- g:python3_host_prog
---
---
--- vim.g.python3_host_prog = "/usr/bin/python"
--- vim.g.python_host_prog = "/usr/bin/python"
-
