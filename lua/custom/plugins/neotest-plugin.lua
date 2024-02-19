@@ -19,21 +19,18 @@ return {
 		-- The adapter will then be automatically loaded with the config.
 		adapters = {
 			["neotest-python"] = {
-				-- Extra arguments for nvim-dap configuration
-				-- See https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for values
 				dap = { justMyCode = false },
-				-- Command line arguments for runner
-				-- Can also be a function to return dynamic values
 				args = { "--log-level", "DEBUG" },
-				-- Runner to use. Will use pytest if available by default.
-				-- Can be a function to return dynamic value.
 				runner = "pytest",
-				-- Custom python path for the runner.
-				-- Can be a string or a list of strings.
-				-- Can also be a function to return dynamic value.
-				-- If not provided, the path will be inferred by checking for
-				-- virtual envs in the local directory and for Pipenev/Poetry configs
-				-- Returns if a given file path is a test file.
+				is_test_file = function(file_path)
+					return file_path:match("test_.*%.py") or file_path:match(".*_test%.py")
+				end,
+			},
+			["neotest-go"] = {
+				runner = "go test",
+				is_test_file = function(file_path)
+					return file_path:match("_test%.go")
+				end,
 			},
 		},
 		status = { virtual_text = true },
@@ -88,17 +85,6 @@ return {
 		end
 
 		require("neotest").setup(opts)
-
-		require("neotest").setup({
-			adapters = {
-				["neotest-python"] = {
-					runner = "pytest",
-					args = { "--log-level", "DEBUG" },
-					dap = { justMyCode = false },
-				},
-				require("neotest-go")
-			},
-		})
 	end,
 	-- stylua: ignore
 	keys = {

@@ -474,3 +474,10 @@ vim.api.nvim_set_keymap("n", "<leader>gmt", ":!go mod tidy<CR>", {
     silent = true,
     desc = "Go Mod Tidy"
 })
+
+-- restart copilot with leader + c + r
+vim.api.nvim_set_keymap("n", "<leader>cr", "<cmd>Copilot restart <CR>", {
+    noremap = true,
+    silent = true,
+    desc = "Restart Copilot"
+})

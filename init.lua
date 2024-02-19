@@ -300,3 +300,24 @@ require 'lspconfig'.tailwindcss.setup {
     on_attach = on_attach,
     capabilities = capabilities,
 }
+
+-- set up vhdl-tool lsp server
+--
+local lsp = require 'lspconfig'
+
+vim.tbl_deep_extend('keep', lsp, {
+	lsp_name = {
+		cmd = { 'vhdl-tool server' },
+		filetypes = { 'vhdl', 'vhd', 'verilog', 'systemverilog' },
+		name = 'vhdl-tool',
+	}
+})
+
+vim.g.neomake_vhdl_enabled_makers = 'vhdltool'
+vim.g.neomake_vhdl_vhdltool_maker = {
+    exe = 'vhdl-tool',
+    args = { 'server' },
+    errorformat = '%f:%l:%c: %m',
+    on_output = 'echo'
+}
+
