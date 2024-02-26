@@ -55,7 +55,6 @@ return {
                 { name = 'luasnip' },
                 { name = 'buffer' },
                 { name = 'path' },
-                { name = 'cmdline' },
             }),
             experimental = {
                 ghost_text = {
