@@ -1,22 +1,12 @@
---[===[
-   dap
-   desc: Debug Adapter Protocol client implementation for Neovim
-   author: mfussenegger (https://github.com/mfussenegger)
-   url: https://github.com/mfussenegger/nvim-dap
---]===] --[======[
-   dap ui
-   desc: Debug Adapter Protocol UI 
-   author: rcarriga (https://github.com/rcarriga)
-   url: https://github.com/rcarriga/nvim-dap-ui
---]======] return {
+return {
     "mfussenegger/nvim-dap",
     {
         "rcarriga/nvim-dap-ui",
-        dependencies = {"mfussenegger/nvim-dap"},
+        dependencies = { "mfussenegger/nvim-dap" },
         config = function()
             require("neodev").setup({
                 library = {
-                    plugins = {"nvim-dap-ui"},
+                    plugins = { "nvim-dap-ui" },
                     types = true
                 }
             })
@@ -33,10 +23,10 @@
                 port = config.port or 8086
             })
         end
-        dap.configurations.lua = {{
+        dap.configurations.lua = { {
             type = "nlua",
             request = "attach",
             name = "Attach to running Neovim instance"
-        }}
+        } }
     end
 }

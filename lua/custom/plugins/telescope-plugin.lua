@@ -1,12 +1,3 @@
---[=============[
-name: Telescope Plugin
-author: nvim-telescope
-url:https://github.com/nvim-telescope/telescope.nvim
-description: Find, Filter, Preview, Pick. All lua, all the time.
-tags: [ 'telescope', 'nvim', 'lua', 'picker', 'fuzzy', 'finder', 'filter', 'preview', 'grep', 'live_grep', 'git', 'files', 'buffers', 'commands', 'quickfix', 'loclist', 'vim', 'neovim', 'nvim-telescope', 'telescop' ]
---]=============]
-
-
 return {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',

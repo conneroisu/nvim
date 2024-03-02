@@ -36,98 +36,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     pattern = "*"
 })
 
-require "nvim-treesitter.install".compilers = { "gcc", "clang", "clang++", "g++" }
-
--- [[ Configure Treesitter ]]
-require("nvim-treesitter.configs").setup {
-    ensure_installed = {
-        require("config.treesitter-langs")
-    },
-
-    auto_install = false,
-
-    highlight = {
-        additional_vim_regex_highlighting = { "markdown" }
-    },
-    indent = {
-        enable = true
-    },
-    incremental_selection = {
-        enable = true,
-        keymaps = {
-            init_selection = "<c-space>",
-            node_incremental = "<c-space>",
-            scope_incremental = "<c-s>",
-            node_decremental = "<M-space>"
-        }
-    },
-    textobjects = {
-        select = {
-            enable = true,
-            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-            keymaps = {
-                -- You can use the capture groups defined in textobjects.scm
-                ["aa"] = "@parameter.outer",
-                ["ia"] = "@parameter.inner",
-                ["af"] = "@function.outer",
-                ["if"] = "@function.inner",
-                ["ac"] = "@class.outer",
-                ["ic"] = "@class.inner"
-            }
-        },
-        move = {
-            enable = true,
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next_start = {
-                ["]m"] = "@function.outer",
-                ["]]"] = "@class.outer"
-            },
-            goto_next_end = {
-                ["]M"] = "@function.outer",
-                ["]["] = "@class.outer"
-            },
-            goto_previous_start = {
-                ["[m"] = "@function.outer",
-                ["[["] = "@class.outer"
-            },
-            goto_previous_end = {
-                ["[M"] = "@function.outer",
-                ["[]"] = "@class.outer"
-            }
-        },
-        swap = {
-            enable = true,
-            swap_next = {
-                ["<leader>a"] = "@parameter.inner"
-            },
-            swap_previous = {
-                ["<leader>A"] = "@parameter.inner"
-            }
-        }
-    }
-}
-vim.api.nvim_set_keymap("x", "n", "'Nn'[v:searchforward]", {
-    expr = true,
-    desc = "Next search result"
-})
-vim.api.nvim_set_keymap("x", "N", "'nN'[v:searchforward]", {
-    expr = true,
-    desc = "Prev search result"
-})
-vim.api.nvim_set_keymap("o", "n", "'Nn'[v:searchforward]", {
-    expr = true,
-    desc = "Next search result"
-})
-vim.api.nvim_set_keymap("o", "N", "'nN'[v:searchforward]", {
-    expr = true,
-    desc = "Prev search result"
-})
-vim.api.nvim_set_keymap("t", "<esc><esc>", "<c-\\><c-n>", {
-    desc = "Enter Normal Mode"
-})
-vim.api.nvim_set_keymap("t", "<c-_>", "<cmd>close<cr>", {
-    desc = "which_key_ignore"
-})
+require("custom.misc.lsp-config")
 
 --  Function that gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
@@ -143,7 +52,7 @@ local on_attach = function(_, bufnr)
         })
     end
     nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-    nmap("<leader>ca", ":Lspsaga code_action<CR>", "[C]ode [A]ction")
+    nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
     nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
     nmap("gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", "[G]oto [R]eferences")
     nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
@@ -170,7 +79,7 @@ end
 
 --  define the property "filetypes" to the map in question, to override the default filetypes of a server.
 local servers = {
-    -- gopls = {},
+    gopls = {},
     -- pyright = {},
     -- rust_analyzer = {},
     svelte = {},
@@ -250,13 +159,9 @@ if not lspconfig.ghdl_ls then
     }
 end
 require "lspconfig".jedi_language_server.setup {}
-require "lspconfig".pyright.setup {
-    capabilities = capabilities,
-}
+require "lspconfig".pyright.setup { capabilities = capabilities, }
 vim.keymap.set("n", "<leader>fi", builtin.find_files, { desc = "Find Files" })
 vim.cmd("set rtp^='/home/conner/.opam/default/share/ocp-indent/vim'")
--- Set the `colorscheme` to ron
-vim.cmd("colorscheme ron")
 
 require('custom.misc.markdown')
 -- Register the language
@@ -301,16 +206,14 @@ require 'lspconfig'.tailwindcss.setup {
     capabilities = capabilities,
 }
 
--- set up vhdl-tool lsp server
---
 local lsp = require 'lspconfig'
 
 vim.tbl_deep_extend('keep', lsp, {
-	lsp_name = {
-		cmd = { 'vhdl-tool server' },
-		filetypes = { 'vhdl', 'vhd', 'verilog', 'systemverilog' },
-		name = 'vhdl-tool',
-	}
+    lsp_name = {
+        cmd = { 'vhdl-tool server' },
+        filetypes = { 'vhdl', 'vhd', 'verilog', 'systemverilog' },
+        name = 'vhdl-tool',
+    }
 })
 
 vim.g.neomake_vhdl_enabled_makers = 'vhdltool'
@@ -320,4 +223,3 @@ vim.g.neomake_vhdl_vhdltool_maker = {
     errorformat = '%f:%l:%c: %m',
     on_output = 'echo'
 }
-

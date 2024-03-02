@@ -1,8 +1,7 @@
---[=========[
-   vim-astro
-   author: wuelnerdotexe
---]=========]
-
 return {
-    "wuelnerdotexe/vim-astro"
+    "wuelnerdotexe/vim-astro",
+    config = function ()
+        vim.g.astro_typescript = 'enable'
+        vim.g.astro_stylus = 'enable'
+    end
 }

@@ -151,3 +151,6 @@ vim.api.nvim_set_keymap("x", "<leader>p", "\"_dp", {
 -- Python Host Program
 vim.g.python3_host_prog = "/usr/bin/python"
 vim.g.python_host_prog = "/usr/bin/python"
+
+-- Set the `colorscheme` to ron
+vim.cmd("colorscheme ron")

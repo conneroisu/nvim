@@ -48,8 +48,21 @@ end, {
     desc = "Signature Help"
 })
 
+-- define function that calls nautilius on the current working directory or current file if the file does not start with oil
+function OpenCurrent()
+    local cwd = vim.fn.expand("%:p:h")
+    local file = vim.fn.expand("%:t")
+    -- ignore oil files and do cwd
+    -- oil:///run/media/conner/source/001Repos/cpre381-project-1
+    if string.match(cwd, "oil") then
+        vim.cmd("!nautilus " .. " . " .. "&")
+    else
+        vim.cmd("!nautilus " .. file .. "&")
+    end
+end
+-- 
 -- bind leader + g + p to open the git pull request in normal mode
-vim.keymap.set("n", "<C-e>", ":! nautilus " .. vim.fn.expand('%') .. "& <CR>", {
+vim.keymap.set("n", "<C-e>", ":lua OpenCurrent()<CR>", {
     desc = "Open the current working directory in the file explorer for windows"
 })
 
@@ -86,11 +99,6 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", {
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", {
     expr = true,
     silent = true
-})
-
--- set leader + c + f to quickfix with lsp in normal mode
-vim.api.nvim_set_keymap("n", "<leader>cf", "<cmd>Lspsaga code_action<CR>", {
-    desc = "Quickfix with LSP"
 })
 
 --[========[

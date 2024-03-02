@@ -1,9 +1,3 @@
---[============[
-   nvim comment
-   author: terrortylor
-   github-name: nvim-comment 
-   url: https://github.com/nvim-comment
---]============]
 return {
 	"terrortylor/nvim-comment",
 	config = function()

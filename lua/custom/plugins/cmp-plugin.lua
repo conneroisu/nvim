@@ -1,9 +1,3 @@
---[===[
-   CMP
-   description: Autocompletion plugin
-   author: hrsh7th
-   url: https://github.com/hrsh7th/nvim-cmp
---]===]
 return {
     "hrsh7th/nvim-cmp",
     version = false, -- last release is way too old
@@ -12,7 +6,7 @@ return {
         {
             "L3MON4D3/LuaSnip",
             -- follow latest release.
-            version = "v2.2.0", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+            version = "v2.2.0",
             -- install jsregexp (optional!).
             build = "make install_jsregexp"
         },
@@ -44,11 +38,11 @@ return {
                 ["<C-f>"] = cmp.mapping.scroll_docs(4),
                 ["<C-Space>"] = cmp.mapping.complete(),
                 ["<C-e>"] = cmp.mapping.abort(),
-                ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 ["<S-CR>"] = cmp.mapping.confirm({
                     behavior = cmp.ConfirmBehavior.Replace,
                     select = true,
-                }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                }),
             }),
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },

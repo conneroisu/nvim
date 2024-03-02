@@ -1,1 +1,4 @@
-return { "jbyuki/nabla.nvim", ft = { "markdown" } }
+return {
+    "jbyuki/nabla.nvim",
+    ft = { "markdown" }
+}

@@ -1,9 +1,3 @@
---[===========================[
-   one small step for vim kind
-   desc: Debug Adapter Protocol for Neovim
-   author: jbyuki
-   url: https://github.com/jbyuki/one=one-small-step-for-vimkind
---]===========================]
 return {
 	"jbyuki/one-small-step-for-vimkind",
 	-- stylua: ignore

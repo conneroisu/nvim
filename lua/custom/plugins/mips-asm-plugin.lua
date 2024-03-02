@@ -1,4 +1,3 @@
-
 return {
    "benknoble/vim-mips"
 }

@@ -1,19 +1,13 @@
---[===[
-   oil
-   desc: File Explorer in Buffer
-   author: Stevearc (https://github.com/stevearc)
-   url: https://github.com/stevearc/oil.nvim
---]===]
 return {
     "stevearc/oil.nvim",
-    -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = function()
         require("oil").setup({
             -- Id is automatically added at the beginning, and name at the end
             -- See :help oil-columns
-            columns = { "icon" -- "permissions"
-            , "size",         --"mtime",
+            columns = {
+                "icon",  -- "permissions"
+                "size",  -- "mtime",
             },
             -- Buffer-local options to use for oil buffers
             buf_options = {

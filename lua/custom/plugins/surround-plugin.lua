@@ -1,10 +1,3 @@
---[============[
-    minisurround
-    desc: Surround text with pairs of characters
-    author: echasnovski
-    url: https://github.com/echasnovski/mini.surround
-    tags: surround
---]============]
 
 return {
 	"echasnovski/mini.surround",

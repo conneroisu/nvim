@@ -1,9 +1,3 @@
---[=======[
-   neotest
-   desc: A test runner plugin for Neovim inspired by vim-test
-   author: nvim-neotest
-   url: https://github.com/nvim-neotest/neotest
---]=======]
 return {
 	"nvim-neotest/neotest",
 	dependencies = {

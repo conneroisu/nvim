@@ -1,9 +1,3 @@
---[=============[
-   better escape 
-   desc: Better Escape for Neovim (jk)
-   author: max397574 
-   url: https://github.com/max397574/better-escape.nvim
---]=============]
 return {
 	"max397574/better-escape.nvim",
 	config = function()

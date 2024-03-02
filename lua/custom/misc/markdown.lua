@@ -32,10 +32,11 @@ local function switch_to_tex()
 end
 
 
-keymap("n", "<leader>vms", function () switch_filetype = not switch_filetype end, { silent = true, remap = true, desc = "Toggle Nabla file type"})
-keymap("n", "<leader>vmv", switch_virtual_preview, { silent = true, remap = true, desc = "Toggle Nabla virtual preview"})
-keymap("n", "<leader>vmp", require("nabla").popup, { silent = true, remap = true, desc = "Nabla popup"})
-keymap("n", "<leader>vmt", ':TableModeRealign<CR>', { silent = true, remap = true, desc = "Realign table"})
+keymap("n", "<leader>vms", function() switch_filetype = not switch_filetype end,
+	{ silent = true, remap = true, desc = "Toggle Nabla file type" })
+keymap("n", "<leader>vmv", switch_virtual_preview, { silent = true, remap = true, desc = "Toggle Nabla virtual preview" })
+keymap("n", "<leader>vmp", require("nabla").popup, { silent = true, remap = true, desc = "Nabla popup" })
+keymap("n", "<leader>vmt", ':TableModeRealign<CR>', { silent = true, remap = true, desc = "Realign table" })
 
 
 vim.g.table_mode_always_active = true
