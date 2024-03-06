@@ -44,5 +44,10 @@ return {
       custom_dynamic_variables = {},
       yank_dry_run = true,
     })
+
+    -- map leader + r + h to run the current http request in normal mode
+    vim.keymap.set("n", "<leader>rh", ":lua require('rest-nvim').run()<CR>", {
+      desc = "No Operation on Space"
+    })
   end
 }

@@ -6,8 +6,10 @@ return {
             -- Id is automatically added at the beginning, and name at the end
             -- See :help oil-columns
             columns = {
-                "icon",  -- "permissions"
-                "size",  -- "mtime",
+                "icon",
+                -- "permissions"
+                -- "size",
+                -- -- "mtime",
             },
             -- Buffer-local options to use for oil buffers
             buf_options = {
@@ -64,4 +66,19 @@ return {
             use_default_keymaps = true,
         })
     end,
+    config = function()
+        -- bind leader + m to open oil file explorer in normal mode
+        vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", {
+            noremap = true,
+            silent = true,
+            desc = "Open Oil File Explorer"
+        })
+
+        -- bind leader + m to open oil file explorer in normal mode
+        vim.api.nvim_set_keymap("n", "<leader>M", ":Oil .<CR>", {
+            noremap = true,
+            silent = true,
+            desc = "Open Oil File Explorer"
+        })
+    end
 }

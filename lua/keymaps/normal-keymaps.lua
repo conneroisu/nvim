@@ -6,25 +6,7 @@
 --[========[
    git
 --]========]
--- map leader + h + i to open the github issues in normal mode
-vim.keymap.set("n", "<leader>hi", ":Octo issue list<CR>", {
-    desc = "Open Github Issues"
-})
 
--- bind leader + g + h to open the Octo github issue list in normal mode
-vim.api.nvim_set_keymap("n", "<leader>gh", "<cmd>:Octo issues<CR>", {
-    desc = "Open the Octo issue list"
-})
-
--- bind leader + h + u to open Git from fugitive in normal mode
-vim.api.nvim_set_keymap("n", "<leader>hu", "<cmd>Git<cr>", {
-    desc = "Git"
-})
-
--- map leader + r + h to run the current http request in normal mode
-vim.keymap.set("n", "<leader>rh", ":lua require('rest-nvim').run()<CR>", {
-    desc = "No Operation on Space"
-})
 
 -- map space to no operation
 vim.keymap.set("n", "<Space>", "<Nop>", {
@@ -36,19 +18,8 @@ vim.keymap.set("n", "J", "mzJ`z", {
     desc = "Join lines"
 })
 
-vim.keymap.set("n", "<F2>", function()
-    vim.lsp.buf.rename()
-end, {
-    desc = "Rename"
-})
 
-vim.keymap.set("i", "<C-h>", function()
-    vim.lsp.buf.signature_help()
-end, {
-    desc = "Signature Help"
-})
-
--- define function that calls nautilius on the current working directory or current file if the file does not start with oil
+--- Bind leader + g + p to open the current working directory in the file explorer in normal mode
 function OpenCurrent()
     local cwd = vim.fn.expand("%:p:h")
     local file = vim.fn.expand("%:t")
@@ -61,8 +32,7 @@ function OpenCurrent()
     end
 end
 
---
--- bind leader + g + p to open the git pull request in normal mode
+-- bind leader + g + p to open the current working directory in the file explorer in normal mode
 vim.keymap.set("n", "<C-e>", ":lua OpenCurrent()<CR>", {
     desc = "Open the current working directory in the file explorer for windows"
 })
@@ -76,18 +46,6 @@ vim.api.nvim_set_keymap("n", "<A-j>", "<cmd>m .+1<cr>==", {
 vim.keymap.set("n", "K", "<CMD>lua _G.show_docs()<CR>", {
     silent = true,
     desc = "Show Documentation for item under cursor"
-})
-
--- bind Control + o to open recent files in normal mode
-vim.api.nvim_set_keymap("n", "<C-o>", ":Telescope oldfiles<CR>", {
-    noremap = true,
-    silent = true,
-    desc = "Open Recent Files"
-})
-
--- bind the leader + u + n to dismiss all notifications in normal mode
-vim.api.nvim_set_keymap("n", "<leader>un", "<cmd>lua require('notify').dismiss({silent = true, pending = true})<cr>", {
-    desc = "Dismiss all Notifications"
 })
 
 -- Remap for dealing with word wrap
@@ -110,34 +68,6 @@ vim.api.nvim_set_keymap("n", "<leader>co", "<cmd>CommentToggle<cr>", {
     desc = "Comment Toggle"
 })
 
---[=======[
-   Trouble
---]=======]
--- map leader + x + x to toggle the document diagnostics from trouble in normal mode
-vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", {
-    desc = "Document Diagnostics (Trouble)"
-})
-
--- map leader + x + X to toggle the workspace diagnostics from trouble in normal mode
-vim.api.nvim_set_keymap("n", "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", {
-    desc = "Workspace Diagnostics (Trouble)"
-})
-
--- bind leader + x + L to toggle the loclist from trouble in normal mode
-vim.api.nvim_set_keymap("n", "<leader>xL", "<cmd>TroubleToggle loclist<cr>", {
-    desc = "Location List (Trouble)"
-})
-
--- bind leader + x + Q to toggle the quickfix list from trouble in normal mode
-vim.api.nvim_set_keymap("n", "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", {
-    desc = "Quickfix List (Trouble)"
-})
-
--- bind leader + a + g to generate a github commit message from the git diff in normal mode
-vim.api.nvim_set_keymap("n", "<leader>ag", ":NeoAIShortcut gitcommit<CR>", {
-    desc = "Generate a git diff commit message."
-})
-
 -- bind leader + u + u to toggle the undo tree view in normal mode
 vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle, {
     desc = "Open Undo Tree"
@@ -146,12 +76,6 @@ vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle, {
 -- bind leader + g + p to open telescope projects in normal mode
 vim.api.nvim_set_keymap("n", "<leader>gp", ":Telescope projects<CR>", {
     desc = "Open Telesope projects "
-})
--- bind leader + m to open oil file explorer in normal mode
-vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", {
-    noremap = true,
-    silent = true,
-    desc = "Open Oil File Explorer"
 })
 -- bind leader + e to open the init.lua file in normal mode
 vim.api.nvim_set_keymap("n", "<leader>e", ":e $MYVIMRC<CR>", {
@@ -269,12 +193,6 @@ vim.api.nvim_set_keymap("n", "<S-l>", "$", {
     desc = "Move cursor to the end of the line"
 })
 
--- bind leader + m to open oil file explorer in normal mode
-vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", {
-    noremap = true,
-    silent = true,
-    desc = "Open Oil File Explorer"
-})
 
 -- lazy
 vim.api.nvim_set_keymap("n", "<leader>L", "<cmd>:Lazy<cr>", {
@@ -283,16 +201,6 @@ vim.api.nvim_set_keymap("n", "<leader>L", "<cmd>:Lazy<cr>", {
 
 vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle, {
     desc = "Open Undo Tree"
-})
-
--- bind <leader> + x + w to open workspace diagnostics
-vim.api.nvim_set_keymap("n", "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", {
-    desc = "Workspace Diagnostics (Trouble)"
-})
-
--- map telescope live_grep to leader + l + g
-vim.keymap.set("n", "<leader>lg", ":Telescope live_grep<CR>", {
-    desc = "Open Telescope Live Grep"
 })
 
 -- bind <leader> + x + x to open document diagnostics in normal mode
@@ -338,43 +246,6 @@ vim.api.nvim_set_keymap("n", "<A-S-f>", ":Format<CR>", {
     desc = "Format"
 })
 
-vim.keymap.set("x", "<leader>re", ":Refactor extract ")
-vim.keymap.set("x", "<leader>rf", ":Refactor extract_to_file ")
-
-vim.keymap.set("x", "<leader>rv", ":Refactor extract_var ")
-
-vim.keymap.set({ "n", "x" }, "<leader>ri", ":Refactor inline_var")
-
-vim.keymap.set("n", "<leader>rI", ":Refactor inline_func")
-
-vim.keymap.set("n", "<leader>rb", ":Refactor extract_block")
-vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
-vim.keymap.set("x", "<leader>re", function()
-    require('refactoring').refactor('Extract Function')
-end)
-vim.keymap.set("x", "<leader>rf", function()
-    require('refactoring').refactor('Extract Function To File')
-end)
--- Extract function supports only visual mode
-vim.keymap.set("x", "<leader>rv", function()
-    require('refactoring').refactor('Extract Variable')
-end)
--- Extract variable supports only visual mode
-vim.keymap.set("n", "<leader>rI", function()
-    require('refactoring').refactor('Inline Function')
-end)
--- Inline func supports only normal
-vim.keymap.set({ "n", "x" }, "<leader>ri", function()
-    require('refactoring').refactor('Inline Variable')
-end)
--- Inline var supports both normal and visual mode
-
-vim.keymap.set("n", "<leader>rb", function()
-    require('refactoring').refactor('Extract Block')
-end)
-vim.keymap.set("n", "<leader>rbf", function()
-    require('refactoring').refactor('Extract Block To File')
-end)
 -- Extract block supports only normal mode
 vim.cmd("let g:VM_maps['Select Cursor Down'] = '<M-S-Down>'")
 vim.cmd("let g:VM_maps['Select Cursor Up'] = '<M-S-Up>'")
@@ -421,11 +292,6 @@ vim.api.nvim_set_keymap("n", "]b", "<cmd>bnext<cr>", {
     desc = "Next buffer"
 })
 
--- bind leader + x + L to open location list from trouble in normal mode
-vim.api.nvim_set_keymap("n", "<leader>xL", "<cmd>TroubleToggle loclist<cr>", {
-    desc = "Location List (Trouble)"
-})
-
 --[=======[
    Neotest
 --]=======]
@@ -456,10 +322,6 @@ Open_nvc = function()
     vim.cmd(
         ":!nvc -a " .. vim.fn.expand('%:p') .. " -e " .. vim.fn.expand('%:t:r') .. " -r " .. vim.fn.expand('%:t:r') ..
         " --format=fst -w && gtkwave " .. vim.fn.expand('%:t:r') .. ".fst")
-
-    -- -- wait for the command to finish 10ms
-    -- sleep(1)
-    -- vim.cmd(":!gtkwave " .. vim.fn.expand('%:t:r') .. ".fst")
 end
 
 -- map leader + v + n to run the current file with nvc
@@ -491,8 +353,3 @@ vim.api.nvim_set_keymap("n", "<leader>cr", "<cmd>Copilot restart <CR>", {
     desc = "Restart Copilot"
 })
 
-local opts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap("n", "<Leader>nc", ":lua require('neogen').generate({ type = 'class' })<CR>", opts)
-vim.api.nvim_set_keymap("n", "<Leader>nf", ":lua require('neogen').generate({ type = 'func' })<CR>", opts)
-vim.api.nvim_set_keymap("n", "<Leader>nF", ":lua require('neogen').generate({ type = 'file' })<CR>", opts)
-vim.api.nvim_set_keymap("n", "<Leader>nt", ":lua require('neogen').generate({ type = 'type' })<CR>", opts)

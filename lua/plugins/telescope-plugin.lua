@@ -41,5 +41,18 @@ return {
                 require('telescope').load_extension('media_files')
             end,
         }
-    }
+    },
+    config = function()
+        -- bind Control + o to open recent files in normal mode
+        vim.api.nvim_set_keymap("n", "<C-o>", ":Telescope oldfiles<CR>", {
+            noremap = true,
+            silent = true,
+            desc = "Open Recent Files"
+        })
+
+        -- map telescope live_grep to leader + l + g
+        vim.keymap.set("n", "<leader>lg", ":Telescope live_grep<CR>", {
+            desc = "Open Telescope Live Grep"
+        })
+    end
 }
