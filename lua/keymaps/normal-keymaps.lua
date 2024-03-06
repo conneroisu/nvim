@@ -6,7 +6,7 @@
 --[========[
    git
 --]========]
-         -- map leader + h + i to open the github issues in normal mode
+-- map leader + h + i to open the github issues in normal mode
 vim.keymap.set("n", "<leader>hi", ":Octo issue list<CR>", {
     desc = "Open Github Issues"
 })
@@ -60,7 +60,8 @@ function OpenCurrent()
         vim.cmd("!nautilus " .. file .. "&")
     end
 end
--- 
+
+--
 -- bind leader + g + p to open the git pull request in normal mode
 vim.keymap.set("n", "<C-e>", ":lua OpenCurrent()<CR>", {
     desc = "Open the current working directory in the file explorer for windows"
@@ -448,7 +449,7 @@ end
    VHDL
 --]=======]
 Compile_And_Link = function()
-    vim.cmd(":!nvc -a " .. vim.fn.expand('%:p') .. " -e " .. vim.fn.expand('%:t:r') .. " -r " .. vim.fn.expand('%:t:r') )
+    vim.cmd(":!nvc -a " .. vim.fn.expand('%:p') .. " -e " .. vim.fn.expand('%:t:r') .. " -r " .. vim.fn.expand('%:t:r'))
 end
 
 Open_nvc = function()
@@ -495,4 +496,3 @@ vim.api.nvim_set_keymap("n", "<Leader>nc", ":lua require('neogen').generate({ ty
 vim.api.nvim_set_keymap("n", "<Leader>nf", ":lua require('neogen').generate({ type = 'func' })<CR>", opts)
 vim.api.nvim_set_keymap("n", "<Leader>nF", ":lua require('neogen').generate({ type = 'file' })<CR>", opts)
 vim.api.nvim_set_keymap("n", "<Leader>nt", ":lua require('neogen').generate({ type = 'type' })<CR>", opts)
-
