@@ -1,4 +1,4 @@
-require("custom.keymaps.visual-keymaps")
-require("custom.keymaps.insert-keymaps")
-require("custom.keymaps.normal-keymaps")
-require("custom.keymaps.misc-keymaps")
+require("keymaps.visual-keymaps")
+require("keymaps.insert-keymaps")
+require("keymaps.normal-keymaps")
+require("keymaps.misc-keymaps")

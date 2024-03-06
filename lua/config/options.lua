@@ -45,9 +45,9 @@ vim.o.relativenumber = true
 
 vim.o.termguicolors = true
 
--- disable netrw in favor of Oil
-vim.o.loaded_netrw = 0
-vim.o.loaded_netrwPlugin = 0
+-- -- disable netrw in favor of Oil
+-- vim.o.loaded_netrw = 0
+-- vim.o.loaded_netrwPlugin = 0
 
 
 -- set termguicolors to true
@@ -71,7 +71,7 @@ vim.g.NERDDefaultAlign = "left"
 -- Set a language to use its alternate delimiters by default
 vim.g.NERDAltDelims_java = 1
 
--- Add your own custom formats or override the defaults
+-- Add your own formats or override the defaults
 vim.g.NERDCustomDelimiters = { c = { left = "/**", right = "*/" } }
 
 -- Allow commenting and inverting empty lines (useful when commenting a region)

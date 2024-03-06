@@ -6,7 +6,7 @@
 --[========[
    git
 --]========]
-             -- map leader + h + i to open the github issues in normal mode
+         -- map leader + h + i to open the github issues in normal mode
 vim.keymap.set("n", "<leader>hi", ":Octo issue list<CR>", {
     desc = "Open Github Issues"
 })
@@ -489,3 +489,10 @@ vim.api.nvim_set_keymap("n", "<leader>cr", "<cmd>Copilot restart <CR>", {
     silent = true,
     desc = "Restart Copilot"
 })
+
+local opts = { noremap = true, silent = true }
+vim.api.nvim_set_keymap("n", "<Leader>nc", ":lua require('neogen').generate({ type = 'class' })<CR>", opts)
+vim.api.nvim_set_keymap("n", "<Leader>nf", ":lua require('neogen').generate({ type = 'func' })<CR>", opts)
+vim.api.nvim_set_keymap("n", "<Leader>nF", ":lua require('neogen').generate({ type = 'file' })<CR>", opts)
+vim.api.nvim_set_keymap("n", "<Leader>nt", ":lua require('neogen').generate({ type = 'type' })<CR>", opts)
+
