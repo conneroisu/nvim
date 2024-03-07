@@ -1,3 +1,29 @@
 ================================================================================
 INTRODUCTION                                                  *conneroisu.nvim*
 
+conneroisu.nvim is a Neovim configuration written in Lua. It is designed to be
+a minimal, yet powerful configuration that is easy to understand and extend.
+
+Multiple programming languages are supported: 
+- C/C++
+- Python
+- JavaScript
+- TypeScript
+- HTML
+- CSS
+- Lua
+- Rust
+- Go
+- Java
+- PHP
+- Ruby
+- Shell
+- Vimscript
+- Markdown
+- JSON
+- YAML
+- TOML
+- Dockerfile
+- SQL
+- XML
+
