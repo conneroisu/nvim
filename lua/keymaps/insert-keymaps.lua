@@ -9,6 +9,7 @@ vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", {
 vim.api.nvim_set_keymap("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", {
     desc = "Move down"
 })
+
 -- bind move line up to Alt + k in insert mode
 vim.api.nvim_set_keymap("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", {
     desc = "Move up"

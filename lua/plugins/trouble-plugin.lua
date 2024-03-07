@@ -65,5 +65,14 @@ return {
 		vim.api.nvim_set_keymap("n", "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", {
 			desc = "Quickfix List (Trouble)"
 		})
+
+		-- bind <leader> + x + x to open document diagnostics in normal mode
+		vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", {
+			desc = "Document Diagnostics (Trouble)"
+		})
+		-- bind leader + x + Q to open quickfix list from trouble in normal mode
+		vim.api.nvim_set_keymap("n", "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", {
+			desc = "Quickfix List (Trouble)"
+		})
 	end,
 }

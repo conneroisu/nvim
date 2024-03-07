@@ -1,3 +1,7 @@
+---@module keymaps.misc-keymaps
+---@author Conner Ohnesorge
+---@license MIT
+
 
 vim.api.nvim_set_keymap("x", "n", "'Nn'[v:searchforward]", {
     expr = true,

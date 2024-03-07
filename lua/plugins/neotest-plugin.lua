@@ -79,6 +79,11 @@ return {
 		end
 
 		require("neotest").setup(opts)
+
+		vim.api.nvim_set_keymap("n", "<leader>td", ":lua require('neotest').run.run({strategy = 'dap'})<CR>", {
+			noremap = true,
+			silent = true
+		})
 	end,
 	-- stylua: ignore
 	keys = {
