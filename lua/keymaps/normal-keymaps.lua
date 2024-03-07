@@ -1,3 +1,7 @@
+---@module "normal-keymaps"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 --[===================[
    Normal Mode Keymaps
    normal-keymaps.lua

@@ -1,3 +1,7 @@
+---@module "insert-keymaps"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 -- bind Ctrl + Space to view options from cmp in insert mode
 vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", {
     noremap = true,

@@ -1,3 +1,7 @@
+---@module "lsp-config"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 require("nvim-treesitter.install").compilers = { "gcc", "clang", "clang++", "g++" }
 
 -- [[ Configure Treesitter ]]

@@ -4,7 +4,7 @@
 
 Conner Ohnesorge's Private Neovim Configuration.
 
-Languages:
+Languages setup for:
 - Lua
 - Vimscript
 - Python
@@ -24,7 +24,15 @@ Languages:
 - Go
 - Ocaml
 - Templ
--
+- Dockerfile
+- SQL
+- PHP
+- Ruby
+- Swift
+- Haskell
+- Elixir
+- R
+- Lua
 
 
 

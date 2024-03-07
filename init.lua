@@ -1,3 +1,7 @@
+---@module "init"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 --  (otherwise wrong leader will be used)
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = " "
@@ -81,6 +85,8 @@ local servers = {
 	gopls = {},
 	-- pyright = {},
 	-- rust_analyzer = {},
+	r_language_server = {},
+	htmx = {},
 	svelte = {},
 	tsserver = {},
 	ltex = {},

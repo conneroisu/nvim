@@ -1,3 +1,7 @@
+---@module "visual-keymaps"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 
 vim.keymap.set( 'v' , '<Space>', '<Nop>', {
     silent = true

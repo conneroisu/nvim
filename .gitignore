@@ -3,3 +3,4 @@ test.sh
 .luarc.json
 nvim
 lazy-lock.json
+ltex.dictionary.en-US.txt

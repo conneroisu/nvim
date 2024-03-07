@@ -1,3 +1,7 @@
+---@module "options"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 --[=======[
    Options
    desc: main configuration file for options of vim for personal configuration of neovim written in lua.

@@ -1,3 +1,7 @@
+---@module "markdown"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 local keymap = vim.keymap.set
 local current_nabla_virtual = false
 local switch_filetype = false
