@@ -1,3 +1,7 @@
+---@module "luasnip-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
     "L3MON4D3/LuaSnip",
     -- follow latest release.

@@ -1,3 +1,7 @@
+---@module "nerd-commenter-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
 	"preservim/nerdcommenter",
 

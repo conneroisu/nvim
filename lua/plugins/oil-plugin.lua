@@ -1,3 +1,7 @@
+---@module "oil-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },

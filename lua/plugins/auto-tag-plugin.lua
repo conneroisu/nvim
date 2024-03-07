@@ -1,3 +1,7 @@
+---@module "auto-tag-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
 	"windwp/nvim-ts-autotag",
 	config = function()

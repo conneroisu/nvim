@@ -1,4 +1,4 @@
----@module keymaps.misc-keymaps
+---@module "misc-keymaps"
 ---@author Conner Ohnesorge
 ---@license MIT
 

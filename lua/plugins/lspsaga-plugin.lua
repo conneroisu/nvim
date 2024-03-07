@@ -1,3 +1,7 @@
+---@module "lspsaga-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
     'nvimdev/lspsaga.nvim',
     config = function()

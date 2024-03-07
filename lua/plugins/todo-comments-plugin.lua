@@ -1,3 +1,7 @@
+---@module "todo-comments-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 
 return {
 	"folke/todo-comments.nvim",

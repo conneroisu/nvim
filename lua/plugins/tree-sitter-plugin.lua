@@ -1,3 +1,7 @@
+---@module "tree-sitter-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
     "nvim-treesitter/nvim-treesitter",
     version = false,

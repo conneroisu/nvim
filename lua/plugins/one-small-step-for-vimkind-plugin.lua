@@ -1,3 +1,7 @@
+---@module "one-small-step-for-vimkind-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
 	"jbyuki/one-small-step-for-vimkind",
 	-- stylua: ignore

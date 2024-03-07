@@ -1,3 +1,7 @@
+---@module "omnisharp-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
 	'OmniSharp/omnisharp-vim',
 	dependencies = {

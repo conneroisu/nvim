@@ -1,3 +1,7 @@
+---@module "dap-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
     "mfussenegger/nvim-dap",
     {

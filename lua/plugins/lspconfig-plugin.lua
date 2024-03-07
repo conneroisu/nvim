@@ -1,3 +1,7 @@
+---@module "lspconfig-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',

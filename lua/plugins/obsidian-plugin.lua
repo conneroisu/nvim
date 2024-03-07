@@ -1,3 +1,7 @@
+---@module "obsidian-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
   "epwalsh/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit

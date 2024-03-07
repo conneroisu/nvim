@@ -1,3 +1,7 @@
+---@module "telescope-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',

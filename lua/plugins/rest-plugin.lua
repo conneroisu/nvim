@@ -1,3 +1,7 @@
+---@module "rest-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
   "rest-nvim/rest.nvim",
   dependencies = { { "nvim-lua/plenary.nvim" } },

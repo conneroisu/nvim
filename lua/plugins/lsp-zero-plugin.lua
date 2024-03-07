@@ -1,3 +1,7 @@
+---@module "lsp-zero-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
     "VonHeikemen/lsp-zero.nvim",
     dependencies = { "neovim/nvim-lspconfig" },

@@ -1,3 +1,7 @@
+---@module "octo-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
   'pwntester/octo.nvim',
   dependencies = {

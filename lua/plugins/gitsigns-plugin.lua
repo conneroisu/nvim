@@ -1,3 +1,7 @@
+---@module "gitsigns-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
    "lewis6991/gitsigns.nvim",
    config = function()

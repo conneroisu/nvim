@@ -1,3 +1,7 @@
+---@module "surround-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 
 return {
 	"echasnovski/mini.surround",

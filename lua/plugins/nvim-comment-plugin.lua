@@ -1,3 +1,7 @@
+---@module "nvim-comment-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
 	"terrortylor/nvim-comment",
 	config = function()

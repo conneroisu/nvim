@@ -1,3 +1,7 @@
+---@module "cmp-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
     "hrsh7th/nvim-cmp",
     version = false, -- last release is way too old

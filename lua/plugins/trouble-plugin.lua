@@ -1,3 +1,7 @@
+---@module "trouble-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
 	"folke/trouble.nvim",
 	cmd = { "TroubleToggle", "Trouble" },

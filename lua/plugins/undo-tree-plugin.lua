@@ -1,3 +1,7 @@
+---@module "undo-tree-plugin"
+---@author Conner Ohnesorge
+---@license WTFPL
+
 return {
 	"mbbill/undotree",
 	config = function()
