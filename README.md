@@ -33,6 +33,7 @@ Languages setup for:
 - Elixir
 - R
 - Lua
+- C#
 
 
 

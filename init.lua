@@ -165,8 +165,6 @@ if not lspconfig.ghdl_ls then
 		},
 	}
 end
-require("lspconfig").jedi_language_server.setup {}
-require("lspconfig").pyright.setup { capabilities = capabilities }
 vim.keymap.set("n", "<leader>fi", builtin.find_files, { desc = "Find Files" })
 vim.cmd "set rtp^='/home/conner/.opam/default/share/ocp-indent/vim'"
 
@@ -230,4 +228,39 @@ vim.g.neomake_vhdl_vhdltool_maker = {
 	args = { "server" },
 	errorformat = "%f:%l:%c: %m",
 	on_output = "echo",
+}
+function STARTVHDLLS()
+	vim.lsp.start({
+		name = 'vhdl_ls',
+		cmd = { 'vhdl_ls' },
+	})
+end
+
+vim.api.nvim_set_keymap('n', '<F5>', ':lua STARTVHDLLS()<CR>', { noremap = true, silent = true })
+
+if not lspconfig.rust_hdl then
+	require 'lspconfig/configs'.rust_hdl = {
+		default_config = {
+			cmd = { "vhdl_ls" },
+			filetypes = { "vhdl" },
+			root_dir = function(fname)
+				return lspconfig.util.root_pattern('vhdl_ls.toml')(fname)
+			end,
+			settings = {},
+		},
+	}
+end
+
+lspconfig.pyright.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+lspconfig.jedi_language_server.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+lspconfig.pylsp.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
 }
