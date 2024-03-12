@@ -83,20 +83,16 @@ end
 --  define the property "filetypes" to the map in question, to override the default filetypes of a server.
 local servers = {
 	gopls = {},
-	-- pyright = {},
-	-- rust_analyzer = {},
-	r_language_server = {},
 	htmx = {},
+	rust_hdl = {},
 	svelte = {},
 	tsserver = {},
 	ltex = {},
 	texlab = {},
-
 	dockerls = {},
 	html = {
 		filetypes = { "html", "twig", "hbs" },
 	},
-
 	lua_ls = {
 		Lua = {
 			workspace = {
@@ -169,6 +165,7 @@ vim.keymap.set("n", "<leader>fi", builtin.find_files, { desc = "Find Files" })
 vim.cmd "set rtp^='/home/conner/.opam/default/share/ocp-indent/vim'"
 
 require "misc.markdown"
+
 -- Register the language
 vim.filetype.add {
 	extension = {
@@ -229,27 +226,16 @@ vim.g.neomake_vhdl_vhdltool_maker = {
 	errorformat = "%f:%l:%c: %m",
 	on_output = "echo",
 }
-function STARTVHDLLS()
-	vim.lsp.start({
-		name = 'vhdl_ls',
-		cmd = { 'vhdl_ls' },
-	})
-end
 
-vim.api.nvim_set_keymap('n', '<F5>', ':lua STARTVHDLLS()<CR>', { noremap = true, silent = true })
-
-if not lspconfig.rust_hdl then
-	require 'lspconfig/configs'.rust_hdl = {
-		default_config = {
-			cmd = { "vhdl_ls" },
-			filetypes = { "vhdl" },
-			root_dir = function(fname)
-				return lspconfig.util.root_pattern('vhdl_ls.toml')(fname)
-			end,
-			settings = {},
-		},
-	}
-end
+lspconfig.rust_hdl = {
+	default_config = {
+		cmd = { vim.lsp.start({ name = 'vhdl_ls', cmd = { 'vhdl_ls' }, }) },
+		filetypes = { "vhdl" },
+		settings = {},
+		on_attach = on_attach,
+		capabilities = capabilities,
+	},
+}
 
 lspconfig.pyright.setup {
 	on_attach = on_attach,
