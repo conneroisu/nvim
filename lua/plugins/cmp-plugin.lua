@@ -53,6 +53,7 @@ return {
                 { name = 'luasnip' },
                 { name = 'buffer' },
                 { name = 'path' },
+                { name = "otter" },
             }),
             experimental = {
                 ghost_text = {

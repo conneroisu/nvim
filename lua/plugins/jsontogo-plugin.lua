@@ -1,0 +1,3 @@
+return {
+    'meain/vim-jsontogo'
+}

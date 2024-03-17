@@ -184,3 +184,10 @@ vim.api.nvim_set_keymap("n", "<leader>cr", "<cmd>Copilot restart <CR>", {
     silent = true,
     desc = "Restart Copilot"
 })
+
+-- set leader + g + t to run go tests when in a go file
+vim.api.nvim_set_keymap("n", "<leader>gt", ":GoTest<CR>", {
+    noremap = true,
+    silent = true,
+    desc = "Run Go Tests"
+})

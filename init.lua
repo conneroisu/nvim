@@ -1,4 +1,4 @@
----@module "init"
+--@module "init"
 ---@author Conner Ohnesorge
 ---@license WTFPL
 
@@ -40,8 +40,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = "*",
 })
 
---  Function that gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+--- This function sets up the keymaps for the LSP, and also sets up the LSP specific commands.
+local on_attach = function(it, bufnr)
 	-- Function that lets us more easily define mappings specific for LSP related items. It sets the mode, buffer and description for us each time.
 	local nmap = function(keys, func, desc)
 		if desc then
@@ -84,7 +84,6 @@ end
 local servers = {
 	gopls = {},
 	htmx = {},
-	rust_hdl = {},
 	svelte = {},
 	tsserver = {},
 	ltex = {},
@@ -104,7 +103,7 @@ local servers = {
 		},
 	},
 	hdl_checker = {
-		filetypes = { "vhdl", "verilog", "systemverilog", "vhd" },
+		filetypes = { "vhdl", "verilog", "systemverilog" },
 		cmd = { "hdl_checker", "--lsp" },
 	},
 }
@@ -210,14 +209,17 @@ require("lspconfig").tailwindcss.setup {
 
 local lsp = require "lspconfig"
 
-require("lspconfig").jedi_language_server.setup {}
 vim.tbl_deep_extend("keep", lsp, {
 	lsp_name = {
 		cmd = { "vhdl-tool server" },
 		filetypes = { "vhdl", "vhd", "verilog", "systemverilog" },
 		name = "vhdl-tool",
+		capabilities = capabilities,
+		on_attach = on_attach,
+		autostart = true,
 	},
 })
+
 
 vim.g.neomake_vhdl_enabled_makers = "vhdltool"
 vim.g.neomake_vhdl_vhdltool_maker = {
@@ -225,16 +227,28 @@ vim.g.neomake_vhdl_vhdltool_maker = {
 	args = { "server" },
 	errorformat = "%f:%l:%c: %m",
 	on_output = "echo",
+	filetypes = { "vhdl", "vhd", "verilog", "systemverilog" },
 }
 
-lspconfig.rust_hdl = {
+local util = require "lspconfig/util"
+lspconfig.vhdl_ls.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	auto_start = true,
+	filetypes = { "vhdl", "vhd", "verilog", "systemverilog" },
 	default_config = {
-		cmd = { vim.lsp.start({ name = 'vhdl_ls', cmd = { 'vhdl_ls' }, }) },
-		filetypes = { "vhdl" },
-		settings = {},
-		on_attach = on_attach,
+		filetypes = { "vhdl", "vhd", "verilog", "systemverilog" },
 		capabilities = capabilities,
-	},
+		on_attach = on_attach,
+		root_dir = function(fname)
+			return util.root_pattern('vhdl_ls.toml')(fname)
+		end,
+	}
+}
+
+lspconfig.pylsp.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
 }
 
 lspconfig.pyright.setup {
@@ -242,12 +256,12 @@ lspconfig.pyright.setup {
 	capabilities = capabilities,
 }
 
-lspconfig.jedi_language_server.setup {
-	on_attach = on_attach,
+lspconfig.ruff_lsp.setup {
+	init_options = {
+		settings = {
+			args = {},
+		}
+	},
 	capabilities = capabilities,
-}
-
-lspconfig.pylsp.setup {
 	on_attach = on_attach,
-	capabilities = capabilities,
 }
