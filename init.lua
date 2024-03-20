@@ -207,29 +207,6 @@ require("lspconfig").tailwindcss.setup {
 	capabilities = capabilities,
 }
 
-local lsp = require "lspconfig"
-
-vim.tbl_deep_extend("keep", lsp, {
-	lsp_name = {
-		cmd = { "vhdl-tool server" },
-		filetypes = { "vhdl", "vhd", "verilog", "systemverilog" },
-		name = "vhdl-tool",
-		capabilities = capabilities,
-		on_attach = on_attach,
-		autostart = true,
-	},
-})
-
-
-vim.g.neomake_vhdl_enabled_makers = "vhdltool"
-vim.g.neomake_vhdl_vhdltool_maker = {
-	exe = "vhdl-tool",
-	args = { "server" },
-	errorformat = "%f:%l:%c: %m",
-	on_output = "echo",
-	filetypes = { "vhdl", "vhd", "verilog", "systemverilog" },
-}
-
 local util = require "lspconfig/util"
 lspconfig.vhdl_ls.setup {
 	on_attach = on_attach,
@@ -246,22 +223,25 @@ lspconfig.vhdl_ls.setup {
 	}
 }
 
-lspconfig.pylsp.setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
+require('lspconfig').sqls.setup {
+	on_attach = function(client, bufnr)
+		require('sqls').on_attach(client, bufnr)
+	end
 }
 
-lspconfig.pyright.setup {
+vim.lsp.set_log_level("debug")
+local client = vim.lsp.start_client({
+	name = "pytrance",
+	cmd = { "/run/media/conner/source/001Repos/pytrance/main" },
 	on_attach = on_attach,
-	capabilities = capabilities,
-}
-
-lspconfig.ruff_lsp.setup {
-	init_options = {
-		settings = {
-			args = {},
-		}
-	},
-	capabilities = capabilities,
-	on_attach = on_attach,
-}
+})
+if not client then
+	print("Failed to start pytrance")
+	return
+end
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		vim.lsp.buf_attach_client(0, client)
+	end,
+})

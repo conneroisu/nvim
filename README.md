@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Conner Ohnesorge's Private Neovim Configuration.
+Conner Ohnesorge's Personal Neovim Configuration.
 
 Languages setup for:
 - Lua
@@ -21,16 +21,12 @@ Languages setup for:
 - C/C++
 - Java
 - Kotlin
-- Go
+- Golang
 - Ocaml
 - Templ
 - Dockerfile
 - SQL
 - PHP
-- Ruby
-- Swift
-- Haskell
-- Elixir
 - R
 - Lua
 - C#

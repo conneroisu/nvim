@@ -8,7 +8,8 @@ return {
 		"nvim-neotest/neotest-go",
 		{
 			"nvim-neotest/neotest-python",
-		}
+		},
+		{ "nvim-neotest/nvim-nio" }
 	},
 	opts = {
 		-- Can be a list of adapters like what neotest expects,
