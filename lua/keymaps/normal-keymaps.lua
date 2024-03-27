@@ -53,7 +53,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", {
 })
 
 -- bind leader + e to open the init.lua file in normal mode
-vim.api.nvim_set_keymap("n", "<leader>e", ":e $MYVIMRC<CR>", {
+vim.api.nvim_set_keymap("n", "<leader>ee", ":e $MYVIMRC<CR>", {
     noremap = true,
     silent = true,
     desc = "Open init.lua"
@@ -141,7 +141,7 @@ vim.api.nvim_set_keymap("n", "<leader>ll", ":LspRestart<CR>", {
    VHDL
 --]=======]
 Compile_And_Link = function()
-    vim.cmd(":!nvc -a " .. vim.fn.expand('%:p') .. " -e " .. vim.fn.expand('%:t:r') .. " -r " .. vim.fn.expand('%:t:r'))
+    vim.cmd(":!nvc --std=2008 -a " .. vim.fn.expand('%:p') .. " -e " .. vim.fn.expand('%:t:r') .. " -r " .. vim.fn.expand('%:t:r'))
 end
 
 Open_nvc = function()

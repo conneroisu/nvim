@@ -46,7 +46,8 @@ vim.o.completeopt = 'menuone,noselect'
 -- set hybrid line numbers
 vim.o.number = true
 vim.o.relativenumber = true
-
+-- set the color column to 80
+-- vim.o.colorcolumn = "80"
 vim.o.termguicolors = true
 
 -- -- disable netrw in favor of Oil
@@ -157,4 +158,4 @@ vim.g.python3_host_prog = "/usr/bin/python"
 vim.g.python_host_prog = "/usr/bin/python"
 
 -- Set the `colorscheme` to ron
-vim.cmd("colorscheme ron")
+-- vim.cmd("colorscheme ron")

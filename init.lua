@@ -8,7 +8,14 @@ vim.g.maplocalleader = " "
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system { "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath }
+	vim.fn.system {
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable",
+		lazypath
+	}
 end
 
 vim.opt.rtp:prepend(lazypath)
@@ -30,7 +37,10 @@ require("lazy").setup {
 require "config.options"
 require "misc.lsp-config"
 
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+local highlight_group = vim.api.nvim_create_augroup(
+	"YankHighlight",
+	{ clear = true }
+)
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
@@ -40,9 +50,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = "*",
 })
 
---- This function sets up the keymaps for the LSP, and also sets up the LSP specific commands.
+--- This function sets up the keymaps for the LSP within markdown files.
+---@param it table
+---@param bufnr number
 local on_attach = function(it, bufnr)
-	-- Function that lets us more easily define mappings specific for LSP related items. It sets the mode, buffer and description for us each time.
+	if it == nil then
+		return
+	end
 	local nmap = function(keys, func, desc)
 		if desc then
 			desc = "LSP: " .. desc
@@ -53,25 +67,76 @@ local on_attach = function(it, bufnr)
 			desc = desc,
 		})
 	end
-	nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-	nmap("<leader>cf", ":Lspsaga code_action<CR>", "[C]ode [A]ction")
-	nmap("<leader>pd", ":Lspsaga peek_definition<CR>", "[P]eek [D]efinition")
-	nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
-	nmap("gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", "[G]oto [R]eferences")
-	nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
-	nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
-	nmap("<leader>ds", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", "[D]ocument [S]ymbols")
-	nmap("<leader>ws", "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>",
-		"[W]orkspace [S]ymbols")
-	-- See `:help K` for why this keymap
-	nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-	-- Lesser used LSP functionality
-	nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-	nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
-	nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
-	nmap("<leader>wl", function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, "[W]orkspace [L]ist Folders")
+	nmap(
+		"<leader>rn",
+		vim.lsp.buf.rename,
+		"[R]e[n]ame"
+	)
+	nmap(
+		"<leader>cf",
+		":Lspsaga code_action<CR>",
+		"[C]ode [A]ction"
+	)
+	nmap(
+		"<leader>pd",
+		":Lspsaga peek_definition<CR>",
+		"[P]eek [D]efinition"
+	)
+	nmap(
+		"gd",
+		vim.lsp.buf.definition,
+		"[G]oto [D]efinition"
+	)
+	nmap(
+		"gr",
+		require('telescope.builtin').lsp_references,
+		"[G]oto [R]eferences"
+	)
+	nmap(
+		"gI",
+		vim.lsp.buf.implementation,
+		"[G]oto [I]mplementation"
+	)
+	nmap(
+		"<leader>D",
+		vim.lsp.buf.type_definition,
+		"Type [D]efinition"
+	)
+	nmap(
+		"<leader>ds",
+		require('telescope.builtin').lsp_document_symbols,
+		"[D]ocument [S]ymbols"
+	)
+	nmap(
+		"<leader>ws",
+		require('telescope.builtin').lsp_dynamic_workspace_symbols,
+		"[W]orkspace [S]ymbols"
+	)
+	nmap(
+		"<C-k>", vim.lsp.buf.signature_help,
+		"Signature Documentation"
+	)
+	nmap(
+		"gD",
+		vim.lsp.buf.declaration,
+		"[G]oto [D]eclaration"
+	)
+	nmap(
+		"<leader>wa",
+		vim.lsp.buf.add_workspace_folder,
+		"[W]orkspace [A]dd Folder"
+	)
+	nmap(
+		"<leader>wr",
+		vim.lsp.buf.remove_workspace_folder,
+		"[W]orkspace [R]emove Folder"
+	)
+	nmap(
+		"<leader>wl", function()
+			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+		end,
+		"[W]orkspace [L]ist Folders"
+	)
 	-- Create a command `:Format` local to the LSP buffer
 	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 		vim.lsp.buf.format()
@@ -89,6 +154,18 @@ local servers = {
 	ltex = {},
 	texlab = {},
 	dockerls = {},
+	tailwindcss = {
+		filetypes = {
+			"css",
+			"scss",
+			"javascript",
+			"typescript",
+			"astro",
+			"svelte",
+			"vue",
+			"templ"
+		}
+	},
 	html = {
 		filetypes = { "html", "twig", "hbs" },
 	},
@@ -139,8 +216,16 @@ local lspconfig = require "lspconfig"
 if not lspconfig.hdl_checker then
 	require("lspconfig/configs").hdl_checker = {
 		default_config = {
-			cmd = { "hdl_checker", "--lsp" },
-			filetypes = { "vhdl", "verilog", "systemverilog", "vhd" },
+			cmd = {
+				"hdl_checker",
+				"--lsp"
+			},
+			filetypes = {
+				"vhdl",
+				"verilog",
+				"systemverilog",
+				"vhd"
+			},
 			root_dir = function(fname)
 				return lspconfig.util.find_git_ancestor(fname) or lspconfig.util.path.dirname(fname)
 			end,
@@ -197,16 +282,6 @@ if not configs.templ then
 	}
 end
 
--- Activate the Tailwind-Lsp for `.templ` files
-require("lspconfig").tailwindcss.setup {
-	cmd = { "tailwindcss-language-server", "--stdio" },
-	filetypes = { "templ", "html", "css", "scss", "javascript", "typescript", "astro", "svelte", "vue" },
-	root_dir = require("lspconfig.util").root_pattern("go.mod", ".git", "tailwind.config.js", "postcss.config.js", "tailwind.config.cjs"),
-	settings = {},
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
-
 local util = require "lspconfig/util"
 lspconfig.vhdl_ls.setup {
 	on_attach = on_attach,
@@ -223,7 +298,7 @@ lspconfig.vhdl_ls.setup {
 	}
 }
 
-require('lspconfig').sqls.setup {
+lspconfig.sqls.setup {
 	on_attach = function(client, bufnr)
 		require('sqls').on_attach(client, bufnr)
 	end
@@ -245,3 +320,38 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.lsp.buf_attach_client(0, client)
 	end,
 })
+
+local lspconfutil = require 'lspconfig/util'
+local root_pattern = lspconfutil.root_pattern("veridian.yml", ".git")
+require('lspconfig').veridian.setup {
+	cmd = { 'veridian' },
+	capabilities = capabilities,
+	on_attach = on_attach,
+	root_dir = function(fname)
+		local filename = lspconfutil.path.is_absolute(fname) and fname
+		    or lspconfutil.path.join(vim.loop.cwd(), fname)
+		return root_pattern(filename) or lspconfutil.path.dirname(filename)
+	end,
+}
+
+-- basedpyright
+lspconfig.basedpyright.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+Format_with_ghdl = function()
+	-- Save current cursor position
+	local save_cursor = vim.api.nvim_win_get_cursor(0)
+	-- Format the current buffer with GHDL and replace its content
+	--
+	vim.api.nvim_command(
+		'%!ghdl fmt --std=08 -frelaxed --work=work -frelaxed-rules -Wall -Werror -lv -v -fpsl -C --mb-comments '
+		.. vim.fn.expand('%')
+	)
+	-- Restore cursor position
+	vim.api.nvim_win_set_cursor(0, save_cursor)
+end
+
+-- Optionally, bind this function to a key
+vim.api.nvim_set_keymap('n', '<leader>fo', '<cmd>lua Format_with_ghdl()<CR>', { noremap = true, silent = true })
