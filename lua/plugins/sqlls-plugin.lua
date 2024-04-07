@@ -1,3 +1,5 @@
 return {
-    'nanotee/sqls.nvim' 
+    'nanotee/sqls.nvim',
+    config = function()
+    end
 }

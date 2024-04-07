@@ -23,6 +23,11 @@ return {
             })
         })
         ls.add_snippets("lua", {
+            s("mk", {
+                t({ "$" }), i(1), t({ "$" })
+            })
+        })
+        ls.add_snippets("lua", {
             s("trig", {
                 t "text: ", i(1), t { "", "copy: " },
                 d(2, function(args)

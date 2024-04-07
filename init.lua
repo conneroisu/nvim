@@ -1,4 +1,4 @@
---@module "init"
+--@module "nvim"
 ---@author Conner Ohnesorge
 ---@license WTFPL
 
@@ -19,6 +19,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 vim.opt.rtp:prepend(lazypath)
+
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable",
+		lazypath })
+end
+vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup {
 	{
 		-- must  be installed before lsp
@@ -61,7 +67,6 @@ local on_attach = function(it, bufnr)
 		if desc then
 			desc = "LSP: " .. desc
 		end
-
 		vim.keymap.set("n", keys, func, {
 			buffer = bufnr,
 			desc = desc,
@@ -143,6 +148,9 @@ local on_attach = function(it, bufnr)
 	end, {
 		desc = "Format current buffer with LSP",
 	})
+
+	local client = vim.lsp.get_client_by_id(it.id)
+	require('sqls').on_attach(client, bufnr)
 end
 
 --  define the property "filetypes" to the map in question, to override the default filetypes of a server.
@@ -213,13 +221,12 @@ require "keymaps.normal-keymaps"
 vim.o.statusline = vim.o.statusline .. "%F"
 local builtin = require "telescope.builtin"
 local lspconfig = require "lspconfig"
+local configs = require "lspconfig.configs"
+local lsp_config_util = require "lspconfig/util"
 if not lspconfig.hdl_checker then
-	require("lspconfig/configs").hdl_checker = {
+	lspconfig.hdl_checker = {
 		default_config = {
-			cmd = {
-				"hdl_checker",
-				"--lsp"
-			},
+			cmd = { "hdl_checker", "--lsp" },
 			filetypes = {
 				"vhdl",
 				"verilog",
@@ -234,7 +241,7 @@ if not lspconfig.hdl_checker then
 	}
 end
 if not lspconfig.ghdl_ls then
-	require("lspconfig/configs").ghdl_ls = {
+	lspconfig.ghdl_ls = {
 		default_config = {
 			cmd = { "ghdl_ls" },
 			filetypes = { "vhdl", "vhd" },
@@ -251,38 +258,20 @@ vim.cmd "set rtp^='/home/conner/.opam/default/share/ocp-indent/vim'"
 require "misc.markdown"
 
 -- Register the language
-vim.filetype.add {
-	extension = {
-		templ = "templ",
-	},
-}
+vim.filetype.add { extension = { templ = "templ", } }
 
--- Make sure we have a Tree-Sitter Grammar for the Language
-local treesitter_parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-treesitter_parser_config.templ = treesitter_parser_config.templ
-    or {
-	    install_info = {
-		    url = "https://github.com/vrischmann/tree-sitter-templ.git",
-		    files = { "src/parser.c", "src/scanner.c" },
-		    branch = "master",
-	    },
-    }
-
--- Register the LSP as a Config
-local configs = require "lspconfig.configs"
 vim.treesitter.language.register("templ", "templ")
 if not configs.templ then
 	configs.templ = {
 		default_config = {
 			cmd = { "templ", "lsp" },
 			filetypes = { "templ" },
-			root_dir = require("lspconfig.util").root_pattern("go.mod", ".git"),
+			root_dir = lsp_config_util.root_pattern("go.mod", ".git"),
 			settings = {},
 		},
 	}
 end
 
-local util = require "lspconfig/util"
 lspconfig.vhdl_ls.setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
@@ -293,7 +282,7 @@ lspconfig.vhdl_ls.setup {
 		capabilities = capabilities,
 		on_attach = on_attach,
 		root_dir = function(fname)
-			return util.root_pattern('vhdl_ls.toml')(fname)
+			return lsp_config_util.root_pattern('vhdl_ls.toml')(fname)
 		end,
 	}
 }
@@ -344,7 +333,6 @@ Format_with_ghdl = function()
 	-- Save current cursor position
 	local save_cursor = vim.api.nvim_win_get_cursor(0)
 	-- Format the current buffer with GHDL and replace its content
-	--
 	vim.api.nvim_command(
 		'%!ghdl fmt --std=08 -frelaxed --work=work -frelaxed-rules -Wall -Werror -lv -v -fpsl -C --mb-comments '
 		.. vim.fn.expand('%')
