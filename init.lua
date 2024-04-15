@@ -79,12 +79,12 @@ local on_attach = function(it, bufnr)
 	)
 	nmap(
 		"<leader>cf",
-		":Lspsaga code_action<CR>",
+		vim.lsp.buf.code_action,
 		"[C]ode [A]ction"
 	)
 	nmap(
 		"<leader>pd",
-		":Lspsaga peek_definition<CR>",
+		vim.lsp.buf.peek_definition,
 		"[P]eek [D]efinition"
 	)
 	nmap(
