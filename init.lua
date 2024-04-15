@@ -329,17 +329,3 @@ lspconfig.basedpyright.setup {
 	capabilities = capabilities,
 }
 
-Format_with_ghdl = function()
-	-- Save current cursor position
-	local save_cursor = vim.api.nvim_win_get_cursor(0)
-	-- Format the current buffer with GHDL and replace its content
-	vim.api.nvim_command(
-		'%!ghdl fmt --std=08 -frelaxed --work=work -frelaxed-rules -Wall -Werror -lv -v -fpsl -C --mb-comments '
-		.. vim.fn.expand('%')
-	)
-	-- Restore cursor position
-	vim.api.nvim_win_set_cursor(0, save_cursor)
-end
-
--- Optionally, bind this function to a key
-vim.api.nvim_set_keymap('n', '<leader>fo', '<cmd>lua Format_with_ghdl()<CR>', { noremap = true, silent = true })
