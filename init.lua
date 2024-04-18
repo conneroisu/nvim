@@ -18,13 +18,12 @@ if not vim.loop.fs_stat(lazypath) then
 	}
 end
 
-vim.opt.rtp:prepend(lazypath)
-
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable",
 		lazypath })
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+
 require("lazy").setup {
 	{
 		-- must  be installed before lsp
@@ -56,13 +55,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = "*",
 })
 
---- This function sets up the keymaps for the LSP within markdown files.
----@param it table
----@param bufnr number
 local on_attach = function(it, bufnr)
-	if it == nil then
-		return
-	end
+
+	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
+		vim.lsp.buf.format()
+	end, {
+		desc = "Format current buffer with LSP",
+	})
 	local nmap = function(keys, func, desc)
 		if desc then
 			desc = "LSP: " .. desc
@@ -142,15 +141,8 @@ local on_attach = function(it, bufnr)
 		end,
 		"[W]orkspace [L]ist Folders"
 	)
-	-- Create a command `:Format` local to the LSP buffer
-	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-		vim.lsp.buf.format()
-	end, {
-		desc = "Format current buffer with LSP",
-	})
 
-	local client = vim.lsp.get_client_by_id(it.id)
-	require('sqls').on_attach(client, bufnr)
+	-- Create a command `:Format` local to the LSP buffer
 end
 
 --  define the property "filetypes" to the map in question, to override the default filetypes of a server.
@@ -286,29 +278,6 @@ lspconfig.vhdl_ls.setup {
 		end,
 	}
 }
-
-lspconfig.sqls.setup {
-	on_attach = function(client, bufnr)
-		require('sqls').on_attach(client, bufnr)
-	end
-}
-
-vim.lsp.set_log_level("debug")
-local client = vim.lsp.start_client({
-	name = "pytrance",
-	cmd = { "/run/media/conner/source/001Repos/pytrance/main" },
-	on_attach = on_attach,
-})
-if not client then
-	print("Failed to start pytrance")
-	return
-end
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "markdown",
-	callback = function()
-		vim.lsp.buf_attach_client(0, client)
-	end,
-})
 
 local lspconfutil = require 'lspconfig/util'
 local root_pattern = lspconfutil.root_pattern("veridian.yml", ".git")
