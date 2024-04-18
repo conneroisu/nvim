@@ -56,6 +56,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 local on_attach = function(it, bufnr)
+	local builtin = require "telescope.builtin"
 
 	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 		vim.lsp.buf.format()
@@ -82,19 +83,19 @@ local on_attach = function(it, bufnr)
 		"[C]ode [A]ction"
 	)
 	nmap(
-		"<leader>pd",
-		vim.lsp.buf.peek_definition,
-		"[P]eek [D]efinition"
-	)
-	nmap(
 		"gd",
 		vim.lsp.buf.definition,
 		"[G]oto [D]efinition"
 	)
 	nmap(
 		"gr",
-		require('telescope.builtin').lsp_references,
+		builtin.lsp_references,
 		"[G]oto [R]eferences"
+	)
+	nmap(
+		"<leader>sr",
+		builtin.resume,
+		"[R]esume [S]earch"
 	)
 	nmap(
 		"gI",
@@ -108,16 +109,17 @@ local on_attach = function(it, bufnr)
 	)
 	nmap(
 		"<leader>ds",
-		require('telescope.builtin').lsp_document_symbols,
+		builtin.lsp_document_symbols,
 		"[D]ocument [S]ymbols"
 	)
 	nmap(
 		"<leader>ws",
-		require('telescope.builtin').lsp_dynamic_workspace_symbols,
+		builtin.lsp_workspace_symbols,
 		"[W]orkspace [S]ymbols"
 	)
 	nmap(
-		"<C-k>", vim.lsp.buf.signature_help,
+		"<C-k>",
+		vim.lsp.buf.signature_help,
 		"Signature Documentation"
 	)
 	nmap(
@@ -140,6 +142,11 @@ local on_attach = function(it, bufnr)
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end,
 		"[W]orkspace [L]ist Folders"
+	)
+	nmap(
+		"<leader>pd",
+		vim.lsp.buf.peek_definition,
+		"[P]eek [D]efinition"
 	)
 
 	-- Create a command `:Format` local to the LSP buffer
