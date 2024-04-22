@@ -74,16 +74,8 @@ vim.api.nvim_set_keymap("n", "<S-l>", "$", {
     desc = "Move cursor to the end of the line"
 })
 
--- lazy
 vim.api.nvim_set_keymap("n", "<leader>L", "<cmd>:Lazy<cr>", {
-    desc = "Open Lazy"
-})
-
-
--- Bind the previous file to alt+left like in a browser.
-vim.api.nvim_set_keymap("n", "<A-Left>", ":edit #<cr>", {
-    silent = true,
-    desc = "Previous File"
+    desc = "Open Lazy Modal"
 })
 
 -- Bind redo to Ctrl + Y
