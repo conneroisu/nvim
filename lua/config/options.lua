@@ -54,7 +54,6 @@ vim.o.termguicolors = true
 -- vim.o.loaded_netrw = 0
 -- vim.o.loaded_netrwPlugin = 0
 
-
 -- set termguicolors to true
 vim.o.termguicolors = true
 
@@ -64,6 +63,12 @@ vim.o.clipboard = "unnamedplus"
 -- Add spaces after comment delimiters by default
 vim.g.NERDSpaceDelims = 1
 
+-- set the scroll off of the buffer when lsp is attached to said buffer to 8
+vim.o.scrolloff = 8
+
+-- set hybrid line numbers 
+vim.o.relativenumber = true
+vim.o.number = true
 
 vim.opt.undofile = true
 
@@ -149,13 +154,10 @@ vim.cmd(":command Q q")
 
 -- set leader + p to "\"_dp allows for pasting without losing yanked text
 vim.api.nvim_set_keymap("x", "<leader>p", "\"_dp", {
-    noremap = true,
-    silent = true
+	noremap = true,
+	silent = true
 })
 
 -- Python Host Program
 vim.g.python3_host_prog = "/usr/bin/python"
 vim.g.python_host_prog = "/usr/bin/python"
-
--- Set the `colorscheme` to ron
--- vim.cmd("colorscheme ron")

@@ -16,16 +16,6 @@ return {
         local lua_opts = lsp.nvim_lua_ls()
         lspconfig.lua_ls.setup(lua_opts)
         local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-        if not lspconfig.configs.templ then
-            lspconfig.configs.templ = {
-                default_config = {
-                    cmd = { "templ", "lsp" },
-                    filetypes = { "templ" },
-                    root_dir = lsp_config_util.root_pattern("go.mod", ".git"),
-                    settings = {},
-                },
-            }
-        end
         lsp.on_attach(function(client, bufnr)
             local opts = { buffer = bufnr, remap = true }
             vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
@@ -97,17 +87,9 @@ return {
             vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
             vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
             vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-
-            -- set the scroll off of the buffer when lsp is attached to said buffer to 8
-            vim.o.scrolloff = 8
-            -- set hybrid line numbers where the actual line number is at the current line and the relative line numbers everywhere else
-            -- vim.cmd("set number relativenumber")
-            vim.o.relativenumber = true
-            vim.o.number = true
             require('mason').setup()
         end)
         lsp.setup()
-
         --  define the property "filetypes" to the map in question, to override the default filetypes of a server.
         local servers = {
             gopls = {
@@ -147,27 +129,13 @@ return {
             html = {
                 filetypes = { "html", "twig", "hbs" },
             },
-            lua_ls = {
-                Lua = {
-                    workspace = {
-                        checkThirdParty = false,
-                    },
-                    telemetry = {
-                        enable = false,
-                    },
-                },
-            },
             hdl_checker = {
                 filetypes = { "vhdl", "verilog", "systemverilog" },
                 cmd = { "hdl_checker", "--lsp" },
             },
         }
         local mason_lspconfig = require "mason-lspconfig"
-
-        mason_lspconfig.setup {
-            ensure_installed = vim.tbl_keys(servers),
-        }
-
+        mason_lspconfig.setup { ensure_installed = vim.tbl_keys(servers) }
         mason_lspconfig.setup_handlers {
             function(server_name)
                 require("lspconfig")[server_name].setup {
@@ -178,8 +146,6 @@ return {
                 }
             end,
         }
-
-
         local custom_servers = {
             vhdl_ls = {
                 filetypes = { "vhdl", "vhd", "verilog", "systemverilog" },
@@ -205,14 +171,14 @@ return {
                     "vhd"
                 },
                 root_dir = function(fname)
-                    return lspconfig.util.find_git_ancestor(fname) or lspconfig.util.path.dirname(fname)
+                    return lsp_config_util.find_git_ancestor(fname) or lsp_config_util.path.dirname(fname)
                 end,
                 auto_start = true,
             },
             ghdl_ls = {
                 filetypes = { "vhdl", "vhd" },
                 root_dir = function(fname)
-                    return lspconfig.util.find_git_ancestor(fname) or lspconfig.util.path.dirname(fname)
+                    return lsp_config_util.find_git_ancestor(fname) or lsp_config_util.path.dirname(fname)
                 end,
                 auto_start = true,
             },
@@ -222,6 +188,13 @@ return {
             sqls = {
                 on_attach = function(client, bufnr)
                     require('sqls').on_attach(client, bufnr)
+                end,
+                auto_start = true,
+            },
+            templ = {
+                filetypes = { "templ" },
+                root_dir = function(fname)
+                    return lsp_config_util.root_pattern('go.mod', '.git')(fname)
                 end,
                 auto_start = true,
             },
