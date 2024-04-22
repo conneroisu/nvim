@@ -132,6 +132,12 @@ return {
         vim.keymap.set('n', '<leader>sr', built_in.resume, {
             desc = '[R]esume [S]earch'
         })
+        vim.keymap.set('n', '<leader>ds', built_in.lsp_document_symbols, {
+            desc = '[D]ocument [S]ymbols'
+        })
+        vim.keymap.set('n', '<leader>ws', built_in.lsp_workspace_symbols, {
+            desc = '[W]orkspace [S]ymbols'
+        })
         -- bind leader + g + p to open telescope projects in normal mode
         vim.api.nvim_set_keymap("n", "<leader>gp", ":Telescope projects<CR>", {
             desc = "Open Telesope projects "
