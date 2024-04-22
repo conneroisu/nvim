@@ -24,6 +24,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
 require("lazy").setup {
 	{
 		-- must  be installed before lsp
@@ -56,8 +58,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 local on_attach = function(_, bufnr)
-	local builtin = require "telescope.builtin"
-
 	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 		vim.lsp.buf.format()
 	end, {
@@ -86,16 +86,6 @@ local on_attach = function(_, bufnr)
 		"gd",
 		vim.lsp.buf.definition,
 		"[G]oto [D]efinition"
-	)
-	nmap(
-		"gr",
-		builtin.lsp_references,
-		"[G]oto [R]eferences"
-	)
-	nmap(
-		"<leader>sr",
-		builtin.resume,
-		"[R]esume [S]earch"
 	)
 	nmap(
 		"gI",
@@ -195,7 +185,6 @@ local mason_lspconfig = require "mason-lspconfig"
 mason_lspconfig.setup {
 	ensure_installed = vim.tbl_keys(servers),
 }
-local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 mason_lspconfig.setup_handlers {
 	function(server_name)
@@ -251,13 +240,11 @@ if not lspconfig.ghdl_ls then
 end
 vim.keymap.set("n", "<leader>fi", builtin.find_files, { desc = "Find Files" })
 vim.cmd "set rtp^='/home/conner/.opam/default/share/ocp-indent/vim'"
-
 require "misc.markdown"
-
--- Register the language
+-- Register the .templ filetype
 vim.filetype.add { extension = { templ = "templ", } }
-
 vim.treesitter.language.register("templ", "templ")
+
 if not configs.templ then
 	configs.templ = {
 		default_config = {
@@ -284,16 +271,14 @@ lspconfig.vhdl_ls.setup {
 	}
 }
 
-local lspconfutil = require 'lspconfig/util'
-local root_pattern = lspconfutil.root_pattern("veridian.yml", ".git")
 require('lspconfig').veridian.setup {
 	cmd = { 'veridian' },
 	capabilities = capabilities,
 	on_attach = on_attach,
 	root_dir = function(fname)
-		local filename = lspconfutil.path.is_absolute(fname) and fname
-		    or lspconfutil.path.join(vim.loop.cwd(), fname)
-		return root_pattern(filename) or lspconfutil.path.dirname(filename)
+		local filename = lsp_config_util.path.is_absolute(fname) and fname
+		    or lsp_config_util.path.join(vim.loop.cwd(), fname)
+		return lsp_config_util.root_pattern("veridian.yml", ".git") or lsp_config_util.path.dirname(filename)
 	end,
 }
 
@@ -305,29 +290,16 @@ lspconfig.basedpyright.setup {
 
 -- sqls
 lspconfig.sqls.setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
-
-require('lspconfig').sqls.setup {
 	on_attach = function(client, bufnr)
 		require('sqls').on_attach(client, bufnr)
-	end
+	end,
+	capabilities = capabilities,
 }
 
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.sql",
 	group = vim.api.nvim_create_augroup("FormatSQL", { clear = true }),
 	callback = function()
-		-- local file_path = vim.fn.expand "%"
-		-- local file, error = io.open(file_path, "r")
-		-- if not file then
-		--         print("Failed to open file: " .. error)
-		--         return
-		-- end
-		-- local content = file:read("*a")
-		-- file:close()
-		-- read from the buff not the file
 		local content = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 		local bufr_content = table.concat(content, "\n")
 
@@ -336,7 +308,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		if handle then
 			local result = handle:read("*a")
 			handle:close()
-			-- print("Command output:", result)
 			local active_file = io.open(vim.fn.expand "%", "w")
 			if not active_file then
 				print("Failed to open file for writing")
