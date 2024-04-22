@@ -17,26 +17,18 @@ vim.keymap.set("n", "J", "mzJ`z", {
     desc = "Join lines"
 })
 
---- Bind leader + g + p to open the current working directory in the file explorer in normal mode
-function OpenCurrent()
+vim.keymap.set("n", "<leader>gp", function()
     local cwd = vim.fn.expand("%:p:h")
-    -- remove the file name from the file variable so "/run/media/pics/asdf.md" becomes "/run/media/pics"
     local path = vim.fn.expand("%:p")
-    -- ignore oil files and do cwd
-    -- oil:///run/media/conner/source/001Repos/cpre381-project-1
     if string.match(cwd, "oil") then
         vim.cmd("!nautilus " .. " . " .. "&")
     else
         vim.cmd("!nautilus " .. path .. "&")
     end
-end
-
--- bind leader + g + p to open the current working directory in the file explorer in normal mode
-vim.keymap.set("n", "<C-e>", ":lua OpenCurrent()<CR>", {
+end, {
     desc = "Open the current working directory in the file explorer for windows"
 })
 
--- bind shift + j to Move Lines up in normal mode without moving the cursor
 vim.api.nvim_set_keymap("n", "<A-j>", "<cmd>m .+1<cr>==", {
     desc = "Move down"
 })
@@ -54,7 +46,9 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", {
 })
 
 -- bind leader + e to open the init.lua file in normal mode
-vim.api.nvim_set_keymap("n", "<leader>ee", ":e $MYVIMRC<CR>", {
+vim.keymap.set("n", "<leader>ee", function()
+    vim.cmd(":e $MYVIMRC")
+end, {
     noremap = true,
     silent = true,
     desc = "Open init.lua"
@@ -92,7 +86,11 @@ function _G.get_cwd()
 end
 
 -- Bind leader + b + p to copy the current buffer path to the clipboard
-vim.api.nvim_set_keymap("n", "<leader>bp", ":let @*=expand('%:p')<CR>", {
+vim.keymap.set("n", "<leader>bp", function()
+    local path = vim.fn.expand("%:p")
+    vim.fn.setreg("+", path)
+    vim.cmd("echo 'Copied: " .. path .. " to clipboard'")
+end, {
     desc = "Copy buffer path to clipboard"
 })
 
@@ -131,56 +129,67 @@ vim.api.nvim_set_keymap("n", "<leader>ll", ":LspRestart<CR>", {
     desc = "Restart LSP"
 })
 
---[=======[
-   VHDL
---]=======]
-Compile_And_Link = function()
-    vim.cmd(":!nvc --std=2008 -a " .. vim.fn.expand('%:p') .. " -e " .. vim.fn.expand('%:t:r') .. " -r " .. vim.fn.expand('%:t:r'))
-end
-
-Open_nvc = function()
+vim.keymap.set("n", "<leader>vn", function()
     vim.cmd(
-        ":!nvc -a " .. vim.fn.expand('%:p') .. " -e " .. vim.fn.expand('%:t:r') .. " -r " .. vim.fn.expand('%:t:r') ..
-        " --format=fst -w && gtkwave " .. vim.fn.expand('%:t:r') .. ".fst")
-end
-
--- map leader + v + n to run the current file with nvc
-vim.api.nvim_set_keymap("n", "<leader>vn", ":lua Open_nvc()<CR>", {
+        ":!nvc -a " ..
+        vim.fn.expand('%:p') ..
+        " -e " ..
+        vim.fn.expand('%:t:r') ..
+        " -r " ..
+        vim.fn.expand('%:t:r') ..
+        " --format=fst -w && gtkwave " ..
+        vim.fn.expand('%:t:r') ..
+        ".fst"
+    )
+end, {
     noremap = true,
     silent = true,
     desc = "Run the current file with nvc"
 })
 
--- just compile using nvc when leader + v + b
-vim.api.nvim_set_keymap("n", "<leader>vb", ":lua Compile_And_Link()<CR>", {
+vim.keymap.set("n", "<leader>vb", function()
+    vim.cmd(
+        ":!nvc --std=2008 -a " ..
+        vim.fn.expand('%:p') ..
+        " -e " .. vim.fn.expand('%:t:r') ..
+        " -r " .. vim.fn.expand('%:t:r')
+    )
+end, {
     noremap = true,
     silent = true,
     desc = "Run the current file with nvc"
 })
 
--- go mod tidy on leager + g + m + t
-vim.api.nvim_set_keymap("n", "<leader>gmt", ":!go mod tidy<CR>", {
+vim.keymap.set("n", "<leader>gmt", function()
+    vim.cmd("!go mod tidy<CR>")
+end, {
     noremap = true,
     silent = true,
-    desc = "Go Mod Tidy"
+    desc = "Run Go Mod Tidy in CWD"
 })
 
 -- open the current file in obsidian with leader + o + b
-vim.api.nvim_set_keymap("n", "<leader>ob", ":!obs open " .. vim.fn.expand('%:p') .. "<CR>", {
+vim.keymap.set("n", "<leader>ob", function()
+    vim.cmd(":!obs open " .. vim.fn.expand('%:p') .. "<CR>")
+end, {
     noremap = true,
     silent = true,
     desc = "Open in Obsidian"
 })
 
 -- restart copilot with leader + c + r
-vim.api.nvim_set_keymap("n", "<leader>cr", "<cmd>Copilot restart <CR>", {
+vim.keymap.set("n", "<leader>cr", function()
+    vim.cmd(":Copilot restart")
+end, {
     noremap = true,
     silent = true,
     desc = "Restart Copilot"
 })
 
 -- set leader + g + t to run go tests when in a go file
-vim.api.nvim_set_keymap("n", "<leader>gt", ":GoTest<CR>", {
+vim.keymap.set("n", "<leader>gt", function()
+    vim.cmd(":GoTest")
+end, {
     noremap = true,
     silent = true,
     desc = "Run Go Tests"
