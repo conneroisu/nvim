@@ -11,15 +11,18 @@ return {
   },
   config = function()
     require "octo".setup({
-      use_local_fs = false,                -- use local files on right side of reviews
-      enable_builtin = false,              -- shows a list of builtin actions when no action is provided
+      suppress_missing_scope = {
+        projects_v2 = true,
+      },
+      use_local_fs = false,                      -- use local files on right side of reviews
+      enable_builtin = false,                    -- shows a list of builtin actions when no action is provided
       default_remote = { "upstream", "origin" }, -- order to try remotes
-      default_merge_method = "commit",     -- default merge method which should be used when calling `Octo pr merge`, could be `commit`, `rebase` or `squash`
-      ssh_aliases = {},                    -- SSH aliases. e.g. `ssh_aliases = {["github.com-work"] = "github.com"}`
-      picker = "telescope",                -- or "fzf-lua"
+      default_merge_method = "commit",           -- default merge method which should be used when calling `Octo pr merge`, could be `commit`, `rebase` or `squash`
+      ssh_aliases = {},                          -- SSH aliases. e.g. `ssh_aliases = {["github.com-work"] = "github.com"}`
+      picker = "telescope",                      -- or "fzf-lua"
       picker_config = {
-        use_emojis = false,                -- only used by "fzf-lua" picker for now
-        mappings = {                       -- mappings for the pickers
+        use_emojis = false,                      -- only used by "fzf-lua" picker for now
+        mappings = {                             -- mappings for the pickers
           open_in_browser = { lhs = "<C-b>", desc = "open issue in browser" },
           copy_url = { lhs = "<C-y>", desc = "copy url to system clipboard" },
           checkout_pr = { lhs = "<C-o>", desc = "checkout pull request" },
@@ -45,25 +48,25 @@ return {
         use_signcolumn = true, -- show "modified" marks on the sign column
       },
       issues = {
-        order_by = {        -- criteria to sort results of `Octo issue list`
+        order_by = {            -- criteria to sort results of `Octo issue list`
           field = "CREATED_AT", -- either COMMENTS, CREATED_AT or UPDATED_AT (https://docs.github.com/en/graphql/reference/enums#issueorderfield)
           direction =
-          "DESC"            -- either DESC or ASC (https://docs.github.com/en/graphql/reference/enums#orderdirection)
+          "DESC"                -- either DESC or ASC (https://docs.github.com/en/graphql/reference/enums#orderdirection)
         }
       },
       pull_requests = {
-        order_by = {                       -- criteria to sort the results of `Octo pr list`
-          field = "CREATED_AT",            -- either COMMENTS, CREATED_AT or UPDATED_AT (https://docs.github.com/en/graphql/reference/enums#issueorderfield)
+        order_by = {                           -- criteria to sort the results of `Octo pr list`
+          field = "CREATED_AT",                -- either COMMENTS, CREATED_AT or UPDATED_AT (https://docs.github.com/en/graphql/reference/enums#issueorderfield)
           direction =
-          "DESC"                           -- either DESC or ASC (https://docs.github.com/en/graphql/reference/enums#orderdirection)
+          "DESC"                               -- either DESC or ASC (https://docs.github.com/en/graphql/reference/enums#orderdirection)
         },
         always_select_remote_on_create = false -- always give prompt to select base remote repo when creating PRs
       },
       file_panel = {
-        size = 10,   -- changed files panel rows
+        size = 10,       -- changed files panel rows
         use_icons = true -- use web-devicons in file panel (if false, nvim-web-devicons does not need to be installed)
       },
-      colors = {     -- used for highlight groups (see Colors section below)
+      colors = {         -- used for highlight groups (see Colors section below)
         white = "#ffffff",
         grey = "#2A354C",
         black = "#000000",
