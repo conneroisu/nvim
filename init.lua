@@ -315,22 +315,23 @@ require('lspconfig').sqls.setup {
 	end
 }
 
-local group = vim.api.nvim_create_augroup("FormatSQL", {})
-
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.sql",
-	group = group,
+	group = vim.api.nvim_create_augroup("FormatSQL", { clear = true }),
 	callback = function()
-		local file_path = vim.fn.expand "%"
-		local file, error = io.open(file_path, "r")
-		if not file then
-			print("Failed to open file: " .. error)
-			return
-		end
-		local content = file:read("*a")
-		file:close()
-		-- local file = io.open(vim.fn.expand "%", "w")
-		local cmd = "echo \"" .. content .. "\" | sleek -i 4"
+		-- local file_path = vim.fn.expand "%"
+		-- local file, error = io.open(file_path, "r")
+		-- if not file then
+		--         print("Failed to open file: " .. error)
+		--         return
+		-- end
+		-- local content = file:read("*a")
+		-- file:close()
+		-- read from the buff not the file
+		local content = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+		local bufr_content = table.concat(content, "\n")
+
+		local cmd = "echo \"" .. bufr_content .. "\" | sleek -i 4"
 		local handle, err = io.popen(cmd, "r")
 		if handle then
 			local result = handle:read("*a")
@@ -344,7 +345,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 			active_file:write(result)
 			active_file:close()
 			vim.cmd "e!"
-			print("Formatted SQL file: " .. file_path)
+			print("Formatted SQL file: " .. vim.fn.expand "%")
 		else
 			print("Error running command:", err)
 		end

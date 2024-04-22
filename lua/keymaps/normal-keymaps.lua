@@ -20,13 +20,14 @@ vim.keymap.set("n", "J", "mzJ`z", {
 --- Bind leader + g + p to open the current working directory in the file explorer in normal mode
 function OpenCurrent()
     local cwd = vim.fn.expand("%:p:h")
-    local file = vim.fn.expand("%:t")
+    -- remove the file name from the file variable so "/run/media/pics/asdf.md" becomes "/run/media/pics"
+    local path = vim.fn.expand("%:p")
     -- ignore oil files and do cwd
     -- oil:///run/media/conner/source/001Repos/cpre381-project-1
     if string.match(cwd, "oil") then
         vim.cmd("!nautilus " .. " . " .. "&")
     else
-        vim.cmd("!nautilus " .. file .. "&")
+        vim.cmd("!nautilus " .. path .. "&")
     end
 end
 
@@ -126,6 +127,7 @@ vim.api.nvim_set_keymap("n", "N", "'nN'[v:searchforward]", {
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {
     desc = 'Go to previous diagnostic message'
 })
+
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {
     desc = 'Go to next diagnostic message'
 })
