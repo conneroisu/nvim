@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = "*",
 })
 
-local on_attach = function(it, bufnr)
+local on_attach = function(_, bufnr)
 	local builtin = require "telescope.builtin"
 
 	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
@@ -148,8 +148,6 @@ local on_attach = function(it, bufnr)
 		vim.lsp.buf.peek_definition,
 		"[P]eek [D]efinition"
 	)
-
-	-- Create a command `:Format` local to the LSP buffer
 end
 
 --  define the property "filetypes" to the map in question, to override the default filetypes of a server.
@@ -305,3 +303,50 @@ lspconfig.basedpyright.setup {
 	capabilities = capabilities,
 }
 
+-- sqls
+lspconfig.sqls.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+require('lspconfig').sqls.setup {
+	on_attach = function(client, bufnr)
+		require('sqls').on_attach(client, bufnr)
+	end
+}
+
+local group = vim.api.nvim_create_augroup("FormatSQL", {})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*.sql",
+	group = group,
+	callback = function()
+		local file_path = vim.fn.expand "%"
+		local file, error = io.open(file_path, "r")
+		if not file then
+			print("Failed to open file: " .. error)
+			return
+		end
+		local content = file:read("*a")
+		file:close()
+		-- local file = io.open(vim.fn.expand "%", "w")
+		local cmd = "echo \"" .. content .. "\" | sleek -i 4"
+		local handle, err = io.popen(cmd, "r")
+		if handle then
+			local result = handle:read("*a")
+			handle:close()
+			-- print("Command output:", result)
+			local active_file = io.open(vim.fn.expand "%", "w")
+			if not active_file then
+				print("Failed to open file for writing")
+				return
+			end
+			active_file:write(result)
+			active_file:close()
+			vim.cmd "e!"
+			print("Formatted SQL file: " .. file_path)
+		else
+			print("Error running command:", err)
+		end
+	end,
+})
