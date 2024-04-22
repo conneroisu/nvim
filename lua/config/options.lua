@@ -2,12 +2,6 @@
 ---@author Conner Ohnesorge
 ---@license WTFPL
 
---[=======[
-   Options
-   desc: main configuration file for options of vim for personal configuration of neovim written in lua.
-   path: C:/Users/Conne/AppData/Local/nvim/lua/options.lua
---]=======]
-
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
@@ -140,9 +134,9 @@ vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#35ea83", bold = true })
 vim.api.nvim_set_hl(0, "LineNr", { fg = "#35ea83", bold = true })
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#35ea83", bold = true })
 
--- Renmap Command 'Wq' to 'wq'
+-- Remap Command 'Wq' to 'wq'
 vim.cmd(":command Wq wq")
--- Renmap Command 'VS' to 'vs'
+-- Remap Command 'VS' to 'vs'
 vim.cmd(":command VS vs")
 -- Remap Command 'Vs' to 'vs'
 vim.cmd(":command Vs vs")
@@ -150,7 +144,6 @@ vim.cmd(":command Vs vs")
 vim.cmd(":command W w")
 -- Remap Command 'Q' to 'q'
 vim.cmd(":command Q q")
-
 
 -- set leader + p to "\"_dp allows for pasting without losing yanked text
 vim.api.nvim_set_keymap("x", "<leader>p", "\"_dp", {
