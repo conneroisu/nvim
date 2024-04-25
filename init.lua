@@ -84,7 +84,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 			active_file:write(result)
 			active_file:close()
 			vim.cmd "e!"
-			print("Formatted SQL file: " .. vim.fn.expand "%")
 		else
 			print("Error running command:", err)
 		end

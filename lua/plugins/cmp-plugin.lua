@@ -21,6 +21,10 @@ return {
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-calc",
         "hrsh7th/cmp-cmdline",
+        {
+            "MattiasMTS/cmp-dbee",
+            ft = "sql",
+        },
     },
     opts = function()
         vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -53,6 +57,7 @@ return {
                 { name = 'luasnip' },
                 { name = 'buffer' },
                 { name = 'path' },
+                { name = "cmp-dbee" },
                 { name = "otter" },
             }),
             experimental = {
