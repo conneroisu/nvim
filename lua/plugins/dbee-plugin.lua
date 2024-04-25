@@ -1,5 +1,5 @@
 return {
-  "conneroisu/nvim-dbee",
+  "kndndrj/nvim-dbee",
   dependencies = {
     "MunifTanjim/nui.nvim",
   },
