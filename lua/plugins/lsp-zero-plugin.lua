@@ -130,7 +130,7 @@ return {
                 filetypes = { "html", "twig", "hbs" },
             },
             hdl_checker = {
-                filetypes = { "vhdl", "verilog", "systemverilog" },
+                filetypes = { "vhdl", "vhd" },
                 cmd = { "hdl_checker", "--lsp" },
             },
         }
@@ -148,7 +148,7 @@ return {
         }
         local custom_servers = {
             vhdl_ls = {
-                filetypes = { "vhdl", "vhd", "verilog", "systemverilog" },
+                filetypes = { "vhdl", "vhd" },
                 root_dir = function(fname)
                     return lsp_config_util.root_pattern('vhdl_ls.toml')(fname)
                 end,
@@ -157,17 +157,16 @@ return {
             veridian = {
                 cmd = { 'veridian' },
                 root_dir = function(fname)
+                    local root_pattern = lsp_config_util.root_pattern("veridian.yml", ".git")
                     local filename = lsp_config_util.path.is_absolute(fname) and fname
                         or lsp_config_util.path.join(vim.loop.cwd(), fname)
-                    return lsp_config_util.root_pattern("veridian.yml", ".git") or lsp_config_util.path.dirname(filename)
+                    return root_pattern(filename) or lsp_config_util.path.dirname(filename)
                 end,
                 auto_start = true,
             },
             hdl_checker = {
                 filetypes = {
                     "vhdl",
-                    "verilog",
-                    "systemverilog",
                     "vhd"
                 },
                 root_dir = function(fname)
