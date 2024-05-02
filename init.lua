@@ -1,7 +1,6 @@
 --@module "nvim"
 ---@author Conner Ohnesorge
 ---@license WTFPL
-
 --  (otherwise wrong leader will be used)
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = " "
@@ -89,3 +88,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		end
 	end,
 })
+
+vim.cmd "set list"
+vim.cmd("set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<")

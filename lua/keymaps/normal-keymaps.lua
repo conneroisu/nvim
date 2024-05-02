@@ -194,3 +194,19 @@ end, {
     silent = true,
     desc = "Run Go Tests"
 })
+
+vim.keymap.set("n", "<leader>rr", function()
+    vim.cmd(":Rest run")
+end, {
+    desc = "Run request under the cursor"
+})
+
+vim.keymap.set("n", "<leader>rl", function()
+    vim.cmd(":Rest run last")
+end, {
+    desc = "Re-run latest request"
+})
+
+vim.keymap.set("n", "<leader><leader>", function()
+    require("telescope").extensions.smart_open.smart_open()
+end, { noremap = true, silent = true })

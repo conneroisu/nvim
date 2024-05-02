@@ -111,7 +111,9 @@ return {
                 filetypes = { "svelte" },
             },
             tsserver = {},
-            ltex = {},
+            ltex = {
+                filetypes = { "tex", "bib", "md", "markdown" },
+            },
             texlab = {},
             dockerls = {},
             tailwindcss = {

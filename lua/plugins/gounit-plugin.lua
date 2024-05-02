@@ -1,3 +1,0 @@
-return {
-    'hexdigest/gounit-vim'
-}

@@ -11,6 +11,7 @@ return {
             config = function()
                 require('telescope').setup()
                 require('telescope').load_extension('project')
+                require('telescope').load_extension('rest')
             end,
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
@@ -86,7 +87,7 @@ return {
         }
     },
     config = function()
-	local built_in = require "telescope.builtin"
+        local built_in = require "telescope.builtin"
         -- bind Control + o to open recent files in normal mode
         vim.api.nvim_set_keymap("n", "<C-o>", ":Telescope oldfiles<CR>", {
             noremap = true,
@@ -142,6 +143,16 @@ return {
         vim.api.nvim_set_keymap("n", "<leader>gp", ":Telescope projects<CR>", {
             desc = "Open Telesope projects "
         })
+        -- bind r + e to search for env variables
+
+        vim.keymap.set("n", "<leader>re", function()
+                require("telescope").extensions.rest.select_env()
+            end,
+            {
+                noremap = true,
+                silent = true,
+                desc = "Search for Environment Variables"
+            })
         -- bind space + space to open telescope in normal mode for files
         vim.api.nvim_set_keymap("n", "<space><space>", ":Telescope find_files<CR>", {
             noremap = true,
