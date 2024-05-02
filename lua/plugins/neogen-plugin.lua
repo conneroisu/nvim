@@ -4,9 +4,9 @@
 
 return {
     "danymat/neogen",
+    event = "BufRead",
     config = function()
         require('neogen').setup {
-            -- snippet_engine = "luasnip",
             enabled = true,
             languages = {
                 python = {

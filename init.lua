@@ -17,16 +17,13 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	}
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
-
 require("lazy").setup {
 	{
-		-- must  be installed before lsp
 		"folke/neodev.nvim",
 		init = function()
 			require("neodev").setup()
 		end,
 	},
-	"tpope/vim-rhubarb",
 	"tpope/vim-sleuth",
 	{
 		import = "plugins",
@@ -34,7 +31,7 @@ require("lazy").setup {
 }
 
 require "config.options"
-require "misc.lsp-config"
+require "misc.ts-config"
 
 local highlight_group = vim.api.nvim_create_augroup(
 	"YankHighlight",
@@ -83,9 +80,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 			active_file:write(result)
 			active_file:close()
 			vim.cmd "e!"
-		else
-			print("Error running command:", err)
-		end
+		else print("Error running command:", err) end
 	end,
 })
 

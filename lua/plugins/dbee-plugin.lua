@@ -1,5 +1,6 @@
 return {
   "kndndrj/nvim-dbee",
+  event = "BufWritePre",
   dependencies = {
     "MunifTanjim/nui.nvim",
   },

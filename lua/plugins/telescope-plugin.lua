@@ -5,6 +5,7 @@
 return {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
+    event = 'BufWinEnter',
     dependencies = {
         {
             'nvim-lua/plenary.nvim',

@@ -3,5 +3,6 @@
 ---@license WTFPL
 
 return {
-	"tpope/vim-repeat"
+	"tpope/vim-repeat",
+	event = "BufWinEnter",
 }
