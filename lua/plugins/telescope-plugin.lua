@@ -50,12 +50,6 @@ return {
         {
             'nvim-lua/popup.nvim'
         },
-        {
-            'nvim-telescope/telescope-media-files.nvim',
-            config = function()
-                require('telescope').load_extension('media_files')
-            end,
-        }
     },
     config = function()
         local built_in = require "telescope.builtin"
