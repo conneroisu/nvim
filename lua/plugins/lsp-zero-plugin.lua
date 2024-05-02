@@ -4,6 +4,7 @@
 
 return {
     "VonHeikemen/lsp-zero.nvim",
+    lazy = true,
     dependencies = {
         "neovim/nvim-lspconfig",
         "hrsh7th/nvim-cmp",
