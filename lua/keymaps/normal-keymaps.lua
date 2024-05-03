@@ -99,10 +99,6 @@ vim.api.nvim_set_keymap("n", "<A-S-f>", ":Format<CR>", {
     desc = "Format"
 })
 
--- Extract block supports only normal mode
-vim.cmd("let g:VM_maps['Select Cursor Down'] = '<M-S-Down>'")
-vim.cmd("let g:VM_maps['Select Cursor Up'] = '<M-S-Up>'")
-
 vim.api.nvim_set_keymap("n", "n", "'Nn'[v:searchforward]", {
     expr = true,
     desc = "Next search result"

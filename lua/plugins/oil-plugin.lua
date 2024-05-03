@@ -72,18 +72,25 @@ return {
     end,
     config = function()
         local oil = require("oil")
-        oil.set_is_hidden_file(function (filename, bufnr)
-            if filename:match("node_modules") or vim.startswith(filename, ".") then
-                return true
+        local hidden_patterns = {
+            "node_modules",
+            "^%.",
+            "tmp",
+            "ltex.*"
+        }
+        oil.set_is_hidden_file(function(filename, _)
+            for _, pattern in ipairs(hidden_patterns) do
+                if filename:match(pattern) then return true end
             end
             return false
         end)
         -- bind leader + m to open oil file explorer in normal mode
-        vim.api.nvim_set_keymap("n", "<leader>m", ":Oil<CR>", {
-            noremap = true,
-            silent = true,
-            desc = "Open Oil File Explorer"
-        })
+        vim.keymap.set("n", "<leader>m", oil.open,
+            {
+                noremap = true,
+                silent = true,
+                desc = "Open Oil File Explorer"
+            })
 
         -- bind leader + m to open oil file explorer in normal mode
         vim.api.nvim_set_keymap("n", "<leader>M", ":Oil .<CR>", {

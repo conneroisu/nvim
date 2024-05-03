@@ -45,14 +45,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = highlight_group,
 	pattern = "*",
 })
-
 vim.cmd "syntax on"
 vim.cmd "set wrap!"
-
 require "keymaps.visual-keymaps"
 require "keymaps.insert-keymaps"
 require "keymaps.normal-keymaps"
-
 vim.o.statusline = vim.o.statusline .. "%F"
 vim.cmd "set rtp^='/home/conner/.opam/default/share/ocp-indent/vim'"
 require "misc.markdown"
@@ -84,5 +81,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
-vim.cmd "set list"
-vim.cmd("set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<")
+-- vim.cmd "set list"
+-- vim.cmd("set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<")
