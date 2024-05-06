@@ -1,6 +1,6 @@
 return {
   "kndndrj/nvim-dbee",
-  event = "BufWritePre",
+  dir = "/run/media/conner/source/001Repos/nvim-dbee",
   dependencies = {
     "MunifTanjim/nui.nvim",
   },

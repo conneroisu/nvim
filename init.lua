@@ -81,5 +81,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
--- vim.cmd "set list"
--- vim.cmd("set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<")
+vim.cmd "set list"
+vim.cmd("set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<")
