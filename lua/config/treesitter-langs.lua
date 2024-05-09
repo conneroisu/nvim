@@ -56,5 +56,6 @@ return {
         "verilog",
         "vhs",
         "yaml",
-        "templ"
+        "templ",
+        "pkl"
 }
