@@ -84,7 +84,6 @@ return {
                 branch = "master",
             },
         }
-
         vim.treesitter.language.register('templ', 'templ')
     end,
 }
