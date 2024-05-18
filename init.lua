@@ -57,7 +57,7 @@ require "misc.markdown"
 vim.filetype.add { extension = { templ = "templ", } }
 vim.treesitter.language.register("templ", "templ")
 
--- Format SQL files with sleek
+-- -- Format SQL files with sleek
 -- vim.api.nvim_create_autocmd("BufWritePre", {
 --         pattern = "*.sql",
 --         group = vim.api.nvim_create_augroup("FormatSQL", { clear = true }),
@@ -77,9 +77,42 @@ vim.treesitter.language.register("templ", "templ")
 --                         active_file:write(result)
 --                         active_file:close()
 --                         vim.cmd "e!"
---                 else print("Error running command:", err) end
+--                 else
+--                         print("Error running command:", err)
+--                 end
 --         end,
 -- })
 --
--- vim.cmd "set list"
--- vim.cmd("set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<")
+vim.cmd "set list"
+vim.cmd("set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<")
+
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufNewFile' }, {
+  pattern = '*.db.sql',
+  command = 'setlocal buftype=nofile',
+})
+-- -- now use the filetype to disable the write command
+-- vim.api.nvim_create_autocmd("FileWritePre", {
+--         pattern = { "*.db.sql" },
+--         command = "setlocal buftype=nofile",
+-- })
+--
+
+local function clear_lsp_log()
+    local log_path = vim.fn.expand("~/.local/state/nvim/lsp.log")
+    local file = io.open(log_path, "w")
+    if file then
+        file:close()
+        print("lsp.log cleared.")
+    else
+        print("Error: Could not open lsp.log.")
+    end
+end
+
+-- Registering the command
+vim.api.nvim_create_user_command('LspLogClear', clear_lsp_log, {})
+
+vim.api.nvim_create_user_command("Cppath", function()
+    local path = vim.fn.expand("%:p")
+    vim.fn.setreg("+", path)
+    vim.notify('Copied "' .. path .. '" to the clipboard!')
+end, {}) 

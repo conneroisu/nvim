@@ -7,12 +7,40 @@ return {
     branch = '0.1.x',
     event = 'BufWinEnter',
     dependencies = {
+        { 'nvim-telescope/telescope-media-files.nvim' },
         {
             'nvim-lua/plenary.nvim',
             config = function()
-                require('telescope').setup()
+                require('telescope').load_extension('media_files')
                 require('telescope').load_extension('project')
                 require('telescope').load_extension('rest')
+
+                require('telescope').extensions.media_files.media_files()
+                require('telescope').setup({
+                    extensions = {
+                        fzf = {
+                            fuzzy = true,
+                        },
+                        project = {
+                            default_action = "open",
+                            mappings = {
+                                ["<CR>"] = "open",
+                                ["<C-t>"] = "tabedit",
+                                ["<C-v>"] = "vsplit",
+                                ["<C-x>"] = "split",
+                            },
+                        },
+                        rest = {
+                        },
+                        media_files = {
+                            -- filetypes whitelist
+                            -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+                            filetypes = { "png", "webp", "jpg", "jpeg" },
+                            -- find command (defaults to `fd`)
+                            find_cmd = "rg"
+                        }
+                    },
+                })
             end,
             {
                 'nvim-telescope/telescope-fzf-native.nvim',

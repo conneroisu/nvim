@@ -1,4 +1,4 @@
 return {
     'fatih/vim-go',
-    event = 'BufWinEnter',
+    -- event = 'BufWinEnter',
 }

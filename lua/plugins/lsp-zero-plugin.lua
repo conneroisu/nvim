@@ -117,6 +117,9 @@ return {
             -- },
             texlab = {},
             dockerls = {},
+            emmet_ls = {
+                filetypes = { "html", "css", "scss", "javascript", "typescript", "astro", "svelte", "vue", "templ" },
+            },
             tailwindcss = {
                 filetypes = {
                     "css",
@@ -128,6 +131,9 @@ return {
                     "vue",
                     "templ"
                 }
+            },
+            terraformls = {
+                filetypes = { "terraform" },
             },
             html = {
                 filetypes = { "html", "twig", "hbs" },
