@@ -16,7 +16,7 @@ jobs:
     - name: Install Neovim
       run: |
         # move root of the the repository to ~/.config/nvim
-        cp . ~/.config/nvim
+        cp -r . ~/.config/nvim
     - name: Install Neovim
       uses: rhysd/action-setup-vim@v1
       with:
