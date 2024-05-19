@@ -1,0 +1,28 @@
+name: Test Neovim
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-zsh:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Install Neovim
+      run: |
+        # move root of the the repository to ~/.config/nvim
+        mv . ~/.config/nvim
+    - name: Install Neovim
+      uses: rhysd/action-setup-vim@v1
+      with:
+        neovim: true
+        version: v0.4.3
+
+    - name: Run tests
+      run: |
+        nvim --headless --noplugin -u tests/init.lua -c "PlenaryBustedDirectory tests/ {minimal_init = 'tests/init.lua'}"
