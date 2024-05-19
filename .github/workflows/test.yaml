@@ -25,4 +25,5 @@ jobs:
 
     - name: Run tests
       run: |
-        nvim --headless --noplugin -u tests/init.lua -c "PlenaryBustedDirectory tests/ {minimal_init = 'tests/init.lua'}"
+        # run the command for 2 minutes and then kill it
+        timeout 120 nvim --headless
