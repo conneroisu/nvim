@@ -20,4 +20,4 @@
 # # Wait for nvim to finish
 # wait $!
 #
-python test.py
+python ./scripts/test.py
