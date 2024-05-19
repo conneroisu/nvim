@@ -25,5 +25,4 @@ jobs:
 
     - name: Run tests
       run: |
-        # run the command for 2 minutes and then kill it
-        timeout 120 nvim --headless
+          sh ./scripts/test.sh
