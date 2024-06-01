@@ -82,20 +82,14 @@ vim.treesitter.language.register("templ", "templ")
 --                 end
 --         end,
 -- })
---
-vim.cmd "set list"
-vim.cmd("set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<")
+
+-- vim.cmd "set list"
+-- vim.cmd("set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<")
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufNewFile' }, {
   pattern = '*.db.sql',
   command = 'setlocal buftype=nofile',
 })
--- -- now use the filetype to disable the write command
--- vim.api.nvim_create_autocmd("FileWritePre", {
---         pattern = { "*.db.sql" },
---         command = "setlocal buftype=nofile",
--- })
---
 
 local function clear_lsp_log()
     local log_path = vim.fn.expand("~/.local/state/nvim/lsp.log")

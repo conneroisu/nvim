@@ -45,13 +45,13 @@ return {
 		})
 
 		-- map leader + x + x to toggle the document diagnostics from trouble in normal mode
-		vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", {
+		vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble diagnostics<cr>", {
 			desc = "Document Diagnostics (Trouble)"
 		})
 
 
 		-- map leader + x + X to toggle the workspace diagnostics from trouble in normal mode
-		vim.api.nvim_set_keymap("n", "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", {
+		vim.api.nvim_set_keymap("n", "<leader>xX", "<cmd>Trouble diagnostics<cr>", {
 			desc = "Workspace Diagnostics (Trouble)"
 		})
 

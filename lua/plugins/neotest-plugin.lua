@@ -93,7 +93,7 @@ return {
 	-- stylua: ignore
 	keys = {
 		{
-			"<leader>tt",
+			"<leader>tf",
 			function() require("neotest").run.run(vim.fn.expand("%")) end,
 			desc =
 			"Run File"
