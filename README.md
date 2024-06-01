@@ -9,31 +9,35 @@ It is a work in progress and will be updated as I continue to learn more about N
 Conner Ohnesorge's Personal Neovim Configuration.
 
 Languages setup for:
-- Lua
-- Vimscript
-- Python
-- Shell (Zsh)
-- Markdown
-- JSON
-- YAML
-- TOML
-- HTML
-- CSS
-- JavaScript
-- TypeScript
-- Rust
-- C/C++
-- Java
-- Kotlin
-- Golang
-- Ocaml
-- Templ
+- [ Lua ](https://lua.org/)
+- [ Python ](https://www.python.org/)
+- [ Shell (Zsh) ](https://www.zsh.org/)
+- [ Bash ](https://www.gnu.org/software/bash/)
+- [ Markdown ](https://www.markdownguide.org/)
+- [ JSON ](https://www.json.org/)
+- [ YAML ](https://yaml.org/)
+- [ TOML ](https://toml.io/)
+- [ HTML ](https://www.w3.org/TR/html/)
+- [ CSS ](https://www.w3.org/Style/CSS/)
+- [ JavaScript ](https://www.ecma-international.org/publications/standards/Ecma-262.htm)
+- [ TypeScript ](https://www.typescriptlang.org/)
+- [ Rust ](https://www.rust-lang.org/)
+- [ Zig ](https://ziglang.org/)
+- [ C ](https://en.wikipedia.org/wiki/C_(programming_language))
+- [ C++ ](https://en.wikipedia.org/wiki/C%2B%2B)
+- [ Java ](https://www.java.com/)
+- [ Kotlin ](https://kotlinlang.org/)
+- [ Golang ](https://go.dev/)
+- [ Ocaml ](https://ocaml.org/)
+- [ Templ ](https://templ.guide/)
 - Dockerfile
+- Docker Compose
 - SQL
 - PHP
 - R
 - Lua
 - C#
+- [ Vimscript ](https://vim.fandom.com/wiki/Vimscript)
 
 
 ## Installation
