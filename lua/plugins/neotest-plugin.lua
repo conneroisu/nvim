@@ -27,9 +27,10 @@ return {
 			},
 			["neotest-go"] = {
 				runner = "go test",
-				is_test_file = function(file_path)
-					return file_path:match("_test%.go")
-				end,
+				experimental = {
+					test_table = true,
+				},
+				args = { "-count=1", "-timeout=60s" }
 			},
 		},
 		status = { virtual_text = true },
@@ -56,7 +57,6 @@ return {
 				end,
 			},
 		}, neotest_ns)
-
 		if opts.adapters then
 			local adapters = {}
 			for name, config in pairs(opts.adapters or {}) do
@@ -90,19 +90,16 @@ return {
 			silent = true
 		})
 	end,
-	-- stylua: ignore
 	keys = {
 		{
 			"<leader>tf",
 			function() require("neotest").run.run(vim.fn.expand("%")) end,
-			desc =
-			"Run File"
+			desc = "Run File"
 		},
 		{
 			"<leader>tT",
 			function() require("neotest").run.run(vim.loop.cwd()) end,
-			desc =
-			"Run All Test Files"
+			desc = "Run All Test Files"
 		},
 		{
 			"<leader>tr",

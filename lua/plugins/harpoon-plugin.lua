@@ -4,6 +4,7 @@
 
 return {
     "ThePrimeagen/harpoon",
+    branch = "master",
     config = function()
         -- bind harpoon view all project marks to space + h
         vim.api.nvim_set_keymap("n", "<space>h", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", {

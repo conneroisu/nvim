@@ -56,6 +56,7 @@ return {
                 { name = 'buffer' },
                 { name = 'path' },
                 { name = "cmp-dbee" },
+    -- { name = "supermaven" },
             }),
             experimental = {
                 ghost_text = {

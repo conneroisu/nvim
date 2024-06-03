@@ -30,13 +30,14 @@ Languages setup for:
 - [ Golang ](https://go.dev/)
 - [ Ocaml ](https://ocaml.org/)
 - [ Templ ](https://templ.guide/)
-- Dockerfile
-- Docker Compose
-- SQL
-- PHP
-- R
-- Lua
-- C#
+- [ Dockerfile ](https://docs.docker.com/engine/reference/builder/)
+- [ Docker Compose ](https://docs.docker.com/compose/)
+- [ sqlite ](https://www.sqlite.org/index.html)
+- [ PostgreSQL ](https://www.postgresql.org/)
+- [ MySQL ](https://www.mysql.com/)
+- [ PHP ](https://www.php.net/)
+- [ R ](https://www.r-project.org/)
+- [ C# ](https://docs.microsoft.com/en-us/dotnet/csharp/)
 - [ Vimscript ](https://vim.fandom.com/wiki/Vimscript)
 
 
