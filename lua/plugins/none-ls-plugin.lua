@@ -4,7 +4,7 @@ return {
     config = function()
         local null_ls = require("null-ls")
         null_ls.setup({
-            sources = { null_ls.builtins.formatting.emacs_vhdl_mode }
+            sources = { null_ls.builtins.formatting.emacs_vhdl_mode, null_ls.builtins.diagnostics.revive }
         })
     end
 }

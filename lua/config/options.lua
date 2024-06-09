@@ -2,6 +2,7 @@
 ---@author Conner Ohnesorge
 ---@license WTFPL
 
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
