@@ -9,6 +9,7 @@ return {
         require("gopher").setup {
             commands = {
                 go = "go",
+                dlv = "dlv",
                 gomodifytags = "gomodifytags",
                 gotests = "gotests", -- also you can set custom command path
                 impl = "impl",

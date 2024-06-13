@@ -17,7 +17,7 @@ return {
         local lua_opts = lsp.nvim_lua_ls()
         lspconfig.lua_ls.setup(lua_opts)
         local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-        lsp.on_attach(function(client, bufnr)
+        local on_attach = function(client, bufnr)
             local opts = { buffer = bufnr, remap = true }
             vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
                 vim.lsp.buf.format()
@@ -89,7 +89,9 @@ return {
             vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
             vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
             require('mason').setup()
-        end)
+        end
+
+        lsp.on_attach(on_attach)
         lsp.setup()
         --  define the property "filetypes" to the map in question, to override the default filetypes of a server.
         local servers = {
@@ -165,6 +167,7 @@ return {
             },
             veridian = {
                 cmd = { 'veridian' },
+                filetypes = { "v", "verilog" },
                 root_dir = function(fname)
                     local root_pattern = lsp_config_util.root_pattern("veridian.yml", ".git")
                     local filename = lsp_config_util.path.is_absolute(fname) and fname
@@ -184,6 +187,10 @@ return {
                 auto_start = true,
             },
             ghdl_ls = {
+                config = {
+                    name = "ghdl_ls",
+                    filetypes = { "vhdl", "vhd" },
+                },
                 filetypes = { "vhdl", "vhd" },
                 root_dir = function(fname)
                     return lsp_config_util.find_git_ancestor(fname) or lsp_config_util.path.dirname(fname)
@@ -191,20 +198,41 @@ return {
                 auto_start = true,
             },
             basedpyright = {
+                name = "basedpyright",
+                config = {
+                    name = "basedpyright",
+                    filetypes = { "python", "py" },
+                },
                 auto_start = true,
             },
             sqls = {
+                config = {
+                    name = "sqls",
+                },
                 on_attach = function(client, bufnr)
                     require('sqls').on_attach(client, bufnr)
                 end,
                 auto_start = true,
             },
             templ = {
-                filetypes = { "templ" },
                 root_dir = function(fname)
                     return lsp_config_util.root_pattern('go.mod', '.git')(fname)
                 end,
+
+                config = {
+                    name = "templ",
+                    filetypes = { "templ" },
+                },
                 auto_start = true,
+            },
+            tools = {
+                filetypes = { "go", "gomod" },
+                cmd = { "/run/media/conner/source/001Repos/seltabl/tools/tools" },
+                auto_start = true,
+                on_attach = on_attach,
+                root_dir = function(fname)
+                    return lsp_config_util.root_pattern('go.mod', '.git')(fname)
+                end,
             },
         }
         for server_name, server_config in pairs(custom_servers) do
@@ -217,5 +245,8 @@ return {
             end
             lspconfig[server_name].setup(server_config)
         end
+
+        print("hello")
+        require "seltabl.seltabl"
     end,
 }

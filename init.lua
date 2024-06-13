@@ -111,21 +111,4 @@ vim.api.nvim_create_user_command("Cppath", function()
     vim.notify('Copied "' .. path .. '" to the clipboard!')
 end, {})
 
----@diagnostic disable-next-line: missing-fields
-local client = vim.lsp.start {
-	name = "seltabl-lsp",
-	cmd = { "/run/media/conner/source/001Repos/seltabl/tools/tools" },
-}
-
-if not client then
-	vim.notify("Failed to start seltabl-lsp")
-	return
-end
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "go",
-	callback = function()
-		vim.lsp.buf.attach_client(0, client)
-	end,
-})
 
