@@ -10,6 +10,7 @@ return {
 				accept_word = "<C-RIGHT>",
 				accept_suggestion = "<C-j>"
 			},
+			disable_inline_completion = false,
 		})
 	end,
 }
