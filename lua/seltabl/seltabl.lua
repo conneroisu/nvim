@@ -1,7 +1,15 @@
+local cmd = ""
+-- if it is linux then url is /run/media/conner/source/001Repos/seltabl/tools/tools
+-- if it is mac then url is /Users/conneroisu/source/001Repos/seltabl/tools/tools
+if vim.fn.has "mac" == 1 then
+	cmd = "/Users/connerohnesorge/Documents/001Repos/seltabl/tools/tools"
+elseif vim.fn.has "linux" == 1 then
+	cmd = "/run/media/conner/source/001Repos/seltabl/tools/tools"
+end
 ---@diagnostic disable-next-line: missing-fields
 local client = vim.lsp.start {
 	name = "tools",
-	cmd = { "/run/media/conner/source/001Repos/seltabl/tools/tools" },
+	cmd = { cmd },
 	on_attach = function(cli, bufnr)
 		local opts = { buffer = bufnr, remap = true }
 		vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
