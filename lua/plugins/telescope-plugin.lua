@@ -8,6 +8,7 @@ return {
     event = 'BufWinEnter',
     dependencies = {
         { 'nvim-telescope/telescope-media-files.nvim' },
+        { 'nvim-telescope/telescope-ui-select.nvim' },
         {
             'nvim-lua/plenary.nvim',
             config = function()
