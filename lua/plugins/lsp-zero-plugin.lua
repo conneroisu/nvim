@@ -17,7 +17,7 @@ return {
         local lua_opts = lsp.nvim_lua_ls()
         lspconfig.lua_ls.setup(lua_opts)
         local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-        local on_attach = function(client, bufnr)
+        local on_attach = function(_, bufnr)
             local opts = { buffer = bufnr, remap = true }
             vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
                 vim.lsp.buf.format()
@@ -159,94 +159,124 @@ return {
         }
         local custom_servers = {
             vhdl_ls = {
-                filetypes = { "vhdl", "vhd" },
-                root_dir = function(fname)
-                    return lsp_config_util.root_pattern('vhdl_ls.toml')(fname)
-                end,
-                auto_start = true,
+                config = {
+                    root_dir = function(fname)
+                        return lsp_config_util.root_pattern('vhdl_ls.toml')(fname)
+                    end,
+                    name = "vhdl_ls",
+                    filetypes = { "vhdl", "vhd" },
+                    setup = function(server)
+                        server.config.on_attach = on_attach
+                    end,
+                    auto_start = true,
+                },
             },
             veridian = {
-                cmd = { 'veridian' },
-                filetypes = { "v", "verilog" },
-                root_dir = function(fname)
-                    local root_pattern = lsp_config_util.root_pattern("veridian.yml", ".git")
-                    local filename = lsp_config_util.path.is_absolute(fname) and fname
-                        or lsp_config_util.path.join(vim.loop.cwd(), fname)
-                    return root_pattern(filename) or lsp_config_util.path.dirname(filename)
-                end,
-                auto_start = true,
+                config = {
+                    name = "veridian",
+                    cmd = { 'veridian' },
+                    filetypes = { "v", "verilog" },
+                    setup = function(server)
+                        server.config.on_attach = on_attach
+                    end,
+                    root_dir = function(fname)
+                        local root_pattern = lsp_config_util.root_pattern("veridian.yml", ".git")
+                        local filename = lsp_config_util.path.is_absolute(fname) and fname
+                            or lsp_config_util.path.join(vim.loop.cwd(), fname)
+                        return root_pattern(filename) or lsp_config_util.path.dirname(filename)
+                    end,
+                    auto_start = true,
+                },
             },
             hdl_checker = {
-                filetypes = {
-                    "vhdl",
-                    "vhd"
+                config = {
+                    name = "hdl_checker",
+                    filetypes = { "vhdl", "vhd" },
+                    root_dir = function(fname)
+                        return lsp_config_util.find_git_ancestor(fname) or lsp_config_util.path.dirname(fname)
+                    end,
+                    setup = function(server)
+                        server.config.on_attach = on_attach
+                    end,
+                    auto_start = true,
                 },
-                root_dir = function(fname)
-                    return lsp_config_util.find_git_ancestor(fname) or lsp_config_util.path.dirname(fname)
-                end,
-                auto_start = true,
             },
             ghdl_ls = {
                 config = {
                     name = "ghdl_ls",
                     filetypes = { "vhdl", "vhd" },
+                    setup = function(server)
+                        server.config.on_attach = on_attach
+                    end,
+                    root_dir = function(fname)
+                        return lsp_config_util.find_git_ancestor(fname) or lsp_config_util.path.dirname(fname)
+                    end,
+                    auto_start = true,
                 },
-                filetypes = { "vhdl", "vhd" },
-                root_dir = function(fname)
-                    return lsp_config_util.find_git_ancestor(fname) or lsp_config_util.path.dirname(fname)
-                end,
-                auto_start = true,
             },
             basedpyright = {
-                name = "basedpyright",
                 config = {
                     name = "basedpyright",
                     filetypes = { "python", "py" },
+                    setup = function(server)
+                        server.config.on_attach = on_attach
+                    end,
+                    auto_start = true,
                 },
-                auto_start = true,
             },
             sqls = {
                 config = {
                     name = "sqls",
+                    filetypes = { "sql", "mysql", "postgresql", "plpgsql", "psql" },
+                    setup = function(server)
+                        server.config.on_attach = on_attach
+                    end,
+                    on_attach = function(client, bufnr)
+                        require('sqls').on_attach(client, bufnr)
+                    end,
+                    auto_start = true,
                 },
-                on_attach = function(client, bufnr)
-                    require('sqls').on_attach(client, bufnr)
-                end,
-                auto_start = true,
             },
             templ = {
-                root_dir = function(fname)
-                    return lsp_config_util.root_pattern('go.mod', '.git')(fname)
-                end,
-
                 config = {
                     name = "templ",
                     filetypes = { "templ" },
+                    setup = function(server)
+                        server.config.on_attach = on_attach
+                    end,
+                    root_dir = function(fname)
+                        return lsp_config_util.root_pattern('go.mod', '.git')(fname)
+                    end,
+                    auto_start = true,
                 },
-                auto_start = true,
             },
-            tools = {
-                filetypes = { "go", "gomod" },
-                cmd = { "/run/media/conner/source/001Repos/seltabl/tools/tools" },
-                auto_start = true,
-                on_attach = on_attach,
-                root_dir = function(fname)
-                    return lsp_config_util.root_pattern('go.mod', '.git')(fname)
-                end,
+            seltabl_lsp = {
+                config = {
+                    filetypes = { "go", "gomod" },
+                    cmd = { "/run/media/conner/source/001Repos/seltabl/tools/seltabl-lsp/seltabl-lsp" },
+                    name = "seltabl_lsp",
+                    setup = function(server)
+                        server.config.on_attach = on_attach
+                    end,
+                    root_dir = function(fname)
+                        return lsp_config_util.root_pattern('go.mod', '.git')(fname)
+                    end,
+                    auto_start = true,
+                    on_attach = on_attach,
+                },
             },
         }
         for server_name, server_config in pairs(custom_servers) do
             if not lspconfig[server_name] then
                 lspconfig[server_name] = {
-                    default_config = server_config,
+                    default_config = server_config.config,
                 }
             else
-                lspconfig[server_name].config = server_config
+                lspconfig[server_name].config = server_config.config
             end
-            lspconfig[server_name].setup(server_config)
+            lspconfig[server_name].setup(server_config.config)
         end
 
-        print("hello")
         require "seltabl.seltabl"
     end,
 }

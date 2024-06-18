@@ -6,7 +6,7 @@ return {
         null_ls.setup({
             sources = {
                 null_ls.builtins.formatting.emacs_vhdl_mode,
-                -- null_ls.builtins.diagnostics.revive
+                null_ls.builtins.diagnostics.revive
             }
         })
     end

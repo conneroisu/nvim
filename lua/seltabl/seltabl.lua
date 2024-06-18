@@ -2,15 +2,16 @@ local cmd = ""
 -- if it is linux then url is /run/media/conner/source/001Repos/seltabl/tools/tools
 -- if it is mac then url is /Users/conneroisu/source/001Repos/seltabl/tools/tools
 if vim.fn.has "mac" == 1 then
-	cmd = "/Users/connerohnesorge/Documents/001Repos/seltabl/tools/tools"
+	cmd = "/Users/connerohnesorge/Documents/001Repos/seltabl/tools/seltabl-lsp/seltabl-lsp"
 elseif vim.fn.has "linux" == 1 then
-	cmd = "/run/media/conner/source/001Repos/seltabl/tools/tools"
+	cmd = "/run/media/conner/source/001Repos/seltabl/tools/seltabl-lsp/seltabl-lsp"
 end
+cmd = "/run/media/conner/source/001Repos/seltabl/tools/seltabl-lsp/seltabl-lsp"
 ---@diagnostic disable-next-line: missing-fields
 local client = vim.lsp.start {
-	name = "tools",
+	name = "seltabl_lsp",
 	cmd = { cmd },
-	on_attach = function(cli, bufnr)
+	on_attach = function(_, bufnr)
 		local opts = { buffer = bufnr, remap = true }
 		vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 			vim.lsp.buf.format()
@@ -93,7 +94,7 @@ end
 
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "go",
+	pattern = "*.go",
 	callback = function()
 		local bufnr = vim.api.nvim_get_current_buf()
 		vim.lsp.buf_attach_client(bufnr, client)
