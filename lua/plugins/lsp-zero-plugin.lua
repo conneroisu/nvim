@@ -1,7 +1,14 @@
 ---@module "lsp-zero-plugin"
 ---@author Conner Ohnesorge
 ---@license WTFPL
-
+local cmd = ""
+-- if it is linux then url is /run/media/conner/source/001Repos/seltabl/tools/tools
+-- if it is mac then url is /Users/conneroisu/source/001Repos/seltabl/tools/tools
+if vim.fn.has "mac" == 1 then
+	cmd = "/Users/connerohnesorge/Documents/001Repos/seltabl/tools/seltabl-lsp/seltabl-lsp"
+elseif vim.fn.has "linux" == 1 then
+	cmd = "/run/media/conner/source/001Repos/seltabl/tools/seltabl-lsp/seltabl-lsp"
+end
 return {
     "VonHeikemen/lsp-zero.nvim",
     event = "BufReadPre",
@@ -253,7 +260,7 @@ return {
             seltabl_lsp = {
                 config = {
                     filetypes = { "go", "gomod" },
-                    cmd = { "/run/media/conner/source/001Repos/seltabl/tools/seltabl-lsp/seltabl-lsp" },
+                    cmd = cmd,
                     name = "seltabl_lsp",
                     setup = function(server)
                         server.config.on_attach = on_attach

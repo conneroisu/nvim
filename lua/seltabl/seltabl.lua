@@ -6,7 +6,6 @@ if vim.fn.has "mac" == 1 then
 elseif vim.fn.has "linux" == 1 then
 	cmd = "/run/media/conner/source/001Repos/seltabl/tools/seltabl-lsp/seltabl-lsp"
 end
-cmd = "/run/media/conner/source/001Repos/seltabl/tools/seltabl-lsp/seltabl-lsp"
 ---@diagnostic disable-next-line: missing-fields
 local client = vim.lsp.start {
 	name = "seltabl_lsp",
