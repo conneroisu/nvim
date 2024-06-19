@@ -266,6 +266,12 @@ return {
                 },
             },
         }
+        lspconfig["seltabl_lsp"] = {
+            default_config = custom_servers.seltabl_lsp.config,
+            config = custom_servers.seltabl_lsp.config,
+            setup = function()
+            end,
+        }
         for server_name, server_config in pairs(custom_servers) do
             if not lspconfig[server_name] then
                 lspconfig[server_name] = {

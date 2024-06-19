@@ -87,28 +87,71 @@ vim.treesitter.language.register("templ", "templ")
 -- vim.cmd("set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<")
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufNewFile' }, {
-  pattern = '*.db.sql',
-  command = 'setlocal buftype=nofile',
+	pattern = '*.db.sql',
+	command = 'setlocal buftype=nofile',
 })
 
 local function clear_lsp_log()
-    local log_path = vim.fn.expand("~/.local/state/nvim/lsp.log")
-    local file = io.open(log_path, "w")
-    if file then
-        file:close()
-        print("lsp.log cleared.")
-    else
-        print("Error: Could not open lsp.log.")
-    end
+	local log_path = vim.fn.expand("~/.local/state/nvim/lsp.log")
+	local file = io.open(log_path, "w")
+	if file then
+		file:close()
+		print("lsp.log cleared.")
+	else
+		print("Error: Could not open lsp.log.")
+	end
 end
 
 -- Registering the command
 vim.api.nvim_create_user_command('LspLogClear', clear_lsp_log, {})
 
 vim.api.nvim_create_user_command("Cppath", function()
-    local path = vim.fn.expand("%:p")
-    vim.fn.setreg("+", path)
-    vim.notify('Copied "' .. path .. '" to the clipboard!')
+	local path = vim.fn.expand("%:p")
+	vim.fn.setreg("+", path)
+	vim.notify('Copied "' .. path .. '" to the clipboard!')
 end, {})
 
 
+-- Read seltabl.logs command
+vim.api.nvim_create_user_command("SeltablLogs", function()
+	local log_path = vim.fn.expand("~/.config/seltabl-lsp/seltabl.log")
+	vim.cmd(":e " .. log_path)
+end, {})
+
+-- Clear seltabl.logs command
+vim.api.nvim_create_user_command("SeltablClearLogs", function()
+	local log_path = vim.fn.expand("~/.config/seltabl-lsp/seltabl.log")
+	local file = io.open(log_path, "w")
+	if file then
+		file:close()
+		print("seltabl.log cleared.")
+	else
+		print("Error: Could not open seltabl.log.")
+	end
+end, {})
+
+vim.api.nvim_create_user_command("SeltablStateLogs", function()
+	local log_path = vim.fn.expand("~/.config/seltabl-lsp/state.log")
+	vim.cmd(":e " .. log_path)
+end, {})
+
+vim.api.nvim_create_user_command("SeltablStateClearLogs", function()
+	local log_path = vim.fn.expand("~/.config/seltabl-lsp/state.log")
+	local file = io.open(log_path, "w")
+	if file then
+		file:close()
+		print("state.log cleared.")
+	else
+		print("Error: Could not open state.log.")
+	end
+end, {})
+
+vim.api.nvim_create_user_command("SeltablDb", function()
+	local log_path = vim.fn.expand("~/.config/seltabl-lsp/urls.sqlite")
+	vim.cmd(":e " .. log_path)
+end, {})
+
+vim.api.nvim_create_user_command("SeltablDbClear", function()
+	local log_path = vim.fn.expand("~/.config/seltabl-lsp/urls.sqlite")
+	os.execute("rm " .. log_path)
+end, {})
