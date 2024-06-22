@@ -1,14 +1,7 @@
 ---@module "lsp-zero-plugin"
 ---@author Conner Ohnesorge
 ---@license WTFPL
-local cmd = ""
--- if it is linux then url is /run/media/conner/source/001Repos/seltabl/tools/tools
--- if it is mac then url is /Users/conneroisu/source/001Repos/seltabl/tools/tools
-if vim.fn.has "mac" == 1 then
-	cmd = "/Users/connerohnesorge/Documents/001Repos/seltabl/tools/seltabl-lsp/seltabl-lsp"
-elseif vim.fn.has "linux" == 1 then
-	cmd = "/run/media/conner/source/001Repos/seltabl/tools/seltabl-lsp/seltabl-lsp"
-end
+
 return {
     "VonHeikemen/lsp-zero.nvim",
     event = "BufReadPre",
@@ -257,11 +250,12 @@ return {
                     auto_start = true,
                 },
             },
-            seltabl_lsp = {
+            seltabls = {
+                filetypes = { "go", "gomod" },
                 config = {
                     filetypes = { "go", "gomod" },
-                    cmd = cmd,
-                    name = "seltabl_lsp",
+                    cmd = { "seltabls" },
+                    name = "seltabls",
                     setup = function(server)
                         server.config.on_attach = on_attach
                     end,
@@ -273,9 +267,9 @@ return {
                 },
             },
         }
-        lspconfig["seltabl_lsp"] = {
-            default_config = custom_servers.seltabl_lsp.config,
-            config = custom_servers.seltabl_lsp.config,
+        lspconfig["seltabls"] = {
+            default_config = custom_servers.seltabls.config,
+            config = custom_servers.seltabls.config,
             setup = function()
             end,
         }

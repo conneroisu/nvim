@@ -176,5 +176,6 @@ vim.api.nvim_create_user_command("SeltablClearAll", function()
 	end
 
 	log_path = vim.fn.expand("~/.config/seltabl-lsp/uri.sqlite")
+	print("Removing " .. log_path)
 	os.execute("rm " .. log_path)
 end, {})
