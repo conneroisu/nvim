@@ -6,60 +6,20 @@ return {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
     config = function()
-        -- bind harpoon view all project marks to space + h
-        vim.api.nvim_set_keymap("n", "<space>h", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", {
-            noremap = true,
-            silent = true,
-            desc = "View all harpoon marks"
-        })
+        local harpoon = require("harpoon")
 
-        -- bind harpoon navigate next to alt + h
-        vim.api.nvim_set_keymap("n", "<A-h>", ":lua require('harpoon.ui').nav_next()<CR>", {
-            noremap = true,
-            silent = true,
-            desc = "Navigate to next harpoon mark"
-        })
+        harpoon:setup()
 
-        -- bind harpoon navigate previous to alt + l
-        vim.api.nvim_set_keymap("n", "<A-l>", ":lua require('harpoon.ui').nav_prev()<CR>", {
-            noremap = true,
-            silent = true,
-            desc = "Navigate to previous harpoon mark"
-        })
+        vim.keymap.set("n", "<space>m", function() harpoon:list():add() end)
+        vim.keymap.set("n", "<space>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
-        -- bind harpoon mark / add file to space + m
-        vim.api.nvim_set_keymap("n", "<space>m", ":lua require('harpoon.mark').add_file()<CR>", {
-            noremap = true,
-            silent = true,
-            desc = "Add file to harpoon list of files"
-        })
+        vim.keymap.set("n", "<M-1>", function() harpoon:list():select(1) end)
+        vim.keymap.set("n", "<M-2>", function() harpoon:list():select(2) end)
+        vim.keymap.set("n", "<M-3>", function() harpoon:list():select(3) end)
+        vim.keymap.set("n", "<M-4>", function() harpoon:list():select(4) end)
 
-        -- Bind harpoon go to first mark to Alt + 1
-        vim.api.nvim_set_keymap("n", "<M-1>", ":lua require('harpoon.ui').nav_file(1)<CR>", {
-            noremap = true,
-            silent = true,
-            desc = "Navigate to first harpoon mark"
-        })
-
-        -- Bind harpoon go to second mark to Ctrl + 2
-        vim.api.nvim_set_keymap("n", "<M-2>", ":lua require('harpoon.ui').nav_file(2)<CR>", {
-            noremap = true,
-            silent = true,
-            desc = "Navigate to second harpoon mark"
-        })
-
-        -- Bind harpoon go to third mark to Ctrl + 3
-        vim.api.nvim_set_keymap("n", "<M-3>", ":lua require('harpoon.ui').nav_file(3)<CR>", {
-            noremap = true,
-            silent = true,
-            desc = "Navigate to third harpoon mark"
-        })
-
-        -- Bind harpoon go to fourth mark to Ctrl + 4
-        vim.api.nvim_set_keymap("n", "<C-4>", ":lua require('harpoon.ui').nav_file(4)<CR>", {
-            noremap = true,
-            silent = true,
-            desc = "Navigate to fourth harpoon mark"
-        })
+        -- Toggle previous & next buffers stored within Harpoon list
+        vim.keymap.set("n", "<A-l>", function() harpoon:list():prev() end)
+        vim.keymap.set("n", "<A-h>", function() harpoon:list():next() end)
     end
 }

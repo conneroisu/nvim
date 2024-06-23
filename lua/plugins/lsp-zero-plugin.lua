@@ -9,6 +9,17 @@ return {
         "neovim/nvim-lspconfig",
         "hrsh7th/nvim-cmp",
         "hrsh7th/cmp-nvim-lsp",
+        {
+            'nvimdev/lspsaga.nvim',
+            event = "LspAttach",
+            config = function()
+                require('lspsaga').setup({})
+            end,
+            dependencies = {
+                'nvim-treesitter/nvim-treesitter', -- optional
+                'nvim-tree/nvim-web-devicons', -- optional
+            }
+        },
     },
     config = function()
         local lsp = require("lsp-zero")
@@ -130,6 +141,7 @@ return {
                     "typescript",
                     "astro",
                     "svelte",
+                    "html",
                     "vue",
                     "templ"
                 }
