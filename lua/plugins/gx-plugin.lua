@@ -9,7 +9,7 @@ return {
     -- you can specify also another config if you want
     config = function()
         require("gx").setup {
-            open_browser_app = "thorium-browser", -- specify your browser app; default for macOS is "open", Linux "xdg-open" and Windows "powershell.exe"
+            open_browser_app = "google-chrome", -- specify your browser app; default for macOS is "open", Linux "xdg-open" and Windows "powershell.exe"
             open_browser_args = { "--background --password-store=gnome-libsecret" }, -- specify any arguments, such as --background for macOS' "open".
             handlers = {
                 plugin = true,                -- open plugin links in lua (e.g. packer, lazy, ..)

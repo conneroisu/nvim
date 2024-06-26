@@ -45,9 +45,6 @@ return {
             row = 0,
             col = 1
          },
-         yadm                         = {
-            enable = false
-         },
       }
       require('gitsigns').setup {
          on_attach = function(bufnr)

@@ -57,5 +57,4 @@ return {
         "vhs",
         "yaml",
         "templ",
-        "pkl"
 }
