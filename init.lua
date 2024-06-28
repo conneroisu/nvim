@@ -138,19 +138,3 @@ vim.api.nvim_create_user_command("SeltablDbClear", function()
 	os.execute("rm " .. log_path)
 end, {})
 
--- clear all command
-vim.api.nvim_create_user_command("SeltablClearAll", function()
-	local log_path = vim.fn.expand("~/.config/seltabls/state.log")
-	local file = io.open(log_path, "w")
-	if file then
-		file:close()
-		print("state.log cleared.")
-	else
-		print("Error: Could not open state.log.")
-	end
-end
-
-	log_path = vim.fn.expand("~/.config/seltabls/uri.sqlite")
-	print("Removing " .. log_path)
-	os.execute("rm " .. log_path)
-end, {})

@@ -3,7 +3,7 @@
 ---@diagnostic disable-next-line: missing-fields
 local client = vim.lsp.start {
 	name = "seltabls",
-	cmd = { "seltabls" },
+	cmd = { "seltabls", "lsp" },
 	on_attach = function(_, bufnr)
 		local opts = { buffer = bufnr, remap = true }
 		vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)

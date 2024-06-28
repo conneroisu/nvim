@@ -266,7 +266,7 @@ return {
                 filetypes = { "go", "gomod" },
                 config = {
                     filetypes = { "go", "gomod" },
-                    cmd = { "seltabls" },
+                    cmd = { "seltabls", "lsp" },
                     name = "seltabls",
                     setup = function(server)
                         server.config.on_attach = on_attach
