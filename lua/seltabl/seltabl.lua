@@ -89,7 +89,7 @@ end
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = "*.go",
 	callback = function()
-		-- local bufnr = vim.api.nvim_get_current_buf()
-		-- vim.lsp.buf_attach_client(bufnr, client)
+		local bufnr = vim.api.nvim_get_current_buf()
+		vim.lsp.buf_attach_client(bufnr, client)
 	end
 })
