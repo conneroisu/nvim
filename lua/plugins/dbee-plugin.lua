@@ -1,6 +1,5 @@
 return {
   "kndndrj/nvim-dbee",
-  dir = "/run/media/conner/source/001Repos/nvim-dbee",
   dependencies = {
     "MunifTanjim/nui.nvim",
   },
