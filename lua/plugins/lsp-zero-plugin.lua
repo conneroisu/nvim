@@ -152,10 +152,6 @@ return {
             html = {
                 filetypes = { "html", "twig", "hbs" },
             },
-            hdl_checker = {
-                filetypes = { "vhdl", "vhd" },
-                cmd = { "hdl_checker", "--lsp" },
-            },
         }
         local mason_lspconfig = require "mason-lspconfig"
         mason_lspconfig.setup { ensure_installed = vim.tbl_keys(servers) }
@@ -196,19 +192,6 @@ return {
                         local filename = lsp_config_util.path.is_absolute(fname) and fname
                             or lsp_config_util.path.join(vim.loop.cwd(), fname)
                         return root_pattern(filename) or lsp_config_util.path.dirname(filename)
-                    end,
-                    auto_start = true,
-                },
-            },
-            hdl_checker = {
-                config = {
-                    name = "hdl_checker",
-                    filetypes = { "vhdl", "vhd" },
-                    root_dir = function(fname)
-                        return lsp_config_util.find_git_ancestor(fname) or lsp_config_util.path.dirname(fname)
-                    end,
-                    setup = function(server)
-                        server.config.on_attach = on_attach
                     end,
                     auto_start = true,
                 },
