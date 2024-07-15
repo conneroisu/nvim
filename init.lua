@@ -145,3 +145,5 @@ vim.api.nvim_create_user_command("SeltablClearAll", function()
 	local log_path = vim.fn.expand("~/.config/seltabls/uri.sqlite")
 	os.execute("rm " .. log_path)
 end, {})
+
+vim.lsp.set_log_level("debug")

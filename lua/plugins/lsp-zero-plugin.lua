@@ -35,12 +35,12 @@ return {
             end, {
                 desc = "Format current buffer with LSP",
             })
-            vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, {
+            vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", {
                 buffer = bufnr,
                 remap = true,
                 desc = "[R]e[n]ame"
             })
-            vim.keymap.set("n", "<leader>cf", function() vim.lsp.buf.code_action() end, {
+            vim.keymap.set("n", "<leader>cf", "<cmd>Lspsaga code_action<CR>", {
                 buffer = bufnr,
                 remap = true,
                 desc = "[C]ode [A]ction"
