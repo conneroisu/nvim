@@ -117,28 +117,6 @@ vim.api.nvim_create_user_command("SeltablStateLogs", function()
 	vim.cmd(":e " .. log_path)
 end, {})
 
-vim.api.nvim_create_user_command("SeltablStateClearLogs", function()
-	local log_path = vim.fn.expand("~/.config/seltabls/state.log")
-	local file = io.open(log_path, "w")
-	if file then
-		file:close()
-		print("state.log cleared.")
-	else
-		print("Error: Could not open state.log.")
-	end
-end, {})
-
-vim.api.nvim_create_user_command("SeltablDb", function()
-	local log_path = vim.fn.expand("~/.config/seltabls/uri.sqlite")
-	vim.cmd(":e " .. log_path)
-end, {})
-
-vim.api.nvim_create_user_command("SeltablDbClear", function()
-	local log_path = vim.fn.expand("~/.config/seltabls/uri.sqlite")
-	os.execute("rm " .. log_path)
-end, {})
-
-
 vim.api.nvim_create_user_command("SeltablClearAll", function()
 	local log_path = vim.fn.expand("~/.config/seltabls/state.log")
 	os.execute("rm " .. log_path)
