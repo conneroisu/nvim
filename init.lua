@@ -27,6 +27,8 @@ require("lazy").setup {
 				library = {
 					-- See the configuration section for more details
 					-- Load luvit types when the `vim.uv` word is found
+					"lazy.nvim",
+					"luvit-meta/library",
 					{ path = "luvit-meta/library", words = { "vim%.uv" } },
 				},
 			},
@@ -138,8 +140,9 @@ end, {})
 vim.api.nvim_create_user_command("SeltablClearAll", function()
 	local log_path = vim.fn.expand("~/.config/seltabls/state.log")
 	os.execute("rm " .. log_path)
-	local log_path = vim.fn.expand("~/.config/seltabls/uri.sqlite")
+	log_path = vim.fn.expand("~/.config/seltabls/uri.sqlite")
 	os.execute("rm " .. log_path)
 end, {})
 
--- vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("debug")
+
