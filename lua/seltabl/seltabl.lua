@@ -8,7 +8,7 @@ local client = vim.lsp.start {
 		end, {
 			desc = "Format current buffer with LSP",
 		})
-		vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, {
+		vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", {
 			buffer = bufnr,
 			remap = true,
 			desc = "[R]e[n]ame"
@@ -79,11 +79,11 @@ if not client then
 	vim.notify("Failed to start seltabl-lsp")
 	return
 end
---
--- vim.api.nvim_create_autocmd("BufEnter", {
---         pattern = "*.go",
---         callback = function()
---                 local bufnr = vim.api.nvim_get_current_buf()
---                 vim.lsp.buf_attach_client(bufnr, client)
---         end
--- })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "*.go",
+	callback = function()
+		local bufnr = vim.api.nvim_get_current_buf()
+		vim.lsp.buf_attach_client(bufnr, client)
+	end
+})
