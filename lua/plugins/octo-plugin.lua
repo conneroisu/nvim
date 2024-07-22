@@ -4,7 +4,7 @@
 
 return {
   'pwntester/octo.nvim',
-  event = "BufRead",
+  event = "VeryLazy",
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-telescope/telescope.nvim',
