@@ -13,7 +13,7 @@ local client = vim.lsp.start {
 			remap = true,
 			desc = "[R]e[n]ame"
 		})
-		vim.keymap.set("n", "<leader>cf", function() vim.lsp.buf.code_action() end, {
+		vim.keymap.set("n", "<leader>cf", "<cmd>Lspsaga code_action<CR>", {
 			buffer = bufnr,
 			remap = true,
 			desc = "[C]ode [A]ction"
