@@ -15,7 +15,7 @@ return {
                 -- In case other textobject modules are enabled, we will load them
                 -- once nvim-treesitter is loaded
                 require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
-                load_textobjects = true
+                vim.g.load_textobjects = true
             end,
         },
         { "nvim-treesitter/nvim-treesitter-context" },
@@ -67,6 +67,7 @@ return {
         },
     },
     config = function(_, opts)
+        ---@diagnostic disable-next-line: missing-fields
         require 'nvim-treesitter.configs'.setup {
             autotag = {
                 enable = true,

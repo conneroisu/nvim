@@ -6,6 +6,7 @@ return {
         "c",
         "cpp",
         "go",
+        "zig",
         "lua",
         "python",
         "rust",
