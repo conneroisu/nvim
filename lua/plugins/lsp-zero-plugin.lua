@@ -146,9 +146,6 @@ return {
                     "templ"
                 }
             },
-            ktlint = {
-                filetypes = { "kotlin" },
-            },
             terraformls = {
                 filetypes = { "terraform" },
             },
