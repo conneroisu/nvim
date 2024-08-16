@@ -2,7 +2,6 @@
 ---@author Conner Ohnesorge
 ---@license WTFPL
 
-
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
@@ -131,9 +130,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#35ea83", bold = true })
+vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#0ad691", bold = false })
 vim.api.nvim_set_hl(0, "LineNr", { fg = "#35ea83", bold = true })
-vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#35ea83", bold = true })
+vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#0ad691", bold = false })
 
 -- Remap Command 'Wq' to 'wq'
 vim.cmd(":command Wq wq")

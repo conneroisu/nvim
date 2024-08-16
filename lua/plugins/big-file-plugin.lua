@@ -1,3 +1,7 @@
+---@module "big-file-plugin"
+---@author "Conner Ohnesorge"
+---@license WTFPL
+
 return {
 	"LunarVim/bigfile.nvim",
 	event = "BufReadPre",

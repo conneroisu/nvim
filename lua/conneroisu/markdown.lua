@@ -1,6 +1,7 @@
 ---@module "markdown"
 ---@author Conner Ohnesorge
 ---@license WTFPL
+
 local keymap = vim.keymap.set
 local switch_filetype = false
 local function switch_to_markdown()

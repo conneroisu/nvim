@@ -1,3 +1,7 @@
+---@module "ale-plugin"
+---@author "Conner Ohnesorge"
+---@license WTFPL
+
 return {
 	'dense-analysis/ale',
 	dependencies = {
