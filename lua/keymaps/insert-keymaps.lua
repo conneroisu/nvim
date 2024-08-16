@@ -18,11 +18,3 @@ vim.api.nvim_set_keymap("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", {
 vim.api.nvim_set_keymap("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", {
     desc = "Move up"
 })
-
---[==============[
-   GITHUB COPILOT
---]==============]
--- Bind accept github copilot to <Tab>
--- vim.cmd("imap <silent><script><expr> <C-j> copilot#Accept('<CR>') ")
--- -- Bind accept word to ctrl + shift + l
--- vim.cmd("imap <silent><script><expr> <C-S-L> copilot#AcceptWord('<CR>') ")
