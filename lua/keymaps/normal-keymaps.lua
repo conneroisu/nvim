@@ -2,11 +2,6 @@
 ---@author Conner Ohnesorge
 ---@license WTFPL
 
---[===================[
-   Normal Mode Keymaps
-   normal-keymaps.lua
---]===================]
-
 -- map space to no operation
 vim.keymap.set("n", "<Space>", "<Nop>", {
     desc = "No Operation on Space"
