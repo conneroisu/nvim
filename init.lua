@@ -50,8 +50,8 @@ require("lazy").setup {
 	},
 }
 
-require "config.options"
-require "misc.ts-config"
+require "conneroisu.options"
+require "conneroisu.treesitter"
 
 local highlight_group = vim.api.nvim_create_augroup(
 	"YankHighlight",

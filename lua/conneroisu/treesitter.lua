@@ -5,7 +5,7 @@
 -- [[ Configure Treesitter ]]
 require("nvim-treesitter.configs").setup {
 	ensure_installed = {
-		require "config.treesitter-langs",
+		require "conneroisu.treesitter-langs",
 	},
 	auto_install = false,
 	highlight = {
