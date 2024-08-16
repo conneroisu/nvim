@@ -279,6 +279,6 @@ return {
             lspconfig[server_name].setup(server_config.config)
         end
 
-        require "seltabl.seltabl"
+        require "conneroisu.seltabl"
     end,
 }
