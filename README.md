@@ -2,8 +2,6 @@
 
 ## Introduction
 
-This is my personal Neovim configuration.
-
 Conner Ohnesorge's Personal Neovim Configuration.
 
 Languages setup for:
