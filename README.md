@@ -38,6 +38,11 @@ Languages setup for:
 - [ C# ](https://docs.microsoft.com/en-us/dotnet/csharp/)
 - [ Vimscript ](https://vim.fandom.com/wiki/Vimscript)
 
+- [ MIPS ](https://mips.com/)
+- [ ARM ](https://en.wikipedia.org/wiki/ARM_architecture)
+- [ RISC-V ](https://en.wikipedia.org/wiki/RISC-V)
+- [ x86 ](https://en.wikipedia.org/wiki/X86)
+- [ x86-64 ](https://en.wikipedia.org/wiki/X86-64)
 
 ## Installation
 
