@@ -41,11 +41,20 @@ Languages setup for:
 
 ## Installation
 
-1. Clone this repository into your Neovim configuration directory. For example, for linux:
+1. Clone this repository into your Neovim configuration directory.
+
+For example, for linux and MacOS:
 
 ```bash
 git clone https://github.com/conneroisu/conneroisu-nvim ~/.config/nvim
 ```
+
+For windows:
+
+```bash
+git clone https://github.com/conneroisu/conneroisu-nvim %USERPROFILE%\AppData\Local\nvim
+```
+
 
 2. Open Neovim.
 
