@@ -30,7 +30,7 @@ Languages setup for:
 - [ Templ ](https://templ.guide/)
 - [ Dockerfile ](https://docs.docker.com/engine/reference/builder/)
 - [ Docker Compose ](https://docs.docker.com/compose/)
-- [ sqlite ](https://www.sqlite.org/index.html)
+- [ Sqlite ](https://www.sqlite.org/index.html)
 - [ PostgreSQL ](https://www.postgresql.org/)
 - [ MySQL ](https://www.mysql.com/)
 - [ PHP ](https://www.php.net/)
