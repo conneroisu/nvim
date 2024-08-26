@@ -137,4 +137,4 @@ vim.api.nvim_create_user_command("SeltablStateLogs", function()
 	vim.cmd(":e " .. log_path)
 end, {})
 
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")

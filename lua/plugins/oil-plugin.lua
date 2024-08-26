@@ -76,7 +76,8 @@ return {
             "node_modules",
             "^%.",
             "tmp",
-            "ltex.*"
+            "ltex.*",
+            "_templ.go",
         }
         oil.set_is_hidden_file(function(filename, _)
             for _, pattern in ipairs(hidden_patterns) do
