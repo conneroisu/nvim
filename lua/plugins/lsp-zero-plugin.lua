@@ -196,19 +196,19 @@ return {
                     auto_start = true,
                 },
             },
-            ghdl_ls = {
-                config = {
-                    name = "ghdl_ls",
-                    filetypes = { "vhdl", "vhd" },
-                    setup = function(server)
-                        server.config.on_attach = on_attach
-                    end,
-                    root_dir = function(fname)
-                        return lsp_config_util.find_git_ancestor(fname) or lsp_config_util.path.dirname(fname)
-                    end,
-                    auto_start = true,
-                },
-            },
+            -- ghdl_ls = {
+            --     config = {
+            --         name = "ghdl_ls",
+            --         filetypes = { "vhdl", "vhd" },
+            --         setup = function(server)
+            --             server.config.on_attach = on_attach
+            --         end,
+            --         root_dir = function(fname)
+            --             return lsp_config_util.find_git_ancestor(fname) or lsp_config_util.path.dirname(fname)
+            --         end,
+            --         auto_start = true,
+            --     },
+            -- },
             basedpyright = {
                 config = {
                     name = "basedpyright",
@@ -219,19 +219,19 @@ return {
                     auto_start = true,
                 },
             },
-            sqls = {
-                config = {
-                    name = "sqls",
-                    filetypes = { "sql", "mysql", "postgresql", "plpgsql", "psql" },
-                    setup = function(server)
-                        server.config.on_attach = on_attach
-                    end,
-                    on_attach = function(client, bufnr)
-                        require('sqls').on_attach(client, bufnr)
-                    end,
-                    auto_start = true,
-                },
-            },
+            -- sqls = {
+            --     config = {
+            --         name = "sqls",
+            --         filetypes = { "sql", "mysql", "postgresql", "plpgsql", "psql" },
+            --         setup = function(server)
+            --             server.config.on_attach = on_attach
+            --         end,
+            --         on_attach = function(client, bufnr)
+            --             require('sqls').on_attach(client, bufnr)
+            --         end,
+            --         auto_start = true,
+            --     },
+            -- },
             templ = {
                 config = {
                     name = "templ",
