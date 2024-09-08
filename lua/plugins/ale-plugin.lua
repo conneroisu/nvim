@@ -17,6 +17,7 @@ return {
 			ruby = { 'rubocop', 'ruby' },
 			lua = { 'lua_language_server' },
 			proto = { 'buf-lint' },
+			-- vhdl = { 'ghdl', 'hdl_checker', 'vcom' },
 		}
 	end
 }

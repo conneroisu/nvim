@@ -132,9 +132,13 @@ vim.api.nvim_create_user_command("Cppath", function()
 end, {})
 
 
-vim.api.nvim_create_user_command("SeltablStateLogs", function()
-	local log_path = vim.fn.expand("~/.config/seltabls/state.log")
+-- vim.api.nvim_create_user_command("SeltablStateLogs", function()
+--         local log_path = vim.fn.expand("~/.config/seltabls/state.log")
+--         vim.cmd(":e " .. log_path)
+-- end, {})
+vim.api.nvim_create_user_command("EmbedPlsLogs", function()
+	local log_path = vim.fn.expand("~/.config/embedpls/state.log")
 	vim.cmd(":e " .. log_path)
 end, {})
 
--- vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("debug")

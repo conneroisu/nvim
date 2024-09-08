@@ -78,6 +78,7 @@ return {
             "tmp",
             "ltex.*",
             "_templ.go",
+            "*rage.out",
         }
         oil.set_is_hidden_file(function(filename, _)
             for _, pattern in ipairs(hidden_patterns) do

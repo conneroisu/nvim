@@ -13,7 +13,29 @@ return {
             'nvimdev/lspsaga.nvim',
             event = "LspAttach",
             config = function()
-                require('lspsaga').setup({})
+                local saga = require('lspsaga')
+                saga.setup({
+                    config = {
+                        implement = {
+                            enable = true,
+                            sign = true,
+                            virtual_text = true,
+                            priority = 100,
+                        },
+
+                        symbol_in_winbar = {
+                            color_mode = true,
+                            delay = 300,
+                            enable = true,
+                            folder_level = 1,
+
+                            ignore_patterns = nil,
+                            hide_keyword = false,
+                            separator = ' › ',
+                            show_file = true,
+                        }
+                    },
+                })
             end,
             dependencies = {
                 'nvim-treesitter/nvim-treesitter',
@@ -199,6 +221,7 @@ return {
             -- ghdl_ls = {
             --     config = {
             --         name = "ghdl_ls",
+            --         command = { "ghdl", "--lsp" },
             --         filetypes = { "vhdl", "vhd" },
             --         setup = function(server)
             --             server.config.on_attach = on_attach
@@ -245,6 +268,19 @@ return {
                     auto_start = true,
                 },
             },
+            embedpls = {
+                config = {
+                    name = "embedpls",
+                    filetypes = { "go", "gomod" },
+                    setup = function(server)
+                        server.config.on_attach = on_attach
+                    end,
+                    root_dir = function(fname)
+                        return lsp_config_util.root_pattern('go.mod', '.git')(fname)
+                    end,
+                    auto_start = true,
+                },
+            },
             seltabls = {
                 filetypes = { "go", "gomod" },
                 config = {
@@ -261,10 +297,48 @@ return {
                     on_attach = on_attach,
                 },
             },
+            jdtls = {
+                config = {
+                    name = "jdtls",
+                    filetypes = { "java", "jsp" },
+                    command = { "/bin/jdtls" },
+                    setup = function(server)
+                        server.config.on_attach = on_attach
+                    end,
+                    root_dir = function(fname)
+                        return lsp_config_util.root_pattern('jdtls.ls')(fname)
+                    end,
+                    auto_start = true,
+                },
+            },
+            hdl_checker = {
+                command = { "hdl_checker", "-fsynopsys", "--lsp" },
+                config = {
+                    name = "hdl_checker",
+                    filetypes = { "vhdl", "vhd", "verilog", "systemverilog" },
+                    setup = function(server)
+                        server.config.on_attach = on_attach
+                    end,
+                    root_dir = function(fname)
+                        -- will look for the .hdl_checker.config file in parent directory, a
+                        -- .git directory, or else use the current directory, in that order.
+                        local util = require 'lspconfig'.util
+                        return util.root_pattern('.hdl_checker.config')(fname) or util.find_git_ancestor(fname) or
+                        util.path.dirname(fname)
+                    end,
+                    auto_start = true,
+                },
+            },
         }
         lspconfig["seltabls"] = {
             default_config = custom_servers.seltabls.config,
             config = custom_servers.seltabls.config,
+            setup = function()
+            end,
+        }
+        lspconfig["embedpls"] = {
+            default_config = custom_servers.embedpls.config,
+            config = custom_servers.embedpls.config,
             setup = function()
             end,
         }
@@ -279,6 +353,6 @@ return {
             lspconfig[server_name].setup(server_config.config)
         end
 
-        require "conneroisu.seltabl"
+        -- require "conneroisu.seltabl"
     end,
 }
