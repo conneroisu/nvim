@@ -75,7 +75,6 @@ return {
         local hidden_patterns = {
             "node_modules",
             "^%.",
-            "tmp",
             "ltex.*",
             "_templ.go",
             "*rage.out",

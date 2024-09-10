@@ -1,3 +1,12 @@
+local function get_open_command()
+  local is_mac = vim.fn.has('macunix') == 1
+
+  if is_mac then
+    return 'open'
+  else
+    return 'xdg-open'
+  end
+end
 return {
     "chrishrb/gx.nvim",
     keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
@@ -10,7 +19,7 @@ return {
         require("gx").setup {
             -- open_browser_app = "thorium-browser", -- specify your browser app; default for macOS is "open", Linux "xdg-open" and Windows "powershell.exe"
             -- open_browser_args = { "--background --password-store=gnome-libsecret" }, -- specify any arguments, such as --background for macOS' "open".
-            open_browser_app = "~/AppImages/zen_browser.appimage",
+            open_browser_app = get_open_command(),
             open_browser_args = {},  -- specify any arguments, such as --background for macOS' "open".
             handlers = {
                 plugin = true,       -- open plugin links in lua (e.g. packer, lazy, ..)

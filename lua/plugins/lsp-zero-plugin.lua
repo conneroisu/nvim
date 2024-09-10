@@ -146,7 +146,7 @@ return {
             svelte = {
                 filetypes = { "svelte" },
             },
-            tsserver = {},
+            ts_ls = {},
             -- ltex = {
             --     filetypes = { "tex", "bib", "md", "markdown" },
             -- },
