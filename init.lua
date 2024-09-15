@@ -72,7 +72,6 @@ require "keymaps.insert-keymaps"
 require "keymaps.normal-keymaps"
 vim.o.statusline = vim.o.statusline .. "%F"
 vim.cmd "set rtp^='/home/conner/.opam/default/share/ocp-indent/vim'"
-require "conneroisu.markdown"
 -- Register the .templ filetype
 vim.filetype.add { extension = { templ = "templ", } }
 vim.treesitter.language.register("templ", "templ")
