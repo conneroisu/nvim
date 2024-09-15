@@ -44,10 +44,6 @@ vim.o.relativenumber = true
 -- vim.o.colorcolumn = "80"
 vim.o.termguicolors = true
 
--- -- disable netrw in favor of Oil
--- vim.o.loaded_netrw = 0
--- vim.o.loaded_netrwPlugin = 0
-
 -- set termguicolors to true
 vim.o.termguicolors = true
 
