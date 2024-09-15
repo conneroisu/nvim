@@ -330,18 +330,12 @@ return {
                 },
             },
         }
-        lspconfig["seltabls"] = {
-            default_config = custom_servers.seltabls.config,
-            config = custom_servers.seltabls.config,
-            setup = function()
-            end,
-        }
-        lspconfig["embedpls"] = {
-            default_config = custom_servers.embedpls.config,
-            config = custom_servers.embedpls.config,
-            setup = function()
-            end,
-        }
+        -- lspconfig["seltabls"] = {
+        --     default_config = custom_servers.seltabls.config,
+        --     config = custom_servers.seltabls.config,
+        --     setup = function()
+        --     end,
+        -- }
         for server_name, server_config in pairs(custom_servers) do
             if not lspconfig[server_name] then
                 lspconfig[server_name] = {
