@@ -268,35 +268,22 @@ return {
                     auto_start = true,
                 },
             },
-            embedpls = {
-                config = {
-                    name = "embedpls",
-                    filetypes = { "go", "gomod" },
-                    setup = function(server)
-                        server.config.on_attach = on_attach
-                    end,
-                    root_dir = function(fname)
-                        return lsp_config_util.root_pattern('go.mod', '.git')(fname)
-                    end,
-                    auto_start = true,
-                },
-            },
-            seltabls = {
-                filetypes = { "go", "gomod" },
-                config = {
-                    filetypes = { "go", "gomod" },
-                    cmd = { "seltabls", "lsp" },
-                    name = "seltabls",
-                    setup = function(server)
-                        server.config.on_attach = on_attach
-                    end,
-                    root_dir = function(fname)
-                        return lsp_config_util.root_pattern('go.mod', '.git')(fname)
-                    end,
-                    auto_start = true,
-                    on_attach = on_attach,
-                },
-            },
+            -- seltabls = {
+            --     filetypes = { "go", "gomod" },
+            --     config = {
+            --         filetypes = { "go", "gomod" },
+            --         cmd = { "seltabls", "lsp" },
+            --         name = "seltabls",
+            --         setup = function(server)
+            --             server.config.on_attach = on_attach
+            --         end,
+            --         root_dir = function(fname)
+            --             return lsp_config_util.root_pattern('go.mod', '.git')(fname)
+            --         end,
+            --         auto_start = true,
+            --         on_attach = on_attach,
+            --     },
+            -- },
             jdtls = {
                 config = {
                     name = "jdtls",
