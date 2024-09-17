@@ -77,6 +77,7 @@ return {
             "^%.",
             "ltex.*",
             "_templ.go",
+            "_templ.txt",
             "*rage.out",
         }
         oil.set_is_hidden_file(function(filename, _)
