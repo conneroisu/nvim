@@ -32,7 +32,5 @@ return {
             },
         }
         require("gp").setup(conf)
-
-        -- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
     end,
 }
