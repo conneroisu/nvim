@@ -6,7 +6,7 @@ return {
             providers = {
                 openai = {
                     endpoint = "https://api.openai.com/v1/chat/completions",
-                    secret = os.getenv("OPENAI_API_KEY"),
+                    secret = {"cat", "~/.config/nvim/.env/.openai"},
                 },
                 copilot = {
                     endpoint = "https://api.githubcopilot.com/chat/completions",
@@ -19,15 +19,9 @@ return {
                 ollama = {
                     endpoint = "http://localhost:11434/v1/chat/completions",
                 },
-                googleai = {
-                    endpoint =
-                    "https://generativelanguage.googleapis.com/v1beta/models/{{model}}:streamGenerateContent?key={{secret}}",
-                    secret = os.getenv("GOOGLEAI_API_KEY"),
-                },
-
                 anthropic = {
                     endpoint = "https://api.anthropic.com/v1/messages",
-                    secret = os.getenv("ANTHROPIC_API_KEY"),
+                    secret = {"cat", "~/.config/nvim/.env/.anthropic"},
                 },
             },
         }
