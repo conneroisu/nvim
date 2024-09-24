@@ -4,3 +4,5 @@ test.sh
 nvim
 lazy-lock.json
 ltex.dictionary.en-US.txt
+.env
+.env/
