@@ -1,4 +1,6 @@
 -- lazy.nvim
+local openai_api_key = vim.fn.system("cat $HOME/.config/nvim/.env/.openai")
+local anthropic_api_key = vim.fn.system("cat $HOME/.config/nvim/.env/.anthropic")
 return {
     "robitx/gp.nvim",
     config = function()
@@ -6,7 +8,7 @@ return {
             providers = {
                 openai = {
                     endpoint = "https://api.openai.com/v1/chat/completions",
-                    secret = {"cat", "~/.config/nvim/.env/.openai"},
+                    secret = openai_api_key,
                 },
                 copilot = {
                     endpoint = "https://api.githubcopilot.com/chat/completions",
@@ -21,7 +23,7 @@ return {
                 },
                 anthropic = {
                     endpoint = "https://api.anthropic.com/v1/messages",
-                    secret = {"cat", "~/.config/nvim/.env/.anthropic"},
+                    secret = anthropic_api_key,
                 },
             },
         }

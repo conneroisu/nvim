@@ -136,4 +136,4 @@ end, {})
 --         vim.cmd(":e " .. log_path)
 -- end, {})
 
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
