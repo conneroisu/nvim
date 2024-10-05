@@ -3,6 +3,7 @@ local openai_api_key = vim.fn.system("cat $HOME/.config/nvim/.env/.openai")
 local anthropic_api_key = vim.fn.system("cat $HOME/.config/nvim/.env/.anthropic")
 return {
     "robitx/gp.nvim",
+    event = "VeryLazy",
     config = function()
         local conf = {
             providers = {
