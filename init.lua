@@ -105,11 +105,6 @@ vim.treesitter.language.register("templ", "templ")
 -- vim.cmd "set list"
 -- vim.cmd("set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<")
 
-vim.api.nvim_create_autocmd({ 'BufEnter', 'BufNewFile' }, {
-	pattern = '*.db.sql',
-	command = 'setlocal buftype=nofile',
-})
-
 local function clear_lsp_log()
 	local log_path = vim.fn.expand("~/.local/state/nvim/lsp.log")
 	local file = io.open(log_path, "w")
@@ -129,7 +124,6 @@ vim.api.nvim_create_user_command("Cppath", function()
 	vim.fn.setreg("+", path)
 	vim.notify('Copied "' .. path .. '" to the clipboard!')
 end, {})
-
 
 -- vim.api.nvim_create_user_command("SeltablStateLogs", function()
 --         local log_path = vim.fn.expand("~/.config/seltabls/state.log")

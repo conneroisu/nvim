@@ -22,7 +22,6 @@ return {
                             virtual_text = true,
                             priority = 100,
                         },
-
                         symbol_in_winbar = {
                             color_mode = true,
                             delay = 300,
