@@ -20,19 +20,18 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup {
 	{
-		{
-			"folke/lazydev.nvim",
-			ft = "lua",
-			opts = {
-				library = {
-					"lazy.nvim",
-					"luvit-meta/library",
-					{ path = "luvit-meta/library", words = { "vim%.uv" } },
-				},
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				"lazy.nvim",
+				"luvit-meta/library",
+				{ path = "luvit-meta/library", words = { "vim%.uv" } },
 			},
 		},
-		{ "Bilal2453/luvit-meta", lazy = true },
-	}, "tpope/vim-sleuth",
+	},
+	{ "Bilal2453/luvit-meta", lazy = true },
+	{ "tpope/vim-sleuth" },
 	{
 		import = "plugins",
 	},
