@@ -10,10 +10,9 @@ return {
         {
             "L3MON4D3/LuaSnip",
             version = "v2.3.0",
-            -- install jsregexp (optional!).
             build = "make install_jsregexp"
         },
-        'saadparwaiz1/cmp_luasnip', -- Adds LSP completion capabilities
+        'saadparwaiz1/cmp_luasnip',
         'hrsh7th/cmp-nvim-lsp',
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
@@ -51,12 +50,13 @@ return {
                 }),
             }),
             sources = cmp.config.sources({
+                { name = 'lazydev', group_index = 0 },
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' },
                 { name = 'buffer' },
                 { name = 'path' },
                 { name = "cmp-dbee" },
-    -- { name = "supermaven" },
+                -- { name = "supermaven" },
             }),
             experimental = {
                 ghost_text = {
