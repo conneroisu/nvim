@@ -1,3 +1,7 @@
+---@module "vim-dadbod-plugin"
+---@author "Conner Ohnesorge"
+---@license WTFPL
+
 local sql_ft = { "sql", "mysql", "pgsql", "sqlite", "plsql", "pl", "pls", "psql", "db2", "oracle", "teradata", "firebird", "maxdb", "mssql", "sybase", "informix", "ingres", "db2" }
 return {
 	"tpope/vim-dadbod",
