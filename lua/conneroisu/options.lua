@@ -59,7 +59,6 @@ vim.o.scrolloff = 8
 -- set hybrid line numbers 
 vim.o.relativenumber = true
 vim.o.number = true
-
 vim.opt.undofile = true
 
 -- Use compact syntax for prettified multi-line comments
@@ -148,5 +147,5 @@ vim.api.nvim_set_keymap("x", "<leader>p", "\"_dp", {
 })
 
 -- Python Host Program
-vim.g.python3_host_prog = "/usr/bin/python"
-vim.g.python_host_prog = "/usr/bin/python"
+vim.g.python3_host_prog = "~/.config/nvim/.venv/bin/python3"
+vim.g.python_host_prog = "~/.config/nvim/.venv/bin/python"
