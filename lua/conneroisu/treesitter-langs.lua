@@ -22,7 +22,6 @@ return {
         "rst",
         "toml",
         "markdown",
-        "markdown_inline",
         "proto",
         "printf",
         "json",

@@ -1,4 +1,0 @@
-Vimscript
-Zsh
-Templ
-Ohnesorge
