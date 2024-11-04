@@ -55,9 +55,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 vim.cmd "syntax on"
 vim.cmd "set wrap!"
+
 require "keymaps.visual-keymaps"
 require "keymaps.insert-keymaps"
 require "keymaps.normal-keymaps"
+
 vim.o.statusline = vim.o.statusline .. "%F"
 vim.cmd "set rtp^='/home/conner/.opam/default/share/ocp-indent/vim'"
 -- Register the .templ filetype
@@ -104,7 +106,6 @@ local function clear_lsp_log()
 	end
 end
 
--- Registering the command
 vim.api.nvim_create_user_command('LspLogClear', clear_lsp_log, {})
 
 vim.api.nvim_create_user_command("Cppath", function()
