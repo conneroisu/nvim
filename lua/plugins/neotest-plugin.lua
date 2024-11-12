@@ -6,17 +6,18 @@ return {
 	"nvim-neotest/neotest",
 	dependencies = {
 		"nvim-neotest/neotest-go",
-		{
-			"nvim-neotest/neotest-python",
-		},
-		{ "nvim-neotest/nvim-nio" }
+		"lawrence-laz/neotest-zig",
+		"nvim-neotest/neotest-python",
+		"nvim-neotest/nvim-nio",
 	},
 	opts = {
-		-- Can be a list of adapters like what neotest expects,
-		-- or a list of adapter names,
-		-- or a table of adapter names, mapped to adapter configs.
-		-- The adapter will then be automatically loaded with the config.
+		log_level = vim.log.levels.TRACE,
 		adapters = {
+			["neotest-zig"] = {
+				dap = {
+					adapter = "lldb",
+				},
+			},
 			["neotest-python"] = {
 				dap = { justMyCode = false },
 				args = { "--log-level", "DEBUG" },

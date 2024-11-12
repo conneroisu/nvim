@@ -24,6 +24,7 @@ return {
         "markdown",
         "proto",
         "printf",
+        "hyprlang",
         "json",
         "php",
         "regex",

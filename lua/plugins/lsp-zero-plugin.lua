@@ -315,6 +315,19 @@ return {
                     auto_start = true,
                 },
             },
+            zls = {
+                config = {
+                    name = "zls",
+                    filetypes = { "zig" },
+                    setup = function(server)
+                        server.config.on_attach = on_attach
+                    end,
+                    root_dir = function(fname)
+                        return lsp_config_util.root_pattern('zls.json', '.git')(fname)
+                    end,
+                    auto_start = true,
+                },
+            },
         }
         -- lspconfig["seltabls"] = {
         --     default_config = custom_servers.seltabls.config,

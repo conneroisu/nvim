@@ -1,4 +1,4 @@
--- return {
+return {
 --   "yetone/avante.nvim",
 --   event = "VeryLazy",
 --   lazy = false,
@@ -43,4 +43,4 @@
 --       ft = { "markdown", "Avante" },
 --     },
 --   },
--- }
+}
