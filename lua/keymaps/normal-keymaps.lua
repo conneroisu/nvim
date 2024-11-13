@@ -138,19 +138,6 @@ end, {
     desc = "Run the current file with nvc"
 })
 
-vim.keymap.set("n", "<leader>vb", function()
-    vim.cmd(
-        ":!nvc --std=2008 -a " ..
-        vim.fn.expand('%:p') ..
-        " -e " .. vim.fn.expand('%:t:r') ..
-        " -r " .. vim.fn.expand('%:t:r')
-    )
-end, {
-    noremap = true,
-    silent = true,
-    desc = "Run the current file with nvc"
-})
-
 vim.keymap.set("n", "<leader>gmt", function()
     vim.cmd("!go mod tidy<CR>")
 end, {

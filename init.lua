@@ -60,7 +60,6 @@ require "keymaps.insert-keymaps"
 require "keymaps.normal-keymaps"
 
 vim.o.statusline = vim.o.statusline .. "%F"
-vim.cmd "set rtp^='/home/conner/.opam/default/share/ocp-indent/vim'"
 -- Register the .templ filetype
 vim.filetype.add { extension = { templ = "templ", } }
 vim.treesitter.language.register("templ", "templ")
@@ -119,3 +118,12 @@ end, {})
 -- end, {})
 
 -- vim.lsp.set_log_level("debug")
+   vim.filetype.add {
+      extension = { rasi = 'rasi' },
+      pattern = {
+        ['.*/waybar/config'] = 'jsonc',
+        ['.*/mako/config'] = 'dosini',
+        ['.*/kitty/*.conf'] = 'bash',
+        ['.*/hypr/.*%.conf'] = 'hyprlang',
+      },
+    }
