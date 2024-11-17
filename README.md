@@ -43,7 +43,7 @@ Languages setup for:
 - [ x86 ](https://en.wikipedia.org/wiki/X86)
 - [ x86-64 ](https://en.wikipedia.org/wiki/X86-64)
 
-## Installation
+## Installation (Of configuration)
 
 1. Clone this repository into your Neovim configuration directory.
 
@@ -58,7 +58,6 @@ For windows:
 ```bash
 git clone https://github.com/conneroisu/conneroisu-nvim %USERPROFILE%\AppData\Local\nvim
 ```
-
 
 2. Open Neovim.
 
