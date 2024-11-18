@@ -117,12 +117,12 @@ end, {})
 -- end, {})
 
 -- vim.lsp.set_log_level("debug")
-   vim.filetype.add {
-      extension = { rasi = 'rasi' },
-      pattern = {
-        ['.*/waybar/config'] = 'jsonc',
-        ['.*/mako/config'] = 'dosini',
-        ['.*/kitty/*.conf'] = 'bash',
-        ['.*/hypr/.*%.conf'] = 'hyprlang',
-      },
-    }
+vim.filetype.add {
+	extension = { rasi = 'rasi' },
+	pattern = {
+		['.*/waybar/config'] = 'jsonc',
+		['.*/mako/config'] = 'dosini',
+		['.*/kitty/*.conf'] = 'bash',
+		['.*/hypr/.*%.conf'] = 'hyprlang',
+	},
+}
