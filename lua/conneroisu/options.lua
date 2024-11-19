@@ -100,7 +100,7 @@ vim.opt.mouse = "a"
 -- turn off swap files
 vim.opt.swapfile = false
 
--- Qutting for specific file types
+-- Quiting for specific file types
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = {
 		"PlenaryTestPopup",

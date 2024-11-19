@@ -151,6 +151,7 @@ return {
             -- },
             texlab = {},
             dockerls = {},
+            taplo = {},
             emmet_ls = {
                 filetypes = { "html", "css", "scss", "javascript", "typescript", "astro", "svelte", "vue", "templ" },
             },
@@ -217,20 +218,20 @@ return {
                     auto_start = true,
                 },
             },
-            -- ghdl_ls = {
-            --     config = {
-            --         name = "ghdl_ls",
-            --         command = { "ghdl", "--lsp" },
-            --         filetypes = { "vhdl", "vhd" },
-            --         setup = function(server)
-            --             server.config.on_attach = on_attach
-            --         end,
-            --         root_dir = function(fname)
-            --             return lsp_config_util.find_git_ancestor(fname) or lsp_config_util.path.dirname(fname)
-            --         end,
-            --         auto_start = true,
-            --     },
-            -- },
+            ghdl_ls = {
+                config = {
+                    name = "ghdl_ls",
+                    command = { "ghdl", "--lsp" },
+                    filetypes = { "vhdl", "vhd" },
+                    setup = function(server)
+                        server.config.on_attach = on_attach
+                    end,
+                    root_dir = function(fname)
+                        return lsp_config_util.find_git_ancestor(fname) or lsp_config_util.path.dirname(fname)
+                    end,
+                    auto_start = true,
+                },
+            },
             basedpyright = {
                 config = {
                     name = "basedpyright",
@@ -297,24 +298,24 @@ return {
                     auto_start = true,
                 },
             },
-            hdl_checker = {
-                command = { "hdl_checker", "-fsynopsys", "--lsp" },
-                config = {
-                    name = "hdl_checker",
-                    filetypes = { "vhdl", "vhd", "verilog", "systemverilog" },
-                    setup = function(server)
-                        server.config.on_attach = on_attach
-                    end,
-                    root_dir = function(fname)
-                        -- will look for the .hdl_checker.config file in parent directory, a
-                        -- .git directory, or else use the current directory, in that order.
-                        local util = require 'lspconfig'.util
-                        return util.root_pattern('.hdl_checker.config')(fname) or util.find_git_ancestor(fname) or
-                        util.path.dirname(fname)
-                    end,
-                    auto_start = true,
-                },
-            },
+            -- hdl_checker = {
+            --     command = { "hdl_checker", "-fsynopsys", "--lsp" },
+            --     config = {
+            --         name = "hdl_checker",
+            --         filetypes = { "vhdl", "vhd", "verilog", "systemverilog" },
+            --         setup = function(server)
+            --             server.config.on_attach = on_attach
+            --         end,
+            --         root_dir = function(fname)
+            --             -- will look for the .hdl_checker.config file in parent directory, a
+            --             -- .git directory, or else use the current directory, in that order.
+            --             local util = require 'lspconfig'.util
+            --             return util.root_pattern('.hdl_checker.config')(fname) or util.find_git_ancestor(fname) or
+            --             util.path.dirname(fname)
+            --         end,
+            --         auto_start = true,
+            --     },
+            -- },
             zls = {
                 config = {
                     name = "zls",

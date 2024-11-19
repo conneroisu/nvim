@@ -1,7 +1,7 @@
 return {
     "conneroisu/doppler.nvim",
     dir = "/run/media/conner/source/001Repos/doppler.nvim",
-    event = "BufWritePre",
+    event = "VeryLazy",
     dependencies = {
         'nvim-lua/plenary.nvim',
     },

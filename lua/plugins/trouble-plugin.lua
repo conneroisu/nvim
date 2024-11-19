@@ -40,43 +40,4 @@ return {
 			desc = "Next trouble/quickfix item",
 		},
 	},
-	config = function()
-		require("trouble").setup({
-		})
-
-		-- map leader + x + x to toggle the document diagnostics from trouble in normal mode
-		vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble diagnostics<cr>", {
-			desc = "Document Diagnostics (Trouble)"
-		})
-
-
-		-- map leader + x + X to toggle the workspace diagnostics from trouble in normal mode
-		vim.api.nvim_set_keymap("n", "<leader>xX", "<cmd>Trouble diagnostics<cr>", {
-			desc = "Workspace Diagnostics (Trouble)"
-		})
-
-		vim.api.nvim_set_keymap("n", "<leader>xL", "<cmd>TroubleToggle loclist<cr>", {
-			desc = "Location List (Trouble)"
-		})
-
-
-		-- bind leader + x + L to toggle the loclist from trouble in normal mode
-		vim.api.nvim_set_keymap("n", "<leader>xL", "<cmd>TroubleToggle loclist<cr>", {
-			desc = "Location List (Trouble)"
-		})
-
-		-- bind leader + x + Q to toggle the quickfix list from trouble in normal mode
-		vim.api.nvim_set_keymap("n", "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", {
-			desc = "Quickfix List (Trouble)"
-		})
-
-		-- bind <leader> + x + x to open document diagnostics in normal mode
-		vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", {
-			desc = "Document Diagnostics (Trouble)"
-		})
-		-- bind leader + x + Q to open quickfix list from trouble in normal mode
-		vim.api.nvim_set_keymap("n", "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", {
-			desc = "Quickfix List (Trouble)"
-		})
-	end,
 }
