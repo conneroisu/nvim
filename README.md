@@ -61,7 +61,7 @@ git clone https://github.com/conneroisu/conneroisu-nvim %USERPROFILE%\AppData\Lo
 
 2. Open Neovim.
 
-```vim
+```bash
 nvim
 ```
 
