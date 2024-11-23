@@ -32,6 +32,8 @@ return {
         "yaml",
         "html",
         "javascript",
+        "vhdl",
+        "verilog",
         "jsonc",
         "zig",
         "svelte",
