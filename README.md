@@ -50,7 +50,7 @@ Languages setup for:
 For example, for linux and MacOS:
 
 ```bash
-git clone https://github.com/conneroisu/conneroisu-nvim ~/.config/nvim
+git clone https://github.com/conneroisu/nvim ~/.config/nvim
 ```
 
 For windows:
