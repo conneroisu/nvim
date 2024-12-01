@@ -213,7 +213,7 @@ return {
                         local root_pattern = lsp_config_util.root_pattern("veridian.yml", ".git")
                         local filename = lsp_config_util.path.is_absolute(fname) and fname
                             or lsp_config_util.path.join(vim.loop.cwd(), fname)
-                        return root_pattern(filename) or lsp_config_util.path.dirname(filename)
+                        return root_pattern(filename) or vim.fs.dirname(filename)
                     end,
                     auto_start = true,
                 },
@@ -227,7 +227,7 @@ return {
                         server.config.on_attach = on_attach
                     end,
                     root_dir = function(fname)
-                        return lsp_config_util.find_git_ancestor(fname) or lsp_config_util.path.dirname(fname)
+                        return lsp_config_util.find_git_ancestor(fname) or vim.fs.dirname(fname)
                     end,
                     auto_start = true,
                 },
