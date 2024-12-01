@@ -348,5 +348,13 @@ return {
         end
 
         -- require "conneroisu.seltabl"
+        lspconfig.nil_ls.setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+            filetypes = { "nix", },
+            root_dir = function(fname)
+                return lsp_config_util.root_pattern('go.mod', '.git')(fname)
+            end,
+        }
     end,
 }
