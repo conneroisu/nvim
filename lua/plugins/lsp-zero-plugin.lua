@@ -346,8 +346,6 @@ return {
             end
             lspconfig[server_name].setup(server_config.config)
         end
-
-        -- require "conneroisu.seltabl"
         lspconfig.nil_ls.setup {
             on_attach = on_attach,
             capabilities = capabilities,
