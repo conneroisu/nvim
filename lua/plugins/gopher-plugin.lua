@@ -11,12 +11,11 @@ return {
                 go = "go",
                 dlv = "dlv",
                 gomodifytags = "gomodifytags",
-                gotests = "gotests", -- also you can set custom command path
+                gotests = "gotests",
                 impl = "impl",
                 iferr = "iferr",
             },
         }
-
         -- add binding leader + EE to call :GoIfError
         vim.api.nvim_set_keymap("n", "<leader>er", ":GoIfErr<CR>", { noremap = true, silent = true })
     end
