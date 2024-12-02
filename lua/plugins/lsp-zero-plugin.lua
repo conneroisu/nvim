@@ -218,9 +218,9 @@ return {
                     auto_start = true,
                 },
             },
-            ghdl_ls = {
+            ghdl = {
                 config = {
-                    name = "ghdl_ls",
+                    name = "ghdl",
                     command = { "ghdl", "--lsp" },
                     filetypes = { "vhdl", "vhd" },
                     setup = function(server)
