@@ -146,9 +146,6 @@ return {
                 filetypes = { "svelte" },
             },
             ts_ls = {},
-            -- ltex = {
-            --     filetypes = { "tex", "bib", "md", "markdown" },
-            -- },
             texlab = {},
             dockerls = {},
             taplo = {},
@@ -242,19 +239,19 @@ return {
                     auto_start = true,
                 },
             },
-            -- sqls = {
-            --     config = {
-            --         name = "sqls",
-            --         filetypes = { "sql", "mysql", "postgresql", "plpgsql", "psql" },
-            --         setup = function(server)
-            --             server.config.on_attach = on_attach
-            --         end,
-            --         on_attach = function(client, bufnr)
-            --             require('sqls').on_attach(client, bufnr)
-            --         end,
-            --         auto_start = true,
-            --     },
-            -- },
+            sqls = {
+                config = {
+                    name = "sqls",
+                    filetypes = { "sql" },
+                    setup = function(server)
+                        server.config.on_attach = on_attach
+                    end,
+                    on_attach = function(client, bufnr)
+                        require('sqls').on_attach(client, bufnr)
+                    end,
+                    auto_start = true,
+                },
+            },
             templ = {
                 config = {
                     name = "templ",
@@ -268,22 +265,6 @@ return {
                     auto_start = true,
                 },
             },
-            -- seltabls = {
-            --     filetypes = { "go", "gomod" },
-            --     config = {
-            --         filetypes = { "go", "gomod" },
-            --         cmd = { "seltabls", "lsp" },
-            --         name = "seltabls",
-            --         setup = function(server)
-            --             server.config.on_attach = on_attach
-            --         end,
-            --         root_dir = function(fname)
-            --             return lsp_config_util.root_pattern('go.mod', '.git')(fname)
-            --         end,
-            --         auto_start = true,
-            --         on_attach = on_attach,
-            --     },
-            -- },
             jdtls = {
                 config = {
                     name = "jdtls",
@@ -346,13 +327,24 @@ return {
             end
             lspconfig[server_name].setup(server_config.config)
         end
-        lspconfig.nil_ls.setup {
+        lspconfig.nixd.setup {
             on_attach = on_attach,
             capabilities = capabilities,
             filetypes = { "nix", },
             root_dir = function(fname)
-                return lsp_config_util.root_pattern('go.mod', '.git')(fname)
+                return lsp_config_util.find_git_ancestor(fname) or vim.fs.dirname(fname)
             end,
+            formatting = {
+                command = { "nixfmt" },
+            },
+            options = {
+                nixos = {
+                    expr = '(builtins.getFlake ("git+file://" + toString ./.)).nixosConfigurations.k-on.options',
+                },
+                home_manager = {
+                    expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations."ruixi@k-on".options',
+                },
+            },
         }
     end,
 }
