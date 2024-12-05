@@ -331,9 +331,6 @@ return {
             on_attach = on_attach,
             capabilities = capabilities,
             filetypes = { "nix", },
-            root_dir = function(fname)
-                return lsp_config_util.find_git_ancestor(fname) or vim.fs.dirname(fname)
-            end,
             formatting = {
                 command = { "nixfmt" },
             },
