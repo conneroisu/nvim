@@ -63,37 +63,37 @@ vim.o.statusline = vim.o.statusline .. "%F"
 vim.filetype.add { extension = { templ = "templ", } }
 vim.treesitter.language.register("templ", "templ")
 
--- Format SQL files with sleek
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*.sql",
-	group = vim.api.nvim_create_augroup("FormatSQL", { clear = true }),
-	callback = function()
-		local content = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-		local bufr_content = table.concat(content, "\n")
-		-- if queries is not in the filepath of the current buffer, then return
-		local filepath = vim.fn.expand "%:p"
-		if not string.find(filepath, "queries") then
-			return
-		end
-		local cmd = "echo \"" .. bufr_content .. "\" | sleek -i 4"
-		local handle, err = io.popen(cmd, "r")
-		if handle then
-			local result = handle:read("*a")
-			handle:close()
-			local active_file = io.open(vim.fn.expand "%", "w")
-			if not active_file then
-				print("Failed to open file for writing")
-				return
-			end
-			active_file:write(result)
-			active_file:close()
-			vim.cmd "e!"
-		else
-			print("Error running command:", err)
-		end
-	end,
-})
-
+-- -- Format SQL files with sleek
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--         pattern = "*.sql",
+--         group = vim.api.nvim_create_augroup("FormatSQL", { clear = true }),
+--         callback = function()
+--                 local content = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--                 local bufr_content = table.concat(content, "\n")
+--                 -- if queries is not in the filepath of the current buffer, then return
+--                 local filepath = vim.fn.expand "%:p"
+--                 if not string.find(filepath, "queries") then
+--                         return
+--                 end
+--                 local cmd = "echo \"" .. bufr_content .. "\" | sleek -i 4"
+--                 local handle, err = io.popen(cmd, "r")
+--                 if handle then
+--                         local result = handle:read("*a")
+--                         handle:close()
+--                         local active_file = io.open(vim.fn.expand "%", "w")
+--                         if not active_file then
+--                                 print("Failed to open file for writing")
+--                                 return
+--                         end
+--                         active_file:write(result)
+--                         active_file:close()
+--                         vim.cmd "e!"
+--                 else
+--                         print("Error running command:", err)
+--                 end
+--         end,
+-- })
+--
 -- vim.cmd "set list"
 -- vim.cmd("set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<")
 
