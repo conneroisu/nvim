@@ -23,7 +23,7 @@ return {
     workspaces = {
       {
         name = "personal",
-        path = "~/Documents/000Vaults/SecondBrainRemote",
+        path = "~/Documents/000Vaults/SecondBrain",
       }
     },
 
