@@ -122,7 +122,7 @@ vim.api.nvim_create_user_command("Format", function()
   vim.lsp.buf.format()
 end, {})
 
+vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+
 vim.o.number = true
 vim.o.relativenumber = true
-
-vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })

@@ -3,5 +3,5 @@
 ---@license WTFPL
 
 return {
-	"windwp/nvim-autopairs",
+  "windwp/nvim-autopairs",
 }

@@ -51,8 +51,6 @@ vim.g.NERDSpaceDelims = 1
 vim.o.scrolloff = 8
 
 -- set hybrid line numbers
-vim.o.relativenumber = true
-vim.o.number = true
 vim.opt.undofile = true
 
 -- Use compact syntax for prettified multi-line comments
