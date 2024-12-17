@@ -50,7 +50,7 @@ vim.g.NERDSpaceDelims = 1
 -- set the scroll off of the buffer when lsp is attached to said buffer to 8
 vim.o.scrolloff = 8
 
--- set hybrid line numbers 
+-- set hybrid line numbers
 vim.o.relativenumber = true
 vim.o.number = true
 vim.opt.undofile = true
@@ -96,27 +96,26 @@ vim.opt.swapfile = false
 
 -- Quiting for specific file types
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = {
-		"PlenaryTestPopup",
-		"help",
-		"lspinfo",
-		"man",
-		"notify",
-		"qf",
-		"ObsidianBacklinks",
-		"spectre_panel",
-		"startuptime",
-		"tsplayground",
-		"neotest-output",
-		"checkhealth",
-		"neotest-summary",
-		"neotest-output-panel",
-		"fugitive",
-	},
-	callback = function(event)
-		vim.bo[event.buf].buflisted = false
-		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
-	end,
+  pattern = {
+    "PlenaryTestPopup",
+    "help",
+    "lspinfo",
+    "man",
+    "notify",
+    "qf",
+    "ObsidianBacklinks",
+    "startuptime",
+    "tsplayground",
+    "neotest-output",
+    "checkhealth",
+    "neotest-summary",
+    "neotest-output-panel",
+    "fugitive",
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  end,
 })
 
 vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#0ad691", bold = false })
@@ -136,10 +135,6 @@ vim.cmd(":command Q q")
 
 -- set leader + p to "\"_dp allows for pasting without losing yanked text
 vim.api.nvim_set_keymap("x", "<leader>p", "\"_dp", {
-	noremap = true,
-	silent = true
+  noremap = true,
+  silent = true
 })
-
--- Python Host Program
-vim.g.python3_host_prog = "~/.config/nvim/.venv/bin/python3"
-vim.g.python_host_prog = "~/.config/nvim/.venv/bin/python"
