@@ -1,3 +1,0 @@
-return {
-	"grafana/vim-alloy",
-}

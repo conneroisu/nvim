@@ -90,7 +90,7 @@ end, {
 })
 
 -- Bind alt + shift + f to :Format in normal mode
-vim.api.nvim_set_keymap("n", "<A-S-f>", ":Format<CR>", {
+vim.keymap.set("n", "<A-S-f>", vim.lsp.buf.format, {
     desc = "Format"
 })
 

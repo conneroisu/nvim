@@ -8,9 +8,6 @@
 -- Set highlight on search
 vim.o.hlsearch = false
 
--- Make line numbers default
-vim.wo.number = true
-
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
@@ -37,9 +34,6 @@ vim.o.timeoutlen = 300
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
--- set hybrid line numbers
-vim.o.number = true
-vim.o.relativenumber = true
 -- set the color column to 80
 -- vim.o.colorcolumn = "80"
 vim.o.termguicolors = true
