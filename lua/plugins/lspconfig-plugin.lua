@@ -54,6 +54,7 @@ return {
           format_on_save = true,
         },
       },
+      statix = {},
       gopls = {},
       -- ocamlls = {},
       zls = {},
