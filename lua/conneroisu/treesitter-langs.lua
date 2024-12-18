@@ -1,7 +1,3 @@
----@module "treesitter-langs"
----@author Conner Ohnesorge
----@license WTFPL
-
 return {
   "c",
   "cpp",

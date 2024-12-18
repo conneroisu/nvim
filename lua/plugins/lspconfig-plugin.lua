@@ -7,9 +7,7 @@ return {
     require('lsp_signature').on_attach()
   end,
   dependencies = {
-    {
-      'j-hui/fidget.nvim',
-    },
+    'j-hui/fidget.nvim',
     "folke/lazydev.nvim",
     "saghen/blink.cmp",
   },
@@ -21,13 +19,10 @@ return {
         spacing = 4,
         source = "if_many",
         prefix = "●",
-        -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-        -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-        -- prefix = "icons",
       },
       severity_sort = true,
     },
-    ---@type require("lspconfig").options
+    ---@class lspconfig.options
     servers = {
       lua_ls = {
         settings = {
@@ -40,7 +35,6 @@ return {
       tailwindcss = {
         filetypes = { "css", "scss", "javascript", "typescript", "astro", "svelte", "html", "vue", "templ" }
       },
-      rust_analyzer = {},
       jsonls = {},
       yamlls = {},
       -- ghdl_ls = {},
@@ -68,8 +62,8 @@ return {
       -- jdtls = {},
       -- cmake = {},
       sqls = {},
-      verible = {},
-      veridian = {},
+      -- verible = {},
+      -- veridian = {},
     }
   },
   config = function(_, opts)
@@ -85,7 +79,6 @@ return {
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if not client then return end
 
-        -- if it is a nix file
         if vim.bo.filetype == "nix" then
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = args.buf,

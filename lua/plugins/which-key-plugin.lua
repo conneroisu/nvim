@@ -1,7 +1,3 @@
----@module "which-key-plugin"
----@author Conner Ohnesorge
----@license WTFPL
-
 return {
   "folke/which-key.nvim",
   event = "VeryLazy",

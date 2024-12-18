@@ -4,6 +4,8 @@ return {
   opts = {
     library = {
       "lazy.nvim",
+      "nvim-lspconfig",
+      "guihua.lua",
       "LazyVim",
       { path = "LazyVim",            words = { "LazyVim" } },
       { path = "${3rd}/luv/library", words = { "vim%.uv" } },

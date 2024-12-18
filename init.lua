@@ -56,7 +56,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function()
     local content = vim.api.nvim_buf_get_lines(0, 0, -1, false)
     local bufr_content = table.concat(content, "\n")
-    -- if queries is not in the filepath of the current buffer, then return
     local filepath = vim.fn.expand "%:p"
     if not string.find(filepath, "queries") then
       return
