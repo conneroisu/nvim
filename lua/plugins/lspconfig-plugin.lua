@@ -1,7 +1,3 @@
----@module "lspconfig-plugin"
----@author Conner Ohnesorge
----@license WTFPL
-
 return {
   -- lspconfig
   'neovim/nvim-lspconfig',
@@ -31,7 +27,7 @@ return {
       },
       severity_sort = true,
     },
-    ---@type lspconfig.options
+    ---@type require("lspconfig").options
     servers = {
       lua_ls = {
         settings = {
@@ -59,7 +55,12 @@ return {
       },
       hyprls = {},
       cssls = {},
-      nixd = {},
+      nixd = {
+        formatting = {
+          format_on_save = true,
+        },
+      },
+      gopls = {},
       -- ocamlls = {},
       zls = {},
       templ = {},
@@ -79,18 +80,24 @@ return {
       lspconfig[server].setup(config)
     end
 
-    vim.api.nvim_create_autocmd("FileType", {
-      callback = function()
-        if vim.bo.filetype == "go" then
-          lspconfig.gopls.setup({ capabilities = capabilities, })
-        end
-      end,
-    })
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if not client then return end
 
+        -- if it is a nix file
+        if vim.bo.filetype == "nix" then
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = args.buf,
+            callback = function()
+              -- call alejandra if it is installed
+              if vim.fn.executable("alejandra") == 1 then
+                -- :% !alejandra --quiet -
+                vim.cmd([[%!alejandra --quiet -]])
+              end
+            end,
+          })
+        end
         if client.supports_method("textDocument/formatting") then
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = args.buf,
@@ -134,6 +141,9 @@ return {
         end
         if client.supports_method('textDocument/implementation') then
           vim.keymap.set('n', '<leader>li', vim.lsp.buf.implementation, { buffer = args.buf, desc = '[I]mplementation' })
+        end
+        if client.supports_method('textDocument/typeDefinition') then
+          vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition, { buffer = args.buf, desc = '[T]ypeDefinition' })
         end
       end,
     })

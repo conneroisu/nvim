@@ -1,7 +1,3 @@
----@module "better-escape-plugin"
----@author Conner Ohnesorge
----@license WTFPL
-
 return {
   "max397574/better-escape.nvim",
   config = function()
