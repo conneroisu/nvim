@@ -86,7 +86,9 @@ return {
               -- call alejandra if it is installed
               if vim.fn.executable("alejandra") == 1 then
                 -- :% !alejandra --quiet -
-                vim.cmd([[%!alejandra --quiet -]])
+                local pos = vim.api.nvim_win_get_cursor(0)
+                vim.cmd("%!alejandra --quiet -")
+                vim.api.nvim_win_set_cursor(0, pos)
               end
             end,
           })
