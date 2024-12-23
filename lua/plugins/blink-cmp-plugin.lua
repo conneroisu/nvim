@@ -2,20 +2,20 @@ return {
   "saghen/blink.cmp",
   version = 'v0.7.6',
   dependencies = {
-    "L3MON4D3/LuaSnip",
+    -- "L3MON4D3/LuaSnip",
 
   },
   opts = {
-    keymap = { preset = 'enter' },
+    -- keymap = { preset = 'enter' },
     snippets = {
-      expand = function(snippet) require('luasnip').lsp_expand(snippet) end,
-      active = function(filter)
-        if filter and filter.direction then
-          return require('luasnip').jumpable(filter.direction)
-        end
-        return require('luasnip').in_snippet()
-      end,
-      jump = function(direction) require('luasnip').jump(direction) end,
+      -- expand = function(snippet) require('luasnip').lsp_expand(snippet) end,
+      -- active = function(filter)
+      --   if filter and filter.direction then
+      --     return require('luasnip').jumpable(filter.direction)
+      --   end
+      --   return require('luasnip').in_snippet()
+      -- end,
+      -- jump = function(direction) require('luasnip').jump(direction) end,
     },
     sources = {
       default = { "lsp", "path", "snippets", "buffer", "lazydev" },
@@ -28,10 +28,20 @@ return {
     completion = {
       menu = {
         draw = {
-          columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
+          columns = {
+            { "label",     "label_description", gap = 1 },
+            { "kind_icon", "kind" }
+          },
         },
+      },
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 100,
       },
     },
     signature = { enabled = true }
   },
+  config = function(_, opts)
+    require('blink.cmp').setup(opts)
+  end,
 }

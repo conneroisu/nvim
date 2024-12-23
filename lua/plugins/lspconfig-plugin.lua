@@ -93,6 +93,19 @@ return {
             end,
           })
         end
+        if vim.bo.filetype == "sql" then
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = args.buf,
+            callback = function()
+              -- call alejandra if it is installed
+              if vim.fn.executable("sleek") == 1 then
+                local pos = vim.api.nvim_win_get_cursor(0)
+                vim.cmd("%!sleek -i 4")
+                vim.api.nvim_win_set_cursor(0, pos)
+              end
+            end,
+          })
+        end
         if client.supports_method("textDocument/formatting") then
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = args.buf,

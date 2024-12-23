@@ -23,9 +23,64 @@ return {
     { "<bs>",      desc = "Decrement selection", mode = "x" },
   },
   opts = {
-    highlight = { enable = true },
-    indent = { enable = true },
-    ensure_installed = require("conneroisu.treesitter-langs"),
+    auto_install = true,
+    ensure_installed = {
+      "c",
+      "cpp",
+      "go",
+      "zig",
+      "lua",
+      "python",
+      "rust",
+      "tsx",
+      "typescript",
+      "vimdoc",
+      "vim",
+      "c_sharp",
+      "astro",
+      "ninja",
+      "bash",
+      "css",
+      "rst",
+      "toml",
+      "markdown",
+      "proto",
+      "printf",
+      "hyprlang",
+      "json",
+      "php",
+      "regex",
+      "templ",
+      "sql",
+      "yaml",
+      "html",
+      "javascript",
+      "vhdl",
+      "verilog",
+      "jsonc",
+      "zig",
+      "svelte",
+      "nix",
+      "ocamllex",
+      "ocaml",
+      "luadoc",
+      "kotlin",
+      "jsdoc",
+      "go",
+      "dockerfile",
+      "asm",
+      "arduino",
+      "bash",
+      "cmake",
+      "gitcommit",
+      "latex",
+      "requirements",
+      "todotxt",
+      "verilog",
+      "vhs",
+      "yaml",
+      "templ",
+    },
     incremental_selection = {
       enable = true,
       keymaps = {
@@ -35,83 +90,83 @@ return {
         node_decremental = "<bs>",
       },
     },
+
+    autotag = {
+      enable = true,
+    },
+    highlight = {
+      enable = true,
+      additional_vim_regex_highlighting = { "markdown" },
+    },
+    indent = {
+      enable = true,
+    },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "<c-space>",
+        node_incremental = "<c-space>",
+        scope_incremental = "<c-s>",
+        node_decremental = "<M-space>",
+      },
+    },
+    textobjects = {
+      select = {
+        enable = true,
+        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ["aa"] = "@parameter.outer",
+          ["ia"] = "@parameter.inner",
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ac"] = "@class.outer",
+          ["ic"] = "@class.inner",
+        },
+      },
+      move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        goto_next_start = {
+          ["]m"] = "@function.outer",
+          ["]]"] = "@class.outer",
+        },
+        goto_next_end = {
+          ["]M"] = "@function.outer",
+          ["]["] = "@class.outer",
+        },
+        goto_previous_start = {
+          ["[m"] = "@function.outer",
+          ["[["] = "@class.outer",
+        },
+        goto_previous_end = {
+          ["[M"] = "@function.outer",
+          ["[]"] = "@class.outer",
+        },
+      },
+      swap = {
+        enable = true,
+        swap_next = {
+          ["<leader>a"] = "@parameter.inner",
+        },
+        swap_previous = {
+          ["<leader>A"] = "@parameter.inner",
+        },
+      },
+    },
   },
   config = function(_, opts)
     ---@diagnostic disable-next-line: missing-fields
-    require 'nvim-treesitter.configs'.setup {
-      autotag = {
-        enable = true,
-      },
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = { "markdown" },
-      },
-      indent = {
-        enable = true,
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<c-space>",
-          node_incremental = "<c-space>",
-          scope_incremental = "<c-s>",
-          node_decremental = "<M-space>",
-        },
-      },
-      textobjects = {
-        select = {
-          enable = true,
-          lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-          keymaps = {
-            -- You can use the capture groups defined in textobjects.scm
-            ["aa"] = "@parameter.outer",
-            ["ia"] = "@parameter.inner",
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
-          },
-        },
-        move = {
-          enable = true,
-          set_jumps = true, -- whether to set jumps in the jumplist
-          goto_next_start = {
-            ["]m"] = "@function.outer",
-            ["]]"] = "@class.outer",
-          },
-          goto_next_end = {
-            ["]M"] = "@function.outer",
-            ["]["] = "@class.outer",
-          },
-          goto_previous_start = {
-            ["[m"] = "@function.outer",
-            ["[["] = "@class.outer",
-          },
-          goto_previous_end = {
-            ["[M"] = "@function.outer",
-            ["[]"] = "@class.outer",
-          },
-        },
-        swap = {
-          enable = true,
-          swap_next = {
-            ["<leader>a"] = "@parameter.inner",
-          },
-          swap_previous = {
-            ["<leader>A"] = "@parameter.inner",
-          },
-        },
-      },
-    }
-    ---@class TreesitterParserConfig
-    local treesitter_parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-    treesitter_parser_config.templ = {
-      install_info = {
-        url = "https://github.com/vrischmann/tree-sitter-templ.git",
-        files = { "src/parser.c", "src/scanner.c" },
-        branch = "master",
-      },
-    }
-    vim.treesitter.language.register('templ', 'templ')
+    require 'nvim-treesitter.configs'.setup(opts)
+    -- ---@class TreesitterParserConfig
+    -- local treesitter_parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+    -- treesitter_parser_config.templ = {
+    --   install_info = {
+    --     url = "https://github.com/vrischmann/tree-sitter-templ.git",
+    --     files = { "src/parser.c", "src/scanner.c" },
+    --     branch = "master",
+    --   },
+    -- }
+    -- vim.treesitter.language.register('templ', 'templ')
   end,
 }
