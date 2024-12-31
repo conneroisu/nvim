@@ -4,7 +4,7 @@
 
 return {
   "epwalsh/obsidian.nvim",
-  version = "*", -- recommended, use latest release instead of latest commit
+  version = "*",
   lazy = true,
   event = "InsertEnter",
   ft = "markdown",
@@ -24,7 +24,7 @@ return {
       {
         name = "personal",
         path = "~/Documents/000Vaults/SecondBrain",
-      }
+      },
     },
 
     yaml_parser = "yq",

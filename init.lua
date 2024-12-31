@@ -82,7 +82,5 @@ vim.filetype.add {
   },
 }
 
-vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
-
 vim.o.number = true
 vim.o.relativenumber = true
