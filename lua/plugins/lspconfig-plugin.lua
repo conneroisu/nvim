@@ -80,21 +80,21 @@ return {
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if not client then return end
 
-        -- if vim.bo.filetype == "nix" then
-        --   vim.api.nvim_create_autocmd("BufWritePre", {
-        --     buffer = args.buf,
-        --     callback = function()
-        --       -- call alejandra if it is installed
-        --       if vim.fn.executable("alejandra") == 1 then
-        --         -- :% !alejandra --quiet -
-        --         local pos = vim.api.nvim_win_get_cursor(0)
-        --         vim.cmd("silent %!alejandra --quiet -")
-        --         vim.api.nvim_win_set_cursor(0, pos)
-        --       end
-        --     end,
-        --   })
-        -- end
-        --
+        if vim.bo.filetype == "nix" then
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = args.buf,
+            callback = function()
+              -- call alejandra if it is installed
+              if vim.fn.executable("alejandra") == 1 then
+                -- :% !alejandra --quiet -
+                local pos = vim.api.nvim_win_get_cursor(0)
+                vim.cmd("silent %!alejandra --quiet -")
+                vim.api.nvim_win_set_cursor(0, pos)
+              end
+            end,
+          })
+        end
+
         if vim.bo.filetype == "sql" then
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = args.buf,
