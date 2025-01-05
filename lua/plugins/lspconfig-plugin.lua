@@ -50,6 +50,7 @@ return {
       },
       hyprls = {},
       cssls = {},
+      nil_ls = {},
       nixd = {
         formatting = {
           format_on_save = true,
