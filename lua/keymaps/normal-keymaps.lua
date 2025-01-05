@@ -170,3 +170,14 @@ end, {
 vim.keymap.set("n", "<leader><leader>", function()
   require("telescope").extensions.smart_open.smart_open()
 end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>ed", function()
+  local handle = io.popen("git rev-parse --show-toplevel")
+  if handle then
+    local git_root = handle:read("*a"):gsub("%s+$", "") -- trim whitespace
+    handle:close()
+    vim.cmd("edit " .. git_root .. "/devenv.nix")
+  end
+end, {
+  desc = "Open devenv.nix"
+})
