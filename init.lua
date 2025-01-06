@@ -45,6 +45,7 @@ require "keymaps.insert-keymaps"
 require "keymaps.normal-keymaps"
 
 vim.o.statusline = vim.o.statusline .. "%F"
+
 -- Register the .templ filetype
 vim.filetype.add { extension = { templ = "templ", } }
 vim.treesitter.language.register("templ", "templ")
