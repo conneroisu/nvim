@@ -30,6 +30,7 @@ return {
         },
       },
       basedpyright = {},
+      protols = {},
       ts_ls = {},
       texlab = {},
       tailwindcss = {

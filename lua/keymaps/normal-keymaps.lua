@@ -176,7 +176,7 @@ vim.keymap.set("n", "<leader>ed", function()
   if handle then
     local git_root = handle:read("*a"):gsub("%s+$", "") -- trim whitespace
     handle:close()
-    vim.cmd("edit " .. git_root .. "/devenv.nix")
+    vim.cmd("edit " .. git_root .. "/flake.nix")
   end
 end, {
   desc = "Open devenv.nix"
