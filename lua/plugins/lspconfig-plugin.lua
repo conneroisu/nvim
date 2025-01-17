@@ -86,9 +86,7 @@ return {
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = args.buf,
             callback = function()
-              -- call alejandra if it is installed
               if vim.fn.executable("alejandra") == 1 then
-                -- :% !alejandra --quiet -
                 local pos = vim.api.nvim_win_get_cursor(0)
                 vim.cmd("silent %!alejandra --quiet -")
                 vim.api.nvim_win_set_cursor(0, pos)
@@ -101,10 +99,22 @@ return {
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = args.buf,
             callback = function()
-              -- call alejandra if it is installed
               if vim.fn.executable("sleek") == 1 then
                 local pos = vim.api.nvim_win_get_cursor(0)
                 vim.cmd("silent %!sleek -i 4")
+                vim.api.nvim_win_set_cursor(0, pos)
+              end
+            end,
+          })
+        end
+
+        if vim.bo.filetype == "python" then
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = args.buf,
+            callback = function()
+              if vim.fn.executable("black") == 1 then
+                local pos = vim.api.nvim_win_get_cursor(0)
+                vim.cmd("silent %!black -")
                 vim.api.nvim_win_set_cursor(0, pos)
               end
             end,
