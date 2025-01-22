@@ -85,3 +85,18 @@ vim.filetype.add {
 
 vim.o.number = true
 vim.o.relativenumber = true
+-- Create an autocommand group for remembering folds in Nix files
+vim.api.nvim_create_augroup('remember_nix_folds', { clear = true })
+
+vim.api.nvim_create_autocmd({ 'BufWinLeave' }, {
+  pattern = '*.nix',
+  group = 'remember_nix_folds',
+  command = 'mkview'
+})
+
+vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
+  pattern = '*.nix',
+  group = 'remember_nix_folds',
+  command = 'silent! loadview'
+})
+vim.opt.shell = "zsh"

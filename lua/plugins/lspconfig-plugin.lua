@@ -45,6 +45,7 @@ return {
       dockerls = {},
       astro = {},
       svelte = {},
+      nushell = {},
       html = {},
       htmx = {
         filetypes = { "css", "scss", "javascript", "typescript", "astro", "svelte", "html", "vue", "templ" },
@@ -88,6 +89,7 @@ return {
             callback = function()
               if vim.fn.executable("alejandra") == 1 then
                 local pos = vim.api.nvim_win_get_cursor(0)
+                -- vim.cmd("silent %!alejandra --quiet -")
                 vim.cmd("silent %!alejandra --quiet -")
                 vim.api.nvim_win_set_cursor(0, pos)
               end
@@ -114,12 +116,21 @@ return {
             callback = function()
               if vim.fn.executable("black") == 1 then
                 local pos = vim.api.nvim_win_get_cursor(0)
-                vim.cmd("silent %!black -")
+                vim.cmd("silent %!black -q -")
                 vim.api.nvim_win_set_cursor(0, pos)
               end
             end,
           })
         end
+
+        if vim.bo.filetype == "nu" then
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = args.buf,
+            callback = function()
+            end,
+          })
+        end
+
         if client.supports_method("textDocument/formatting") and vim.bo.filetype ~= "sql" then
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = args.buf,

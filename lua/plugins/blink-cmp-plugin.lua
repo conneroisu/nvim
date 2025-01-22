@@ -7,7 +7,7 @@ return {
   opts = {
     debug = true,
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "lazydev" },
+      default = { "path", "lsp", "snippets", "buffer", "lazydev" },
       providers = {
         -- dont show LuaLS require statements when lazydev has items
         lsp = {
