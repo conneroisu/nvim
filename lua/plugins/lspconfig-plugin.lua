@@ -32,6 +32,7 @@ return {
       basedpyright = {},
       protols = {},
       ts_ls = {},
+      -- golangci_lint_ls = {},
       texlab = {},
       tailwindcss = {
         filetypes = { "css", "scss", "javascript", "typescript", "astro", "svelte", "html", "vue", "templ" }
@@ -46,7 +47,7 @@ return {
       astro = {},
       svelte = {},
       nushell = {},
-      html = {},
+      -- html = {},
       htmx = {
         filetypes = { "css", "scss", "javascript", "typescript", "astro", "svelte", "html", "vue", "templ" },
       },
