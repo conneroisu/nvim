@@ -53,7 +53,7 @@ return {
       },
       hyprls = {},
       cssls = {},
-      nil_ls = {},
+      -- nil_ls = {},
       nixd = {
         formatting = {
           format_on_save = true,
@@ -125,6 +125,7 @@ return {
         end
 
         if vim.bo.filetype == "nu" then
+          vim.bo.commentstring = "# %s"
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = args.buf,
             callback = function()

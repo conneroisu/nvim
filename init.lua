@@ -73,6 +73,7 @@ vim.api.nvim_create_user_command("Cppath", function()
 end, {})
 
 -- vim.lsp.set_log_level("debug")
+--
 vim.filetype.add {
   extension = { rasi = 'rasi' },
   pattern = {
@@ -113,5 +114,20 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
   group = 'steeltrap_zig',
   command = 'silent! loadview'
 })
+
+vim.api.nvim_create_augroup('steeltrap_c', { clear = true })
+
+vim.api.nvim_create_autocmd({ 'BufWinLeave' }, {
+  pattern = '*.c',
+  group = 'steeltrap_c',
+  command = 'mkview'
+})
+
+vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
+  pattern = '*.c',
+  group = 'steeltrap_c',
+  command = 'silent! loadview'
+})
+
 
 vim.opt.shell = "zsh"
