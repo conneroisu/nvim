@@ -29,6 +29,13 @@ return {
           Lua = { workspace = { checkThirdParty = false, }, },
         },
       },
+      ccls = {
+        init_options = {
+          cache = {
+            directory = ".ccls-cache",
+          },
+        }
+      },
       basedpyright = {},
       protols = {},
       ts_ls = {},
@@ -42,11 +49,10 @@ return {
       -- ghdl_ls = {},
       -- hdl_checker = {},
       -- vhdl_ls = {},
-      rust_analyzer = {},
       dockerls = {},
       astro = {},
       svelte = {},
-      nushell = {},
+      -- nushell = {},
       -- html = {},
       htmx = {
         filetypes = { "css", "scss", "javascript", "typescript", "astro", "svelte", "html", "vue", "templ" },
@@ -120,15 +126,6 @@ return {
                 vim.cmd("silent %!black -q -")
                 vim.api.nvim_win_set_cursor(0, pos)
               end
-            end,
-          })
-        end
-
-        if vim.bo.filetype == "nu" then
-          vim.bo.commentstring = "# %s"
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = args.buf,
-            callback = function()
             end,
           })
         end

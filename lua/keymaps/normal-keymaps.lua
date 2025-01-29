@@ -181,14 +181,3 @@ vim.keymap.set("n", "<leader>ed", function()
 end, {
   desc = "Open devenv.nix"
 })
-
-vim.keymap.set("n", "<leader>dx", function()
-  local handle = io.popen("git rev-parse --show-toplevel")
-  if handle then
-    local git_root = handle:read("*a"):gsub("%s+$", "") -- trim whitespace
-    handle:close()
-    vim.cmd("edit " .. git_root .. "/devenv.nix")
-  end
-end, {
-  desc = "Open daily notes"
-})
