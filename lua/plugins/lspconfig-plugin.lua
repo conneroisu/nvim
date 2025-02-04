@@ -10,6 +10,7 @@ return {
     'j-hui/fidget.nvim',
     "folke/lazydev.nvim",
     "saghen/blink.cmp",
+    "folke/neoconf.nvim",
   },
   opts = {
     diagnostics = {
@@ -72,7 +73,11 @@ return {
       marksman = {},
       -- jdtls = {},
       -- cmake = {},
-      sqls = {},
+      -- sqls = {
+      --   on_attach = function(client, bufnr)
+      --     require('sqls').on_attach(client, bufnr)
+      --   end
+      -- },
       -- verible = {},
       -- veridian = {},
     }
@@ -96,7 +101,6 @@ return {
             callback = function()
               if vim.fn.executable("alejandra") == 1 then
                 local pos = vim.api.nvim_win_get_cursor(0)
-                -- vim.cmd("silent %!alejandra --quiet -")
                 vim.cmd("silent %!alejandra --quiet -")
                 vim.api.nvim_win_set_cursor(0, pos)
               end

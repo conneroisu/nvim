@@ -25,6 +25,10 @@ return {
         name = "personal",
         path = "~/Documents/000Vaults/SecondBrain",
       },
+      {
+        name = "cpre488",
+        path = "~/Documents/000Vaults/cpre488.wiki",
+      },
     },
 
     yaml_parser = "yq",
