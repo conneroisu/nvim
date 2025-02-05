@@ -73,11 +73,7 @@ return {
       marksman = {},
       -- jdtls = {},
       -- cmake = {},
-      -- sqls = {
-      --   on_attach = function(client, bufnr)
-      --     require('sqls').on_attach(client, bufnr)
-      --   end
-      -- },
+      sqls = {},
       -- verible = {},
       -- veridian = {},
     }
@@ -116,6 +112,8 @@ return {
                 local pos = vim.api.nvim_win_get_cursor(0)
                 vim.cmd("silent %!sleek -i 4")
                 vim.api.nvim_win_set_cursor(0, pos)
+              else
+                vim.print("sleek not found")
               end
             end,
           })
