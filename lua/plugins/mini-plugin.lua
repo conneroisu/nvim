@@ -3,6 +3,18 @@ return {
     'echasnovski/mini.nvim',
     version = "*",
     config = function()
+      require('mini.comment').setup({
+        mappings = {
+          comment_line = '<leader>cc',
+
+          -- Toggle comment on visual selection
+          comment_visual = '<leader>cc',
+
+          -- Define 'comment' textobject (like `d<leader>cc` - delete whole comment block)
+          -- Works also in Visual mode if mapping differs from `comment_visual`
+          textobject = '<leader>cc',
+        },
+      })
       require('mini.jump').setup()
       require('mini.surround').setup()
       require('mini.move').setup()
