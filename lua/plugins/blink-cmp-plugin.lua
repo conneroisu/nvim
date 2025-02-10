@@ -1,24 +1,25 @@
 return {
   "saghen/blink.cmp",
-  -- version = 'v0.7.6',
+  version = 'v0.11.0',
   dependencies = {
     { 'echasnovski/mini.nvim', version = false }
   },
+  ---@module 'blink.cmp'
+  ---@type blink.cmp.Config
   opts = {
-    debug = true,
     sources = {
       default = { "path", "lsp", "snippets", "buffer", "lazydev" },
       providers = {
         -- dont show LuaLS require statements when lazydev has items
         lsp = {
-          fallback_for = { "lazydev" },
           score_offset = 2,
         },
-        lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", },
+        lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
       },
     },
     completion = {
       menu = {
+        auto_show = function(ctx) return ctx.mode ~= 'cmdline' end,
         draw = {
           columns = {
             { "label",     "label_description", gap = 1 },
@@ -40,14 +41,8 @@ return {
           },
         },
       },
-      documentation = {
-        auto_show = true,
-        auto_show_delay_ms = 100,
-      },
     },
-    signature = { enabled = true }
+    signature = { enabled = true },
   },
-  config = function(_, opts)
-    require('blink.cmp').setup(opts)
-  end,
+  opts_extend = { "sources.default" }
 }
