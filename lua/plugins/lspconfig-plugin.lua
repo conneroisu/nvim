@@ -42,22 +42,16 @@ return {
       ts_ls = {},
       -- golangci_lint_ls = {},
       texlab = {},
-      tailwindcss = {
-        filetypes = { "css", "scss", "javascript", "typescript", "astro", "svelte", "html", "vue", "templ" }
-      },
+      tailwindcss = {},
       jsonls = {},
       yamlls = {},
-      -- ghdl_ls = {},
       -- hdl_checker = {},
-      -- vhdl_ls = {},
       dockerls = {},
       astro = {},
       svelte = {},
       -- nushell = {},
-      -- html = {},
-      htmx = {
-        filetypes = { "css", "scss", "javascript", "typescript", "astro", "svelte", "html", "vue", "templ" },
-      },
+      html = {},
+      htmx = {},
       hyprls = {},
       cssls = {},
       -- nil_ls = {},
@@ -79,6 +73,7 @@ return {
     }
   },
   config = function(_, opts)
+    vim.filetype.add({ extension = { templ = "templ" } })
     local lspconfig = require("lspconfig")
     local capabilities = require('blink.cmp').get_lsp_capabilities()
     for server, config in pairs(opts.servers) do
