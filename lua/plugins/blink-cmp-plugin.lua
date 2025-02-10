@@ -12,13 +12,21 @@ return {
       providers = {
         -- dont show LuaLS require statements when lazydev has items
         lsp = {
-          score_offset = 2,
+          score_offset = 5,
           fallbacks = { "path", "buffer", "snippets" },
         },
         lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
       },
     },
+    enabled = function()
+      return true
+    end,
     completion = {
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 10,
+      },
+
       menu = {
         auto_show = function(ctx) return ctx.mode ~= 'cmdline' end,
         draw = {
@@ -43,7 +51,12 @@ return {
         },
       },
     },
-    signature = { enabled = true },
+    signature = {
+      enabled = true,
+      window = {
+        show_documentation = true,
+      },
+    },
   },
   opts_extend = { "sources.default" }
 }
