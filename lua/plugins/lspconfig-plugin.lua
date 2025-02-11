@@ -1,5 +1,4 @@
 return {
-  -- lspconfig
   'neovim/nvim-lspconfig',
   event = { "BufReadPost", "BufNewFile" },
   on_attach = function(client, bufnr)
@@ -37,6 +36,7 @@ return {
           },
         }
       },
+      elmls = {},
       basedpyright = {},
       protols = {},
       ts_ls = {},

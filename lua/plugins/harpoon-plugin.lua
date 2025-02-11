@@ -1,7 +1,3 @@
----@module "harpoon-plugin"
----@author Conner Ohnesorge
----@license WTFPL
-
 return {
   "ThePrimeagen/harpoon",
   event = "BufRead",

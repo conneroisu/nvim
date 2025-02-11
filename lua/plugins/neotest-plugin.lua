@@ -1,7 +1,3 @@
----@module "neotest-plugin"
----@author Conner Ohnesorge
----@license WTFPL
-
 return {
   "nvim-neotest/neotest",
   dependencies = {

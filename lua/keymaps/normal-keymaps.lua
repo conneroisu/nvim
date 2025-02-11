@@ -137,15 +137,6 @@ end, {
   desc = "Open in Obsidian"
 })
 
--- restart copilot with leader + c + r
-vim.keymap.set("n", "<leader>cr", function()
-  vim.cmd(":Copilot restart")
-end, {
-  noremap = true,
-  silent = true,
-  desc = "Restart Copilot"
-})
-
 -- set leader + g + t to run go tests when in a go file
 vim.keymap.set("n", "<leader>gt", function()
   vim.cmd(":GoTest")

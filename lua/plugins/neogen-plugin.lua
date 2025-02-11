@@ -1,7 +1,3 @@
----@module "neogen-plugin"
----@author Conner Ohnesorge
----@license WTFPL
-
 return {
   "danymat/neogen",
   event = "BufRead",

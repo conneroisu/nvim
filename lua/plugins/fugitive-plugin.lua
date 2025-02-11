@@ -1,7 +1,3 @@
----@module "fugitive-plugin"
----@author Conner Ohnesorge
----@license WTFPL
-
 return {
   "tpope/vim-fugitive",
   dependencies = {
