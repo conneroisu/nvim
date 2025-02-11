@@ -39,11 +39,10 @@ return {
         },
         modules = { -- List of various plugins and additional options
           neotest = true,
-          -- cmp = true,
+          cmp = true,
           lazy = true,
           treesitter = true,
           whichkey = true,
-          blink = true,
         },
       },
       palettes = {},

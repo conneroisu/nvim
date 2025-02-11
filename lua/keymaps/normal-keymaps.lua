@@ -165,7 +165,7 @@ end, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>ed", function()
   local handle = io.popen("git rev-parse --show-toplevel")
   if handle then
-    local git_root = handle:read("*a"):gsub("%s+$", "") -- trim whitespace
+    local git_root = handle:read("*a"):gsub("%s+$", "")
     handle:close()
     vim.cmd("edit " .. git_root .. "/flake.nix")
   end
