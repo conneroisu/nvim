@@ -53,6 +53,7 @@ return {
       protols = {},
       ts_ls = {},
       texlab = {},
+      vhdl_ls = {},
       tailwindcss = {},
       jsonls = {},
       yamlls = {},
