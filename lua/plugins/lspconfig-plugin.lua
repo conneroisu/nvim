@@ -55,6 +55,7 @@ return {
       texlab = {},
       vhdl_ls = {},
       tailwindcss = {},
+      hdl_checker = {},
       jsonls = {},
       yamlls = {},
       dockerls = {},
