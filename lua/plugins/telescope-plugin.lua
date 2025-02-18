@@ -45,6 +45,7 @@ return {
   config = function()
     local telescope = require("telescope")
     local built_in = require "telescope.builtin"
+    local multigrep = require("conneroisu.multigrep")
     telescope.load_extension('media_files')
     telescope.load_extension('projects')
     telescope.setup({
@@ -75,7 +76,7 @@ return {
       desc = "Open Recent Files",
     })
     -- map telescope live_grep to leader + l + g
-    vim.keymap.set("n", "<leader>lg", built_in.live_grep, {
+    vim.keymap.set("n", "<leader>lg", multigrep.multigrep, {
       desc = "Open Telescope Live Grep"
     })
     -- bind leader + f + f to open telescope in normal mode for files
