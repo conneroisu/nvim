@@ -37,6 +37,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = highlight_group,
   pattern = "*",
 })
+
 vim.cmd "syntax on"
 vim.cmd "set wrap!"
 
@@ -73,7 +74,7 @@ vim.api.nvim_create_user_command("Cppath", function()
 end, {})
 
 -- vim.lsp.set_log_level("debug")
---
+
 vim.filetype.add {
   extension = { rasi = 'rasi' },
   pattern = {
