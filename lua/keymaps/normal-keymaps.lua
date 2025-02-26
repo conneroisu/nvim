@@ -128,15 +128,6 @@ end, {
   desc = "Run Go Mod Tidy in CWD"
 })
 
--- open the current file in obsidian with leader + o + b
-vim.keymap.set("n", "<leader>ob", function()
-  vim.cmd(":!obs open " .. vim.fn.expand('%:p') .. "<CR>")
-end, {
-  noremap = true,
-  silent = true,
-  desc = "Open in Obsidian"
-})
-
 -- set leader + g + t to run go tests when in a go file
 vim.keymap.set("n", "<leader>gt", function()
   vim.cmd(":GoTest")
@@ -172,3 +163,11 @@ vim.keymap.set("n", "<leader>ed", function()
 end, {
   desc = "Open devenv.nix"
 })
+
+vim.keymap.set("n", "<leader>ob", function()
+    vim.cmd(":ObsidianOpen")
+  end,
+  {
+    desc = "Open Obsidian"
+  }
+)
