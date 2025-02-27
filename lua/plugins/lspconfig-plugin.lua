@@ -9,7 +9,7 @@ return {
   dependencies = {
     'j-hui/fidget.nvim',
     "folke/lazydev.nvim",
-    "saghen/blink.cmp",
+    -- "saghen/blink.cmp",
     "folke/neoconf.nvim",
     'hrsh7th/cmp-nvim-lsp',
     "hrsh7th/cmp-nvim-lsp-signature-help",
