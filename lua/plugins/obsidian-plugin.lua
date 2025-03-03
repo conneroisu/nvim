@@ -26,8 +26,8 @@ return {
         path = "~/Documents/000Vaults/SecondBrain",
       },
       {
-        name = "cpre488",
-        path = "~/Documents/000Vaults/cpre488.wiki",
+        name = "conneroh.com",
+        path = "~/Documents/001Repos/conneroh.com/internal/data/docs",
       },
     },
 
