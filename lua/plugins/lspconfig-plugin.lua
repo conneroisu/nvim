@@ -61,7 +61,6 @@ return {
       dockerls = {},
       astro = {},
       svelte = {},
-      -- html = {},
       htmx = {},
       hyprls = {},
       cssls = {},

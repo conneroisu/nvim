@@ -1,7 +1,7 @@
 return {
   "olexsmir/gopher.nvim",
   event = "BufRead",
-  requires = { -- dependencies
+  dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
   },
@@ -17,6 +17,14 @@ return {
       },
     }
     -- add binding leader + EE to call :GoIfError
-    vim.api.nvim_set_keymap("n", "<leader>er", ":GoIfErr<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap(
+      "n",
+      "<leader>er",
+      ":GoIfErr<CR>",
+      {
+        noremap = true,
+        silent = true,
+      }
+    )
   end
 }
