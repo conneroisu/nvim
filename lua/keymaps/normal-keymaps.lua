@@ -1,7 +1,3 @@
----@module "normal-keymaps"
----@author Conner Ohnesorge
----@license WTFPL
-
 -- map space to no operation so that it can be used as a prefix key
 vim.keymap.set("n", "<Space>", "<Nop>", {
   desc = "No Operation on Space"
