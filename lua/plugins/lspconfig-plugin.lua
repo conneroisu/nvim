@@ -52,6 +52,7 @@ return {
       basedpyright = {},
       protols = {},
       ts_ls = {},
+      rust_analyzer = {},
       texlab = {},
       vhdl_ls = {},
       tailwindcss = {},
@@ -86,7 +87,6 @@ return {
       },
       zls = {},
       templ = {},
-      marksman = {},
       sqls = {},
     }
   },
