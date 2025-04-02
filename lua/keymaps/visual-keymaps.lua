@@ -25,3 +25,9 @@ vim.keymap.set('x', '<C-S-2>', ':s/\\d\\+/\\=submatch(0)-1/g<CR>gv', {
   silent = true,
   desc = "Decrement all numbers in selection by 1"
 })
+
+vim.keymap.set("x", "<leader>om", 'c<Esc>oclass={<Space>twerge.Generate(\"<Esc>pa\")<Space>}<Esc>kdd',
+  { remap = true, silent = true })
+
+vim.keymap.set("v", "<leader>om", 'c<Esc>oclass={<Space>twerge.Generate(\"<Esc>pa\")<Space>}<Esc>kdd',
+  { remap = true, silent = true })

@@ -36,6 +36,23 @@ return {
     },
     ---@class lspconfig.options
     servers = {
+      basics_ls = {
+        settings = {
+          buffer = {
+            enable = false,
+          },
+          path = {
+            enable = false,
+          },
+          snippet = {
+            enable = true,
+            sources = {
+              vim.fn.stdpath("config") .. "/snippets",
+            },                       -- paths to package containing snippets, see examples below
+            matchStrategy = 'fuzzy', -- or 'fuzzy'
+          },
+        }
+      },
       lua_ls = {
         settings = {
           Lua = { workspace = { checkThirdParty = false, }, },
@@ -51,6 +68,7 @@ return {
       elmls = {},
       basedpyright = {},
       protols = {},
+      clangd = {},
       ts_ls = {},
       rust_analyzer = {},
       texlab = {},

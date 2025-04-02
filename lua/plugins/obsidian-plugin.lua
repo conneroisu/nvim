@@ -77,8 +77,18 @@ return {
       end
 
       -- Add the created date of the note as an alias if not already present.
-      if not out.created then
+      if not out.created_at then
         out.created_at = getCurrentTimeRFC3339()
+      end
+
+      -- title is required for the note to be saved. (default: {filename})
+      if not out.title then
+        out.title = note.title
+      end
+
+      -- description is required for the note to be saved. (default: {filename})
+      if not out.description then
+        out.description = note.title
       end
 
       out.updated_at = getCurrentTimeRFC3339()
