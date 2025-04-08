@@ -68,7 +68,7 @@ return {
       elmls = {},
       basedpyright = {},
       protols = {},
-      clangd = {},
+      -- clangd = {},
       ts_ls = {},
       rust_analyzer = {},
       texlab = {},
