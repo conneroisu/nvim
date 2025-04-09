@@ -1,1 +1,1 @@
-{"class":{"prefix":"cls","body":"class={ twerge.Generate(\"${1:class}\") }"}}
+{"class":{"prefix":"cls","body":"class={ twerge.It(\"${1:class}\") }"}}
