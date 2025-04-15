@@ -60,6 +60,7 @@ return {
           Lua = { workspace = { checkThirdParty = false, }, },
         },
       },
+      ocamlls = {},
       ccls = {
         init_options = {
           cache = {
