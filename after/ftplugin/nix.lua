@@ -14,11 +14,9 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
 })
 
 vim.api.nvim_create_autocmd("BufWriteCmd", {
+  pattern = '*.nix',
   ---@param args vim.api.keyset.create_autocmd.callback_args
   callback = function(args)
-    if vim.fn.expand("%:e") ~= "nix" then
-      return
-    end
     if vim.fn.executable("alejandra") == 1 then
       local cursor_position = vim.api.nvim_win_get_cursor(0)
       local bufnr = vim.api.nvim_get_current_buf()
