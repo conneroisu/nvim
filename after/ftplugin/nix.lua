@@ -40,8 +40,10 @@ vim.api.nvim_create_autocmd("BufWriteCmd", {
         vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.fn.split(formatted, "\n"))
         vim.api.nvim_win_set_cursor(0, cursor_position)
         vim.print("Formatted Nix file (" .. args.file .. ")")
+        return true
       end
       -- If check_code == 0, file is already formatted, do nothing
+      return true
     end
   end,
 })
