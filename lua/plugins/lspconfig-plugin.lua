@@ -182,6 +182,8 @@ return {
     end
 
     vim.api.nvim_create_autocmd("LspAttach", {
+
+      --- @param args vim.api.keyset.create_autocmd.callback_args
       callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if not client then return end
@@ -214,6 +216,7 @@ return {
           })
         end
 
+        ---@diagnostic disable-next-line: param-type-mismatch
         if client.supports_method("textDocument/formatting") and vim.bo.filetype ~= "sql" then
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = args.buf,
