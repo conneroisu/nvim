@@ -33,18 +33,20 @@ vim.api.nvim_create_autocmd("BufWriteCmd", {
           error_msg = check_result
         end
         vim.print("Error in Nix file (" .. args.file .. "): " .. error_msg)
-        return false
       elseif check_code == 2 then
         -- Formatting is needed, apply it
         local formatted = vim.fn.system("alejandra --quiet - ", content)
         -- Apply the formatted content
         vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.fn.split(formatted, "\n"))
         vim.api.nvim_win_set_cursor(0, cursor_position)
-        vim.print("Formatted Nix file (" .. args.file .. ")")
+        -- vim.print("Formatted Nix file (" .. args.file .. ")")
+      elseif check_code == 0 then
+        -- File is already formatted, do nothing
         return true
       end
-      -- If check_code == 0, file is already formatted, do nothing
-      return true
+
+      -- write the buffer to the file
+      vim.cmd("write")
     end
   end,
 })
