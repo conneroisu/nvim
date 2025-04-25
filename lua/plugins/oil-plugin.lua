@@ -73,7 +73,7 @@ return {
       "_templ.go",
       "_templ.txt",
       "*rage.out",
-      "tmp",
+      "tmp$",
     }
     oil.set_is_hidden_file(function(filename, _)
       for _, pattern in ipairs(hidden_patterns) do
