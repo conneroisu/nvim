@@ -21,33 +21,12 @@ return {
       build =
       'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
     },
-    {
-      "ahmedkhalf/project.nvim",
-      opts = {},
-      config = function()
-        require("project_nvim").setup {
-          manual_mode = false,
-          detection_methods = { "lsp", "pattern" },
-          patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
-          ignore_lsp = {},
-          exclude_dirs = {},
-          show_hidden = false,
-          silent_chdir = true,
-          scope_chdir = 'global',
-          datapath = vim.fn.stdpath("data"),
-        }
-      end,
-      keys = {
-        { "<leader>gp", "<Cmd>Telescope projects<CR>", desc = "Projects" },
-      },
-    },
   },
   config = function()
     local telescope = require("telescope")
     local built_in = require "telescope.builtin"
     local multigrep = require("conneroisu.multigrep")
     telescope.load_extension('media_files')
-    telescope.load_extension('projects')
     telescope.setup({
       extensions = {
         fzf = {
@@ -108,21 +87,8 @@ return {
     vim.keymap.set('n', '<leader>sd', built_in.diagnostics, {
       desc = '[S]earch [D]iagnostics'
     })
-    vim.keymap.set('n', '<leader>gr', built_in.lsp_references, {
-      desc = '[G]oto [R]eferences'
-    })
     vim.keymap.set('n', '<leader>sr', built_in.resume, {
       desc = '[R]esume [S]earch'
-    })
-    vim.keymap.set('n', '<leader>ds', built_in.lsp_document_symbols, {
-      desc = '[D]ocument [S]ymbols'
-    })
-    vim.keymap.set('n', '<leader>ws', built_in.lsp_workspace_symbols, {
-      desc = '[W]orkspace [S]ymbols'
-    })
-    -- bind leader + g + p to open telescope projects in normal mode
-    vim.api.nvim_set_keymap("n", "<leader>gp", ":Telescope projects<CR>", {
-      desc = "Open Telesope projects "
     })
   end
 }

@@ -1,12 +1,17 @@
 return {
   "saghen/blink.cmp",
-  version = 'v0.11.0',
+  version = 'v1.1.1',
   dependencies = {
     { 'echasnovski/mini.nvim', version = false }
   },
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
+    fuzzy = {
+      prebuilt_binaries = {
+        force_version = "v1.1.1"
+      },
+    },
     sources = {
       default = { "path", "lsp", "snippets", "buffer", "lazydev" },
       providers = {

@@ -210,11 +210,9 @@ return {
     end
 
     vim.api.nvim_create_autocmd("LspAttach", {
-
       --- @param args vim.api.keyset.create_autocmd.callback_args
       callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if not client then return end
+        local client = assert(vim.lsp.get_client_by_id(args.data.client_id), "must have valid client")
 
         if vim.bo.filetype == "sql" then
           vim.api.nvim_create_autocmd("BufWritePre", {
@@ -231,110 +229,84 @@ return {
           })
         end
 
-        if vim.bo.filetype == "python" then
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = args.buf,
-            callback = function()
-              if vim.fn.executable("black") == 1 then
-                local pos = vim.api.nvim_win_get_cursor(0)
-                vim.cmd("silent %!black -q -")
-                vim.api.nvim_win_set_cursor(0, pos)
-              end
-            end,
-          })
-        end
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          buffer = args.buf,
+          callback = function()
+            vim.lsp.buf.format({
+              bufnr = args.buf,
+              id = client.id,
+            })
+          end,
+        })
 
-        ---@diagnostic disable-next-line: param-type-mismatch
-        if client.supports_method("textDocument/formatting") and vim.bo.filetype ~= "sql" then
-          vim.api.nvim_create_autocmd("BufWritePre", {
+
+        local builtin = require("telescope.builtin")
+        vim.keymap.set(
+          'n',
+          '<leader>rn',
+          vim.lsp.buf.rename,
+          { buffer = args.buf, desc = '[R]e[n]ame' }
+        )
+        vim.keymap.set(
+          'n',
+          '<leader>cf',
+          vim.lsp.buf.format,
+          { buffer = args.buf, desc = '[C]ode [F]ormat' }
+        )
+        vim.keymap.set(
+          'n',
+          '<leader>ca',
+          vim.lsp.buf.code_action,
+          { buffer = args.buf, desc = '[C]ode [A]ction' }
+        )
+        vim.keymap.set(
+          'n',
+          '<leader>ls',
+          vim.lsp.buf.document_symbol,
+          { buffer = args.buf, desc = '[L]ocate [S]ymbols' }
+        )
+        vim.keymap.set(
+          'n',
+          '<leader>lws',
+          vim.lsp.buf.workspace_symbol,
+          { buffer = args.buf, desc = '[W]orkspace [S]ymbols' }
+        )
+        vim.keymap.set(
+          'n',
+          '<leader>sh',
+          vim.lsp.buf.signature_help,
+          { buffer = args.buf, desc = '[S]ignature [H]elp' }
+        )
+        vim.keymap.set(
+          'n',
+          'K',
+          vim.lsp.buf.hover,
+          { buffer = args.buf, desc = '[H]over' }
+        )
+        vim.keymap.set(
+          'n',
+          'gd',
+          builtin.lsp_definitions,
+          { buffer = args.buf, desc = '[D]efinition' }
+        )
+        vim.keymap.set('n', '<leader>gr', builtin.lsp_references, {
+          desc = '[G]oto [R]eferences'
+        })
+        vim.keymap.set('n', '<leader>ds', builtin.lsp_document_symbols, {
+          desc = '[D]ocument [S]ymbols'
+        })
+        vim.keymap.set('n', '<leader>ws', builtin.lsp_workspace_symbols, {
+          desc = '[W]orkspace [S]ymbols'
+        })
+        vim.keymap.set(
+          'n',
+          '<leader>li',
+          builtin.lsp_implementations,
+          {
             buffer = args.buf,
-            callback = function()
-              vim.lsp.buf.format({
-                bufnr = args.buf,
-                id = client.id,
-              })
-            end,
+            desc = '[I]mplementation'
           })
-        end
-        -- Key Mappings
-        if client.supports_method('textDocument/rename') then
-          vim.keymap.set(
-            'n',
-            '<leader>rn',
-            vim.lsp.buf.rename,
-            { buffer = args.buf, desc = '[R]e[n]ame' }
-          )
-        end
-        if client.supports_method('textDocument/formatting') then
-          vim.keymap.set(
-            'n',
-            '<leader>cf',
-            vim.lsp.buf.format,
-            { buffer = args.buf, desc = '[C]ode [F]ormat' }
-          )
-        end
-        if client.supports_method('textDocument/codeAction') then
-          vim.keymap.set(
-            'n',
-            '<leader>ca',
-            vim.lsp.buf.code_action,
-            { buffer = args.buf, desc = '[C]ode [A]ction' }
-          )
-        end
-        if client.supports_method('textDocument/documentSymbol') then
-          vim.keymap.set(
-            'n',
-            '<leader>ls',
-            vim.lsp.buf.document_symbol,
-            { buffer = args.buf, desc = '[L]ocate [S]ymbols' }
-          )
-        end
-        if client.supports_method('workspace/symbol') then
-          vim.keymap.set(
-            'n',
-            '<leader>lws',
-            vim.lsp.buf.workspace_symbol,
-            { buffer = args.buf, desc = '[W]orkspace [S]ymbols' }
-          )
-        end
-        if client.supports_method('textDocument/signatureHelp') then
-          vim.keymap.set(
-            'n',
-            '<leader>sh',
-            vim.lsp.buf.signature_help,
-            { buffer = args.buf, desc = '[S]ignature [H]elp' }
-          )
-        end
-        if client.supports_method('textDocument/hover') then
-          vim.keymap.set(
-            'n',
-            'K',
-            vim.lsp.buf.hover,
-            { buffer = args.buf, desc = '[H]over' }
-          )
-        end
-        if client.supports_method('textDocument/definition') then
-          vim.keymap.set(
-            'n',
-            'gd',
-            vim.lsp.buf.definition,
-            { buffer = args.buf, desc = '[D]efinition' }
-          )
-        end
-        if client.supports_method('textDocument/references') then
-          vim.keymap.set(
-            'n',
-            '<leader>lr',
-            vim.lsp.buf.references,
-            { buffer = args.buf, desc = '[R]eferences' }
-          )
-        end
-        if client.supports_method('textDocument/implementation') then
-          vim.keymap.set('n', '<leader>li', vim.lsp.buf.implementation, { buffer = args.buf, desc = '[I]mplementation' })
-        end
-        if client.supports_method('textDocument/typeDefinition') then
-          vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition, { buffer = args.buf, desc = '[T]ypeDefinition' })
-        end
+        vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition, { buffer = args.buf, desc = '[T]ypeDefinition' })
       end,
     })
 
