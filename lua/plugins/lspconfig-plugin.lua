@@ -171,10 +171,10 @@ return {
             vim.lsp.buf.format({
               bufnr = args.buf,
               id = client.id,
+              name = client.name,
             })
           end,
         })
-
 
         local builtin = require("telescope.builtin")
         vim.keymap.set(
