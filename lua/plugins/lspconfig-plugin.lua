@@ -113,9 +113,9 @@ return {
       -- hyprls = {},
       cssls = {},
       nixd = {
-        formatting = {
-          format_on_save = true,
-        },
+        -- formatting = {
+        --   format_on_save = true,
+        -- },
       },
       gopls = {
         settings = {
@@ -168,6 +168,9 @@ return {
         vim.api.nvim_create_autocmd("BufWritePre", {
           buffer = args.buf,
           callback = function()
+            if vim.bo.filetype == "go" then -- vim.go handles formatting
+              return
+            end
             vim.lsp.buf.format({
               bufnr = args.buf,
               id = client.id,

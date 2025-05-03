@@ -14,10 +14,10 @@ return {
     },
     sources = {
       default = { "path", "lsp", "snippets", "buffer", "lazydev" },
+
       providers = {
         -- dont show LuaLS require statements when lazydev has items
         lsp = {
-          score_offset = 5,
           fallbacks = { "path", "buffer", "snippets" },
         },
         lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },

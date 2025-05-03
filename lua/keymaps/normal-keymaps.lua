@@ -39,6 +39,8 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", {
 -- bind leader + e to open the init.lua file in normal mode
 vim.keymap.set("n", "<leader>ee", function()
   vim.cmd(":e $MYVIMRC")
+  -- set cwd to the current buffer's directory
+  vim.cmd("cd " .. vim.fn.expand("%:p:h"))
 end, {
   noremap = true,
   silent = true,
