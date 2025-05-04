@@ -75,6 +75,7 @@ return {
       --     },
       --   }
       -- },
+      nushell = {},
       golangci_lint_ls = {
       },
       lua_ls = {
@@ -165,19 +166,18 @@ return {
           })
         end
 
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          buffer = args.buf,
-          callback = function()
-            if vim.bo.filetype == "go" then -- vim.go handles formatting
-              return
-            end
-            vim.lsp.buf.format({
-              bufnr = args.buf,
-              id = client.id,
-              name = client.name,
-            })
-          end,
-        })
+        if vim.bo.filetype ~= "go" then -- vim.go handles formatting
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = args.buf,
+            callback = function()
+              vim.lsp.buf.format({
+                bufnr = args.buf,
+                id = client.id,
+                name = client.name,
+              })
+            end,
+          })
+        end
 
         local builtin = require("telescope.builtin")
         vim.keymap.set(

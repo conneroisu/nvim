@@ -1,6 +1,5 @@
 local function get_open_command()
   local is_mac = vim.fn.has('macunix') == 1
-
   if is_mac then
     return 'open'
   else
@@ -27,20 +26,24 @@ return {
         brewfile = true,      -- open Homebrew formulaes and casks
         package_json = true,  -- open dependencies from package.json
         search = true,        -- search the web/selection on the web if nothing else is found
-        -- jira = {             -- custom handler to open Jira tickets (these have higher precedence than builtin handlers)
-        --     handle = function(mode, line, _)
-        --         local ticket = require("gx.helper").find(line, mode, "(%u+-%d+)")
-        --         if ticket and #ticket < 20 then
-        --             return "http://jira.company.com/browse/" .. ticket
-        --         end
-        --     end,
-        -- },
+        nix = {               -- custom handler to open Jira tickets (these have higher precedence than builtin handlers)
+          handle = function(mode, line, _)
+            local input = require("gx.helper").find(line, mode, "(%u+-%d+)")
+            -- if the line contains github:... the go to https://github.com/...
+            if string.find(line, "github:") then
+              -- Extract the repo author and name from the line
+              local author_repo = require("gx.helper").find(line, mode, "github:([%w%-%.]+/[%w%-%.]+)")
+              if author_repo then
+                return "https://github.com/" .. author_repo
+              end
+            end
+          end,
+        },
         rust = {                   -- custom handler to open rust's cargo packages
           filetype = { "toml" },   -- you can also set the required filetype for this handler
           filename = "Cargo.toml", -- or the necessary filename
           handle = function(mode, line, _)
             local crate = require("gx.helper").find(line, mode, "(%w+)%s-=%s")
-
             if crate then
               return "https://crates.io/crates/" .. crate
             end
@@ -50,7 +53,6 @@ return {
           filetype = { "go.mod" },
           handle = function(mode, line, _)
             local module = require("gx.helper").find(line, mode, "module%s+(%S+)")
-
             if module then
               return "https://pkg.go.dev/" .. module
             end
