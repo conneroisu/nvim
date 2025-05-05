@@ -1,6 +1,6 @@
 return {
   "saghen/blink.cmp",
-  version = 'v1.1.1',
+  version = 'v1.2.0',
   dependencies = {
     { 'echasnovski/mini.nvim', version = false }
   },
@@ -9,11 +9,11 @@ return {
   opts = {
     fuzzy = {
       prebuilt_binaries = {
-        force_version = "v1.1.1"
+        force_version = "v1.2.0"
       },
     },
     sources = {
-      default = { "path", "lsp", "snippets", "buffer", "lazydev" },
+      default = { "path", "lsp", "snippets", "buffer", "omni", "lazydev" },
 
       providers = {
         -- dont show LuaLS require statements when lazydev has items
