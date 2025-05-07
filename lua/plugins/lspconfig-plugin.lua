@@ -75,7 +75,7 @@ return {
       --     },
       --   }
       -- },
-      nushell = {},
+      -- nushell = {},
       golangci_lint_ls = {
       },
       lua_ls = {
