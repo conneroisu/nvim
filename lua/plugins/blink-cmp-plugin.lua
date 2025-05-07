@@ -13,7 +13,7 @@ return {
       },
     },
     sources = {
-      default = { "path", "lsp", "snippets", "buffer", "omni", "lazydev" },
+      default = { "path", "lsp", "snippets", "buffer", "lazydev" },
 
       providers = {
         -- dont show LuaLS require statements when lazydev has items
