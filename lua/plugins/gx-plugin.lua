@@ -28,8 +28,6 @@ return {
         search = true,        -- search the web/selection on the web if nothing else is found
         nix = {               -- custom handler to open Jira tickets (these have higher precedence than builtin handlers)
           handle = function(mode, line, _)
-            local input = require("gx.helper").find(line, mode, "(%u+-%d+)")
-            -- if the line contains github:... the go to https://github.com/...
             if string.find(line, "github:") then
               -- Extract the repo author and name from the line
               local author_repo = require("gx.helper").find(line, mode, "github:([%w%-%.]+/[%w%-%.]+)")
@@ -60,8 +58,7 @@ return {
         },
       },
       handler_options = {
-        search_engine = "google",                       -- you can select between google, bing, duckduckgo, and ecosia
-        search_engine = "https://google.com/search?q=", -- or you can pass in a custom search engine
+        search_engine = "https://google.com/search?q=",
       },
     }
   end,
