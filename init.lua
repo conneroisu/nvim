@@ -54,7 +54,7 @@ vim.treesitter.language.register("templ", "templ")
 -- vim.cmd "set list"
 -- vim.cmd("set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<")
 
-local function clear_lsp_log()
+vim.api.nvim_create_user_command('LspLogClear', function()
   local log_path = vim.fn.expand("~/.local/state/nvim/lsp.log")
   local file = io.open(log_path, "w")
   if file then
@@ -63,9 +63,7 @@ local function clear_lsp_log()
   else
     print("Error: Could not open lsp.log.")
   end
-end
-
-vim.api.nvim_create_user_command('LspLogClear', clear_lsp_log, {})
+end, {})
 
 vim.api.nvim_create_user_command("Cppath", function()
   local path = vim.fn.expand("%:p")

@@ -27,6 +27,7 @@ return {
     },
     ---@class lspconfig.options
     servers = {
+      laravel_ls = {},
       -- harper_ls = {
       --   settings = {
       --     ["harper-ls"] = {
