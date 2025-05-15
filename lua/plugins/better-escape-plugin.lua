@@ -7,9 +7,7 @@ return {
       mappings = {
         i = {
           j = {
-            -- These can all also be functions
             k = "<Esc>",
-            -- j = "<Esc>",
           },
         },
       },
