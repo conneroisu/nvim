@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
   command = 'silent! loadview'
 })
 
-vim.api.nvim_create_autocmd("BufWriteCmd", {
+vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = '*.nix',
   ---@param args vim.api.keyset.create_autocmd.callback_args
   callback = function(args)
@@ -38,9 +38,6 @@ vim.api.nvim_create_autocmd("BufWriteCmd", {
         vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.fn.split(formatted, "\n"))
         vim.api.nvim_win_set_cursor(0, cursor_position)
       end
-
-      -- write the buffer to the file
-      vim.cmd("write")
     end
   end,
 })
