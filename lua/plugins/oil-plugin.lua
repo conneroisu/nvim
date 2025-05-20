@@ -24,7 +24,7 @@ return {
       conceallevel = 3,
       concealcursor = "n"
     },
-    is_always_hidden = function(name, bufnr)
+    is_always_hidden = function(_, _)
       return true
     end,
     -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`

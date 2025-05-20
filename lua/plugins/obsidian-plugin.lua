@@ -49,7 +49,7 @@ return {
       },
       {
         name = "conneroh.com",
-        path = "~/Documents/001Repos/conneroh.com/internal/data/docs",
+        path = "~/Documents/001Repos/conneroh.com/internal/data",
       },
     },
 
