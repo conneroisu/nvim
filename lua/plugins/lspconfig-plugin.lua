@@ -77,6 +77,7 @@ return {
       --   }
       -- },
       -- nushell = {},
+      astro = {},
       golangci_lint_ls = {
       },
       lua_ls = {
