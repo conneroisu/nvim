@@ -1,25 +1,14 @@
 function getCurrentTimeRFC3339()
-  -- Get current time
   local currentTime = os.time()
-
-  -- Get timezone offset in seconds
   local timezone = os.difftime(currentTime, os.time(os.date("!*t", currentTime)))
-
-  -- Calculate timezone offset sign and hours/minutes
   local sign = "+"
   if timezone < 0 then
     sign = "-"
     timezone = -timezone
   end
-
   local tzHours = math.floor(timezone / 3600)
   local tzMinutes = math.floor((timezone % 3600) / 60)
-
-  -- Format the time with milliseconds (which Lua doesn't natively support)
-  -- So we'll add .000 for the milliseconds part
   local formattedTime = os.date("%Y-%m-%dT%H:%M:%S", currentTime)
-
-  -- Add milliseconds and timezone
   return string.format("%s.000%s%02d:%02d", formattedTime, sign, tzHours, tzMinutes)
 end
 
