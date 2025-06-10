@@ -36,10 +36,10 @@ return {
         name = "personal",
         path = "~/Documents/000Vaults/SecondBrain",
       },
-      {
-        name = "conneroh.com",
-        path = "~/Documents/001Repos/conneroh.com/internal/data",
-      },
+      -- {
+      --   name = "conneroh.com",
+      --   path = "~/Documents/001Repos/conneroh.com.git/internal/data",
+      -- },
     },
 
     yaml_parser = "yq",
