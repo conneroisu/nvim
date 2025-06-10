@@ -38,7 +38,7 @@ return {
       },
       -- {
       --   name = "conneroh.com",
-      --   path = "~/Documents/001Repos/conneroh.com.git/internal/data",
+      --   path = "~/Documents/001Repos/conneroh.com/internal/data",
       -- },
     },
 
