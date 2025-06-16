@@ -85,6 +85,7 @@ return {
           Lua = { workspace = { checkThirdParty = false, }, },
         },
       },
+      oxlint = {},
       ocamlls = {},
       ccls = {
         init_options = {
