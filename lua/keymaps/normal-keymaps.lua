@@ -12,9 +12,9 @@ vim.keymap.set("n", "<C-e>", function()
   local cwd = vim.fn.expand("%:p:h")
   local path = vim.fn.expand("%:p")
   if string.match(cwd, "oil") then
-    vim.cmd("!thunar " .. " . " .. "&")
+    vim.cmd("!nemo " .. " . " .. "&")
   else
-    vim.cmd("!thunar " .. path .. "&")
+    vim.cmd("!nemo " .. path .. "&")
   end
 end, {
   desc = "Open the current working directory in the file explorer for windows"

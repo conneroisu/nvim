@@ -112,7 +112,7 @@ return {
       dockerls = {},
       -- astro = {},
       svelte = {},
-      htmx = {},
+      -- htmx = {},
       -- hyprls = {},
       cssls = {},
       nixd = {
