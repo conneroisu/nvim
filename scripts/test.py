@@ -1,4 +1,3 @@
-
 # run nvim --headless for 120 seconds
 
 import subprocess
