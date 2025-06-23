@@ -74,6 +74,7 @@ return {
       "_templ.txt",
       "*rage.out",
       "tmp$",
+      "__pycache__",
     }
     oil.set_is_hidden_file(function(filename, _)
       for _, pattern in ipairs(hidden_patterns) do
