@@ -2,14 +2,20 @@ return {
   "nvim-neotest/neotest",
   dependencies = {
     "nvim-neotest/neotest-go",
-    "lawrence-laz/neotest-zig",
+    -- "lawrence-laz/neotest-zig",
+"rouge8/neotest-rust",
     "nvim-neotest/neotest-python",
     "nvim-neotest/nvim-nio",
   },
   opts = {
     log_level = vim.log.levels.TRACE,
     adapters = {
-      ["neotest-zig"] = {
+      -- ["neotest-zig"] = {
+      --   dap = {
+      --     adapter = "lldb",
+      --   },
+      -- },
+      ["neotest-rust"] = {
         dap = {
           adapter = "lldb",
         },
