@@ -27,7 +27,8 @@ return {
     },
     ---@class lspconfig.options
     servers = {
-      phpactor = {},
+      -- phpactor = {},
+      eslint = {},
       -- harper_ls = {
       --   settings = {
       --     ["harper-ls"] = {
