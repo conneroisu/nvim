@@ -3,7 +3,8 @@ return {
   dependencies = {
     "nvim-neotest/neotest-go",
     -- "lawrence-laz/neotest-zig",
-"rouge8/neotest-rust",
+    "rouge8/neotest-rust",
+    "arthur944/neotest-bun",
     "nvim-neotest/neotest-python",
     "nvim-neotest/nvim-nio",
   },
@@ -15,6 +16,8 @@ return {
       --     adapter = "lldb",
       --   },
       -- },
+      ["neotest-bun"] = {
+      },
       ["neotest-rust"] = {
         dap = {
           adapter = "lldb",
