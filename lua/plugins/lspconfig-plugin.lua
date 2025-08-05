@@ -85,6 +85,7 @@ return {
           Lua = { workspace = { checkThirdParty = false, }, },
         },
       },
+      biome = {},
       oxlint = {},
       ocamlls = {},
       ccls = {
