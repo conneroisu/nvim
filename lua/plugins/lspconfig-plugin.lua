@@ -28,6 +28,7 @@ return {
     ---@class lspconfig.options
     servers = {
       phpactor = {},
+      -- vue_ls = {},
       -- harper_ls = {
       --   settings = {
       --     ["harper-ls"] = {
