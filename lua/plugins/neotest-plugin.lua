@@ -7,6 +7,7 @@ return {
     "arthur944/neotest-bun",
     "nvim-neotest/neotest-python",
     "nvim-neotest/nvim-nio",
+    -- 'thenbe/neotest-playwright',
   },
   opts = {
     log_level = vim.log.levels.TRACE,
@@ -14,6 +15,12 @@ return {
       -- ["neotest-zig"] = {
       --   dap = {
       --     adapter = "lldb",
+      --   },
+      -- },
+      -- ["neotest-playwright"] = {
+      --   options = {
+      --     persist_project_selection = true,
+      --     enable_dynamic_test_discovery = true,
       --   },
       -- },
       ["neotest-bun"] = {
