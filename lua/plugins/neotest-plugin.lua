@@ -4,7 +4,7 @@ return {
     "nvim-neotest/neotest-go",
     -- "lawrence-laz/neotest-zig",
     "rouge8/neotest-rust",
-    "arthur944/neotest-bun",
+    -- "arthur944/neotest-bun",
     "nvim-neotest/neotest-python",
     "nvim-neotest/nvim-nio",
     -- 'thenbe/neotest-playwright',
@@ -23,8 +23,8 @@ return {
       --     enable_dynamic_test_discovery = true,
       --   },
       -- },
-      ["neotest-bun"] = {
-      },
+      -- ["neotest-bun"] = {
+      -- },
       ["neotest-rust"] = {
         dap = {
           adapter = "lldb",
