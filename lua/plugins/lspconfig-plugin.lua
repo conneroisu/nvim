@@ -28,7 +28,8 @@ return {
     ---@class lspconfig.options
     servers = {
       -- phpactor = {},
-      volar = {},
+      -- volar = {},
+      vue_ls = {},
       -- harper_ls = {
       --   settings = {
       --     ["harper-ls"] = {
@@ -89,13 +90,14 @@ return {
       biome = {},
       oxlint = {},
       ocamlls = {},
-      ccls = {
-        init_options = {
-          cache = {
-            directory = ".ccls-cache",
-          },
-        }
-      },
+      clangd = {},
+      -- ccls = {
+      --   init_options = {
+      --     cache = {
+      --       directory = ".ccls-cache",
+      --     },
+      --   }
+      -- },
       -- elmls = {},
       basedpyright = {},
       protols = {
@@ -145,11 +147,13 @@ return {
   },
   config = function(_, opts)
     vim.filetype.add({ extension = { templ = "templ" } })
-    local lspconfig = require("lspconfig")
+    local blink = require('blink.cmp')
     for server, config in pairs(opts.servers) do
-      config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-      lspconfig[server].setup(config)
+      config.capabilities = blink.get_lsp_capabilities(config.capabilities)
+      vim.lsp.config(server, config)
+      vim.lsp.enable(server)
     end
+
 
     vim.api.nvim_create_autocmd("LspAttach", {
       --- @param args vim.api.keyset.create_autocmd.callback_args
