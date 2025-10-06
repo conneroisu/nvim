@@ -90,16 +90,17 @@ return {
       biome = {},
       oxlint = {},
       ocamlls = {},
-      clangd = {},
-      -- ccls = {
-      --   init_options = {
-      --     cache = {
-      --       directory = ".ccls-cache",
-      --     },
-      --   }
-      -- },
+      -- clangd = {},
+      ccls = {
+        init_options = {
+          cache = {
+            directory = ".ccls-cache",
+          },
+        }
+      },
       -- elmls = {},
       basedpyright = {},
+      -- pyrefly = {},
       protols = {
         single_file_support = false,
         cmd = { "protols", "--include-paths=/home/connerohnesorge/Documents/002Orgs/pegwings/pegwings/proto/lib,/home/connerohnesorge/Documents/002Orgs/pegwings/pegwings/proto/src" },
@@ -159,21 +160,6 @@ return {
       --- @param args vim.api.keyset.create_autocmd.callback_args
       callback = function(args)
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id), "must have valid client")
-
-        if vim.bo.filetype == "sql" then
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = args.buf,
-            callback = function()
-              if vim.fn.executable("sleek") == 1 then
-                local pos = vim.api.nvim_win_get_cursor(0)
-                vim.cmd("silent %!sleek -i 4")
-                vim.api.nvim_win_set_cursor(0, pos)
-              else
-                vim.print("sleek not found")
-              end
-            end,
-          })
-        end
 
         if vim.bo.filetype ~= "go" then -- vim.go handles formatting
           vim.api.nvim_create_autocmd("BufWritePre", {
