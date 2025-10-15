@@ -7,6 +7,9 @@ return {
     },
     "lawrence-laz/neotest-zig",
     "rouge8/neotest-rust",
+    build = function()
+      vim.system({ "go", "install", "gotest.tools/gotestsum@latest" }):wait() -- Optional, but recommended
+    end,
     -- "arthur944/neotest-bun",
     "nvim-neotest/neotest-python",
     "nvim-neotest/nvim-nio",
