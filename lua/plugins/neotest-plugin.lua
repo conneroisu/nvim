@@ -44,12 +44,8 @@ return {
           return file_path:match("test_.*%.py") or file_path:match(".*_test%.py")
         end,
       },
-      ["neotest-go"] = {
-        runner = "go test",
-        experimental = {
-          test_table = true,
-        },
-        args = { "-count=1", "-timeout=60s", "-v" }
+      ["neotest-golang"] = {
+        runner = "gotestsum",
       },
     },
     status = { virtual_text = true },
