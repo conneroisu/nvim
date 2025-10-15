@@ -10,7 +10,7 @@ return {
     build = function()
       vim.system({ "go", "install", "gotest.tools/gotestsum@latest" }):wait() -- Optional, but recommended
     end,
-    -- "arthur944/neotest-bun",
+    "arthur944/neotest-bun",
     "nvim-neotest/neotest-python",
     "nvim-neotest/nvim-nio",
     -- 'thenbe/neotest-playwright',
