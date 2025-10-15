@@ -1,7 +1,10 @@
 return {
   "nvim-neotest/neotest",
   dependencies = {
-    "nvim-neotest/neotest-go",
+    {
+      "fredrikaverpil/neotest-golang",
+      version = "*", -- Optional, but recommended; track releases
+    },
     -- "lawrence-laz/neotest-zig",
     "rouge8/neotest-rust",
     -- "arthur944/neotest-bun",
