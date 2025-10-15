@@ -5,7 +5,7 @@ return {
       "fredrikaverpil/neotest-golang",
       version = "*", -- Optional, but recommended; track releases
     },
-    -- "lawrence-laz/neotest-zig",
+    "lawrence-laz/neotest-zig",
     "rouge8/neotest-rust",
     -- "arthur944/neotest-bun",
     "nvim-neotest/neotest-python",
