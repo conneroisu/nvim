@@ -18,19 +18,19 @@ return {
   opts = {
     log_level = vim.log.levels.TRACE,
     adapters = {
-      -- ["neotest-zig"] = {
-      --   dap = {
-      --     adapter = "lldb",
-      --   },
-      -- },
-      -- ["neotest-playwright"] = {
-      --   options = {
-      --     persist_project_selection = true,
-      --     enable_dynamic_test_discovery = true,
-      --   },
-      -- },
-      -- ["neotest-bun"] = {
-      -- },
+      ["neotest-zig"] = {
+        dap = {
+          adapter = "lldb",
+        },
+      },
+      ["neotest-playwright"] = {
+        options = {
+          persist_project_selection = true,
+          enable_dynamic_test_discovery = true,
+        },
+      },
+      ["neotest-bun"] = {
+      },
       ["neotest-rust"] = {
         dap = {
           adapter = "lldb",
