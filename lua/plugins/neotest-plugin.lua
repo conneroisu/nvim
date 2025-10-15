@@ -13,7 +13,7 @@ return {
     "arthur944/neotest-bun",
     "nvim-neotest/neotest-python",
     "nvim-neotest/nvim-nio",
-    -- 'thenbe/neotest-playwright',
+    'thenbe/neotest-playwright',
   },
   opts = {
     log_level = vim.log.levels.TRACE,
