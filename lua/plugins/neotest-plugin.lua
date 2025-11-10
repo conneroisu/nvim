@@ -1,49 +1,29 @@
 return {
   "nvim-neotest/neotest",
   dependencies = {
-    "nvim-neotest/neotest-go",
-    -- "lawrence-laz/neotest-zig",
+    {
+      "fredrikaverpil/neotest-golang",
+      version = "*", -- Optional, but recommended; track releases
+    },
     "rouge8/neotest-rust",
-    -- "arthur944/neotest-bun",
-    "nvim-neotest/neotest-python",
+    "antoinemadec/FixCursorHold.nvim",
+    "nvim-treesitter/nvim-treesitter",
+    "nvim-lua/plenary.nvim",
     "nvim-neotest/nvim-nio",
-    -- 'thenbe/neotest-playwright',
   },
   opts = {
     log_level = vim.log.levels.TRACE,
     adapters = {
-      -- ["neotest-zig"] = {
-      --   dap = {
-      --     adapter = "lldb",
-      --   },
-      -- },
-      -- ["neotest-playwright"] = {
-      --   options = {
-      --     persist_project_selection = true,
-      --     enable_dynamic_test_discovery = true,
-      --   },
-      -- },
-      -- ["neotest-bun"] = {
-      -- },
       ["neotest-rust"] = {
         dap = {
           adapter = "lldb",
         },
       },
-      ["neotest-python"] = {
-        dap = { justMyCode = false },
-        args = { "--log-level", "DEBUG" },
-        runner = "pytest",
-        is_test_file = function(file_path)
-          return file_path:match("test_.*%.py") or file_path:match(".*_test%.py")
-        end,
-      },
-      ["neotest-go"] = {
-        runner = "go test",
-        experimental = {
-          test_table = true,
+      ["neotest-golang"] = {
+        runner = "gotestsum",
+        go_test_args = {
+          "-v",
         },
-        args = { "-count=1", "-timeout=60s", "-v" }
       },
     },
     status = { virtual_text = true },
@@ -97,22 +77,12 @@ return {
     end
 
     require("neotest").setup(opts)
-
-    vim.api.nvim_set_keymap("n", "<leader>td", ":lua require('neotest').run.run({strategy = 'dap'})<CR>", {
-      noremap = true,
-      silent = true
-    })
   end,
   keys = {
     {
       "<leader>tf",
       function() require("neotest").run.run(vim.fn.expand("%")) end,
       desc = "Run File"
-    },
-    {
-      "<leader>tT",
-      function() require("neotest").run.run(vim.loop.cwd()) end,
-      desc = "Run All Test Files"
     },
     {
       "<leader>tr",
