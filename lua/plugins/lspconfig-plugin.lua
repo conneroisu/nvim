@@ -99,8 +99,8 @@ return {
         }
       },
       -- elmls = {},
-      basedpyright = {},
-      -- pyrefly = {},
+      -- basedpyright = {},
+      pyrefly = {},
       protols = {
         single_file_support = false,
         cmd = { "protols", "--include-paths=/home/connerohnesorge/Documents/002Orgs/pegwings/pegwings/proto/lib,/home/connerohnesorge/Documents/002Orgs/pegwings/pegwings/proto/src" },
